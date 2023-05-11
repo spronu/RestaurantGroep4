@@ -23,17 +23,22 @@ public class MainMenu : MenuLogic
                     }
                     else if (pos == 2)
                     {
-                        // MenuShowData.Main();
+// MenuShowData.Main();
                         MenuShowData MSD = new MenuShowData();
                         bool choosing = true;
+                        string option = "";
                         while (choosing == true)
                         {
-                            MSD.Main();
-                            if (MSD.check == "continue")
+                            choosing = menucardpresentasion.menucard();
+                            Console.WriteLine("druk x om weg te gaan of enter om iets anders te zien.");
+                            option = Console.ReadLine() ?? string.Empty;
+                            if (option == "x")
                             {
-                                choosing = false;
+                                selecting = true;
+                                Menu.Start();
                             }
                         }
+
 
                     }
                     else if (pos == 3)
@@ -73,14 +78,19 @@ public class MainMenu : MenuLogic
                         // MenuShowData.Main();
                         MenuShowData MSD = new MenuShowData();
                         bool choosing = true;
+                        string option = "";
                         while (choosing == true)
                         {
-                            MSD.Main();
-                            if (MSD.check == "continue")
+                            choosing = menucardpresentasion.menucard();
+                            Console.WriteLine("druk x om weg te gaan of enter om iets anders te zien.");
+                            option = Console.ReadLine() ?? string.Empty;
+                            if (option == "x")
                             {
-                                choosing = false;
+                                selecting = true;
+                                Menu.Start();
                             }
                         }
+
 
                     }
                     else if (pos == 2)
@@ -121,12 +131,16 @@ public class MainMenu : MenuLogic
                         // MenuShowData.Main();
                         MenuShowData MSD = new MenuShowData();
                         bool choosing = true;
+                        string option = "";
                         while (choosing == true)
                         {
-                            MSD.Main();
-                            if (MSD.check == "continue")
+                            choosing = menucardpresentasion.menucard();
+                            Console.WriteLine("druk x om weg te gaan of enter om iets anders te zien.");
+                            option = Console.ReadLine() ?? string.Empty;
+                            if (option == "x")
                             {
-                                choosing = false;
+                                selecting = true;
+                                Menu.Start();
                             }
                         }
                     }
