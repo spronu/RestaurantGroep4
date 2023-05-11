@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "emailAddress": "Admin@gmail.com",
+    "password": "O2Esdae1BIpDX7bsgeUv\u002BS1teVqLWpwXBw9qY8l6U7I=",
+    "fullName": "Admin",
+    "admin": true
+  },
+  {
+    "id": 2,
+    "emailAddress": "TestUser@outlook.com",
+    "password": "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B\u002BmY6G9/eieuM=",
+    "fullName": "tester",
+    "admin": false
+  },
+  {
+    "id": 3,
+    "emailAddress": "hallo@hal.coom",
+    "password": "3muduwB8iwlCV9KtlQmaBn1mGbV8aiD3dNkfv1OKrhE=",
+    "fullName": "123",
+    "admin": false
+  },
+  {
+    "id": 4,
+    "emailAddress": "Test@gmail.com",
+    "password": "n4bQgYhMfWWaL\u002BqgxVrQFaO/TxsrC4Is0V1sFbDwCgg=",
+    "fullName": "Test",
+    "admin": false
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "name": "Zalmfilet met proseccoroomsaus",
+    "allergies": null,
+    "course": "main",
+    "category": "vis",
+    "price": 5.95
+  },
+  {
+    "id": 2,
+    "name": "Kabeljauw met saffraansaus",
+    "allergies": null,
+    "course": "side",
+    "category": "vis",
+    "price": 7.5
+  },
+  {
+    "id": 3,
+    "name": "Zalm uit de oven",
+    "allergies": null,
+    "course": "main",
+    "category": "vis",
+    "price": 8
+  },
+  {
+    "id": 4,
+    "name": "Kabeljauwfilet met mosselen",
+    "allergies": null,
+    "course": "main",
+    "category": "vis",
+    "price": 9.95
+  },
+  {
+    "id": 5,
+    "name": "Biefstuk met pepersaus",
+    "allergies": null,
+    "course": "main",
+    "category": "vlees",
+    "price": 15.5
+  },
+  {
+    "id": 6,
+    "name": "Kipfilet met champignonsaus",
+    "allergies": null,
+    "course": "side",
+    "category": "vlees",
+    "price": 17.5
+  },
+  {
+    "id": 7,
+    "name": "Varkenshaas met roomsaus",
+    "allergies": null,
+    "course": "main",
+    "category": "vlees",
+    "price": 20
+  },
+  {
+    "id": 8,
+    "name": "Rundscarpaccio",
+    "allergies": null,
+    "course": "side",
+    "category": "vlees",
+    "price": 22.5
+  },
+  {
+    "id": 9,
+    "name": "Veganistische lasagne",
+    "allergies": null,
+    "course": "side",
+    "category": "veganistisch",
+    "price": 15.5
+  },
+  {
+    "id": 10,
+    "name": "Veganistische burger",
+    "allergies": null,
+    "course": "main",
+    "category": "veganistisch",
+    "price": 17.5
+  },
+  {
+    "id": 11,
+    "name": "Veganistische curry",
+    "allergies": null,
+    "course": "main",
+    "category": "veganistisch",
+    "price": 20
+  },
+  {
+    "id": 12,
+    "name": "Veganistische salade",
+    "allergies": null,
+    "course": "main",
+    "category": "veganistisch",
+    "price": 22.5
+  },
+  {
+    "id": 13,
+    "name": "Vegetarische wraps",
+    "allergies": null,
+    "course": "main",
+    "category": "vegetarisch",
+    "price": 15.5
+  },
+  {
+    "id": 14,
+    "name": "Vegetarische quiche",
+    "allergies": null,
+    "course": "main",
+    "category": "vegetarisch",
+    "price": 17.5
+  },
+  {
+    "id": 15,
+    "name": "Pasta met tomaat-auberginesaus",
+    "allergies": null,
+    "course": "main",
+    "category": "vegetarisch",
+    "price": 20
+  },
+  {
+    "id": 16,
+    "name": "Kikkererwten met kerrie en rijst van Bonduelle",
+    "allergies": null,
+    "course": "main",
+    "category": "vegetarisch",
+    "price": 22.5
+  }
+]

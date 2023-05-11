@@ -1,0 +1,92 @@
+[
+  {
+    "TableId": 1,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 2,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 3,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 4,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 5,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 6,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 7,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 8,
+    "Capacity": 2,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 9,
+    "Capacity": 4,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 10,
+    "Capacity": 4,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 11,
+    "Capacity": 4,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 12,
+    "Capacity": 4,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 13,
+    "Capacity": 4,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 14,
+    "Capacity": 6,
+    "ReservationDate": null,
+    "ReservationTime": null
+  },
+  {
+    "TableId": 15,
+    "Capacity": 6,
+    "ReservationDate": null,
+    "ReservationTime": null
+  }
+]
