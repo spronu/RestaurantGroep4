@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-class ReservationLogic
+public class ReservationLogic
 {
     private List<ReservationModel> _reservations;
 
     public static ReservationModel? CurrentReservation { get; private set; }
+
+
+    public ReservationLogic(List<ReservationModel> reservations = null)
+    {
+        _reservations = reservations ?? ReservationsAccess.LoadAll();
+    }
 
     public ReservationLogic()
     {
