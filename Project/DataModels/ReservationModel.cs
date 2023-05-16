@@ -20,24 +20,20 @@ public class ReservationModel
     [JsonPropertyName("tableId")]
     public int TableId { get; set; }
 
-    [JsonPropertyName("date")]
-    public DateTime Date { get; set; }
-
-    [JsonPropertyName("time")]
-    public DateTime Time { get; set; }
+    [JsonPropertyName("reservationDateTime")]
+    public DateTime ReservationDateTime { get; set; }
 
     [JsonPropertyName("numberOfPeople")]
     public int NumberOfPeople { get; set; }
 
-    public ReservationModel(int accountId, string fullName, int tableId, int numberOfPeople, DateTime date, DateTime time)
+    public ReservationModel(int accountId, string fullName, int tableId, int numberOfPeople, DateTime reservationDateTime)
     {
         ReservationId = Guid.NewGuid();
         AccountId = accountId;
         FullName = fullName;
         TableId = tableId;
         NumberOfPeople = numberOfPeople;
-        Date = date;
-        Time = time;
+        ReservationDateTime = reservationDateTime;
     }
 
     public ReservationModel()

@@ -35,8 +35,7 @@ public class ReservationInfo
                 Console.WriteLine("Volledige naam: " + reservation.FullName);
                 Console.WriteLine("Tafel Id: " + reservation.TableId);
                 Console.WriteLine("Aantal mensen: " + reservation.NumberOfPeople);
-                Console.WriteLine("Reserveringsdatum: " + reservation.Date.ToString("dd-MM-yyyy"));
-                Console.WriteLine("Reserveringstijd: " + reservation.Time.ToString("HH:mm"));
+                Console.WriteLine("Reserveringsdatum en tijd: " + reservation.ReservationDateTime.ToString());
                 foreach (var item in reservation.Orders)
                 {
                     System.Console.WriteLine("Bestelling: " + item);
