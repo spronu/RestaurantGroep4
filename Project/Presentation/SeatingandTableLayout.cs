@@ -108,9 +108,9 @@ public class SeatingandTableLayout
     }
 
 
-    public bool IsTableOccupied(int tableId, DateTime date, DateTime time)
+    public bool IsTableOccupied(int tableId, DateTime dateTime)
     {
-        return reservationlogics.CheckReservation(tableId, date);
+        return reservationlogics.CheckReservation(tableId, dateTime);
     }
 
 
@@ -161,8 +161,23 @@ public class SeatingandTableLayout
 
         SchedulingChart schedulingChart = new SchedulingChart();
         DateTime selectedDate = schedulingChart.SelectDate();
-        DateTime reservationTime = GetReservationTime();
-        LoadTableData(selectedDate);
+        // DateTime reservationTime = GetReservationTime();
+
+        DateTime reservationDateTime = GetReservationTime();
+        // LoadTableData(reservationDateTime.Date);
+
+        reservationDateTime = new DateTime(
+            selectedDate.Year, 
+            selectedDate.Month, 
+            selectedDate.Day, 
+            reservationDateTime.Hour, 
+            reservationDateTime.Minute, 
+            reservationDateTime.Second
+        );
+
+        LoadTableData(reservationDateTime.Date);
+
+        // LoadTableData(selectedDate);
 
         if (selectedRow == -1 && selectedCol == -1)
         {
@@ -175,12 +190,19 @@ public class SeatingandTableLayout
 
                     var table = tables[index];
 
-                    if (!IsTableOccupied(table.TableId, selectedDate, reservationTime) && table.Capacity >= desiredCapacity)
+                    if (!IsTableOccupied(table.TableId, reservationDateTime) && table.Capacity >= desiredCapacity)
                     {
                         selectedRow = i;
                         selectedCol = j;
                         break;
                     }
+
+                    // if (!IsTableOccupied(table.TableId, selectedDate, reservationTime) && table.Capacity >= desiredCapacity)
+                    // {
+                    //     selectedRow = i;
+                    //     selectedCol = j;
+                    //     break;
+                    // }
                 }
                 if (selectedRow != -1 && selectedCol != -1) break;
             }
@@ -211,10 +233,15 @@ public class SeatingandTableLayout
                         Console.BackgroundColor = ConsoleColor.Blue;
                     }
 
-                    if (IsTableOccupied(table.TableId, selectedDate, reservationTime))
+                    if (IsTableOccupied(table.TableId, reservationDateTime))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
+
+                    // if (IsTableOccupied(table.TableId, selectedDate, reservationTime))
+                    // {
+                    //     Console.ForegroundColor = ConsoleColor.Red;
+                    // }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -251,15 +278,23 @@ public class SeatingandTableLayout
                 {
                     Table selectedTable = tables[selectedIndex];
 
-                    if (!IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime) && selectedTable.Capacity >= desiredCapacity)
+
+                    if (!IsTableOccupied(selectedTable.TableId, reservationDateTime) && selectedTable.Capacity >= desiredCapacity)
                     {
+                        IsTableOccupied(selectedTable.TableId, reservationDateTime);
+                        selectedTable.ReservationDateTime = reservationDateTime;
+                        SaveTableData(reservationDateTime.Date);
+                        reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
+
+                    // if (!IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime) && selectedTable.Capacity >= desiredCapacity)
+                    // {
 
 
-                        IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime);
-                        selectedTable.ReservationDate = selectedDate;
-                        selectedTable.ReservationTime = reservationTime;
-                        SaveTableData(selectedDate);
-                        reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, selectedDate, reservationTime);
+                    //     IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime);
+                    //     selectedTable.ReservationDate = selectedDate;
+                    //     selectedTable.ReservationTime = reservationTime;
+                    //     SaveTableData(selectedDate);
+                    //     reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, selectedDate, reservationTime);
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("============================================================================================================");
@@ -272,7 +307,7 @@ public class SeatingandTableLayout
                         CorrectInputCheck.ShowMenu(reservation);
                         Menu.Start();
                     }
-                    else if (IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime))
+                    else if (IsTableOccupied(selectedTable.TableId, reservationDateTime))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nDeze tafel is al in gebruik. Kiest u alstublieft een andere tafel.");

@@ -8,9 +8,13 @@ public class Table
     [JsonPropertyName("capacity")]
     public int Capacity { get; set; }
 
-    [JsonPropertyName("reservationDate")]
-    public DateTime? ReservationDate { get; set; }
+    // [JsonPropertyName("reservationDate")]
+    // public DateTime? ReservationDate { get; set; }
 
-    [JsonPropertyName("reservationTime")]
-    public DateTime? ReservationTime { get; set; }
+    // [JsonPropertyName("reservationTime")]
+    // public DateTime? ReservationTime { get; set; }
+
+    [JsonPropertyName("reservationDateTime")]
+    public DateTime? ReservationDateTime { get; set; }
+    // public DateTime ReservationDateTime { get; set; }
 }

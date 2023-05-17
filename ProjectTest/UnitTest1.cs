@@ -15,8 +15,8 @@ namespace ProjectTest
         {
             _reservations = new List<ReservationModel>
             {
-                new ReservationModel { TableId = 1, Date = new DateTime(2023, 1, 1) },
-                new ReservationModel { TableId = 2, Date = new DateTime(2023, 1, 2) }
+                new ReservationModel { TableId = 1, ReservationDateTime = new DateTime(2023, 1, 1) },
+                new ReservationModel { TableId = 2, ReservationDateTime = new DateTime(2023, 1, 2) }
             };
 
             _reservationLogic = new ReservationLogic(_reservations);
