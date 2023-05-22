@@ -13,9 +13,11 @@ static class CorrectInputCheck
         JArray jsonArray = MenuRecive.getdata();
         bool done = true;
         List<string> orderItems = new List<string>();
+        List<int> orderItemIDs = new List<int>();
+        double totalPrice = 0.0;
+
         while (menucardpresentasion.menucard() && done)
         {
-
             Console.WriteLine("schrijf het nummer van de bestelling die je wilt! Of type 'return' als je klaar bent.");
             Console.WriteLine("");
             string option = Console.ReadLine();
@@ -25,7 +27,8 @@ static class CorrectInputCheck
             {
                 if (option == item["id"].ToString())
                 {
-                    orderItems.Add(item["name"].ToString());
+                    orderItemIDs.Add(Convert.ToInt32(item["id"]));
+                    totalPrice += Convert.ToDouble(item["price"]);
                     Console.WriteLine($"{item["name"].ToString()} succesvol toegevoegd aan bestelling");
                     Thread.Sleep(1000);
                     notFound = false;
@@ -44,13 +47,15 @@ static class CorrectInputCheck
         }
 
         // Assign the order items to the reservation
-        reservation.Orders = orderItems;
+        reservation.OrderItemIDs = orderItemIDs;
+        reservation.TotalPrice = totalPrice;
 
         // Create a new dictionary with reservationId and orders
         var newDict = new Dictionary<string, object>
         {
             { "reservationId", reservation.ReservationId },
-            { "orders", orderItems }
+            { "orderItemIDs", orderItemIDs },
+            { "totalPrice", totalPrice }
         };
 
         // Read existing JSON data
@@ -72,7 +77,8 @@ static class CorrectInputCheck
         // Update the reservation with the order items
         if (reservationJson != null)
         {
-            reservationJson["orders"] = JArray.FromObject(orderItems);
+            reservationJson["orderItemIDs"] = JArray.FromObject(orderItemIDs);
+            reservationJson["totalPrice"] = totalPrice;
         }
 
         // Write the updated JSON data to the file
@@ -80,4 +86,17 @@ static class CorrectInputCheck
 
         Console.WriteLine("bestelling succesvol opgeslagen");
     }
+
+public static string GetDishNameById(int id)
+{
+    JArray jsonArray = MenuRecive.getdata();
+    foreach (JObject item in jsonArray)
+    {
+        if (id == Convert.ToInt32(item["id"]))
+        {
+            return item["name"].ToString();
+        }
+    }
+    return "Unknown dish"; // return this if the id is not found
+}
 }
