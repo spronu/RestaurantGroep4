@@ -191,6 +191,11 @@ class AccountsLogic
         AccountsAccess.WriteAll(_accounts);
     }
 
+    public bool LogOut(int id){
+        CurrentAccount = null;
+        return true;
+    }
+
     public void ShowAllAccounts(){
         Console.Clear();
 
@@ -228,6 +233,7 @@ class AccountsLogic
             Console.WriteLine("Terug");
 
             Console.ResetColor();
+            Console.WriteLine("====================================");
 
             ConsoleKeyInfo key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow){
@@ -244,6 +250,7 @@ class AccountsLogic
                 var lastdigit = _accounts.Count - 1;
                 if(select_index == lastdigit){
                     Menu.Start();
+                    // break;
                 }
                 else{
                     select = true;
@@ -251,6 +258,7 @@ class AccountsLogic
             }
             else if (key.Key == ConsoleKey.Escape){
                 Menu.Start();
+                // break;
             }
             if (select){
                 int num = 3;
@@ -298,12 +306,18 @@ class AccountsLogic
                             do
                             {
                                 key_pw = Console.ReadKey(true);
-                                // if(ConsoleKey.Escape == key_pw.Key){
-                                //     select = false;
-                                //     select_bool = false;
-                                // }
+                                if(ConsoleKey.Escape == key_pw.Key){
+                                    // key_pw = Console.ReadKey(false);
+                                    select = false;
+                                    select_bool = false;
+                                    break;
+                                }
                                 if (key_pw.Key != ConsoleKey.Backspace && key_pw.Key != ConsoleKey.Enter)
                                 {
+                                    // if(key_pw.Key == ConsoleKey.Escape){
+                                    //     select = false;
+                                    //     select_bool = false;
+                                    // }
                                     newPassword += key_pw.KeyChar;
                                     Console.Write("*");
                                 }
@@ -323,12 +337,18 @@ class AccountsLogic
                         }
                         else if(option_index == 1){
                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine("Weet u zeker dat u dit account wilt verwijderen? (Y/N)");
+                            Console.WriteLine("Weet u zeker dat u dit account wilt verwijderen? (J/N)");
                             Console.ResetColor();
                             string deleting = Console.ReadLine().ToUpper().Trim();
-                            if(deleting == "Y"){
+                            if(deleting == "J"){
                                 DeleteAccount(selectedAccount.Id);
-                                Console.WriteLine("Account is verwijderd");
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine();
+                                Console.WriteLine("====================================");
+                                Console.WriteLine("|      Account is verwijderd!      |");
+                                Console.WriteLine("====================================");
+                                Console.ResetColor();
+                                Thread.Sleep(1000);
                                 select = false;
                                 select_bool = false;
                             }

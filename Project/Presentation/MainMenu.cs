@@ -53,7 +53,13 @@ public class MainMenu : MenuLogic
                     {
                         RestaurantInformation.Print();
                     }
-                    else if (pos == 6)
+                    else if(pos == 6)
+                    {
+                        AccountsLogic accountsLogic = new AccountsLogic();
+                        accountsLogic.LogOut(AccountsLogic.CurrentAccount.Id);
+                        Menu.Start();
+                    }
+                    else if (pos == 7)
                     {
                         Environment.Exit(0);
                     }
@@ -104,7 +110,13 @@ public class MainMenu : MenuLogic
                         menu.Logics(title);                        // veranderen thema menus, admin overzicht gebruikers, overzicht reserveringen
 
                     }
-                    else if (pos == 3)
+                    else if(pos == 3)
+                    {
+                        AccountsLogic accountslogic = new AccountsLogic();
+                        accountslogic.LogOut(AccountsLogic.CurrentAccount.Id);
+                        Menu.Start();
+                    }
+                    else if (pos == 4)
                     {
                         Environment.Exit(0);
                     }
