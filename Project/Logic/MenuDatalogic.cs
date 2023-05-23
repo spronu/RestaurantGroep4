@@ -10,7 +10,6 @@ static class MenuDataLogic
     public static Tuple<string, string> hallo()
     {
 
-        // Console.Clear();
         bool choise = true;
 
         string option = "";
@@ -18,19 +17,10 @@ static class MenuDataLogic
 
         List<string> Allallcatogories = new List<string>();
         List<string> Allallcourses = new List<string>();
-        // Dictionary<string, int> x = fish;
         JArray jsonArray = MenuRecive.getdata();
 
         foreach (JObject item in jsonArray)
         {
-
-            // Console.WriteLine(item["id"]);
-            // Console.WriteLine(item["name"]);
-            // Console.WriteLine(item["course"]);
-            // Console.WriteLine(item["category"]);
-            // Console.WriteLine(item["price"]);
-            // ---
-            // Console.WriteLine($"{item["name"]}    :    {item["price"]}");
             Allallcatogories.Add($"{item["category"]}");
             Allallcourses.Add($"{item["course"]}");
 
@@ -78,18 +68,6 @@ static class MenuDataLogic
                     }
                 }
 
-
-
-
-
-                // Console.Clear();
-                // foreach (string item in allcourses)
-                // {
-                //     Console.WriteLine(item);
-                // }
-                // Console.WriteLine("welke type maaltijd wilt u?");
-                // Console.WriteLine("");
-                // course = Console.ReadLine() ?? string.Empty;
                 if (allcourses.Contains(course))
                 {
                     courseoption = false;
@@ -115,14 +93,6 @@ static class MenuDataLogic
 
             while (choise)
             {
-                // Console.Clear();
-                // foreach (string item in allcatogories)
-                // {
-                //     Console.WriteLine(item);
-                // }
-                // Console.WriteLine("welke categorie wil je zien?");
-                // Console.WriteLine("");
-                // option = Console.ReadLine() ?? string.Empty;
 
                 List<String> items = new List<String>();
                 items.Add("vis");
@@ -192,23 +162,5 @@ static class MenuDataLogic
         Tuple<string, string> x = Tuple.Create(option, course);
         return x;
 
-        // Console.Clear();
-        // Console.WriteLine("gerecht       :         prijs");
-        // foreach (JObject item in jsonArray)
-        // {
-        //     if( item["category"].ToString() == option)
-        //     {
-        //         Console.WriteLine($"{item["name"].ToString()}   :   {item["price"].ToString()}");
-        //     }
-        // }
-        // Console.WriteLine("");
-        // Console.WriteLine(food["name"]); manier om de prijs te printen
-
     }
-
-
 }
-
-
-
-
