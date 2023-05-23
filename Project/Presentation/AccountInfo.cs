@@ -79,43 +79,16 @@ public class AccountInfo : MenuLogic
         else if (accountInfo.returnedOption == "Verander wachtwoord")
         {
 
-            // Console.WriteLine("Voer uw oude wachtwoord in");
-            // string oldPassword = "";
-            // ConsoleKeyInfo old_key;
-            // do
-            // {
-            //     old_key = Console.ReadKey(true);
-            //     if (old_key.Key != ConsoleKey.Backspace && old_key.Key != ConsoleKey.Enter)
-            //     {
-            //         oldPassword += old_key.KeyChar;
-            //         Console.Write("*");
-            //     }
-            //     else
-            //     {
-            //         if (old_key.Key == ConsoleKey.Backspace && oldPassword.Length > 0)
-            //         {
-            //             oldPassword = oldPassword.Substring(0, (oldPassword.Length - 1));
-            //             Console.Write("\b \b");
-            //         }
-            //     }
-            // } while (old_key.Key != ConsoleKey.Enter);
-            // Console.WriteLine();
-
-            // if (AccountsLogic.DecryptPassword(oldPassword, AccountsLogic.CurrentAccount.Password) == false) // MOET NOG AANGEPAST WORDEN, WANT HET DOET HET MAAR 1 KEER
-            // {
-            //     Console.ForegroundColor = ConsoleColor.Red;
-            //     Console.WriteLine("Uw oude wachtwoord is niet correct");
-            //     Console.WriteLine("Klik op een knop om terug te keren");
-            //     Console.ResetColor();
-            //     Console.ReadKey();
-            //     Main();
-            // }
             Console.WriteLine("Voer uw oude wachtwoord in");
             string oldPassword = "";
             ConsoleKeyInfo old_key;
             do
             {
                 old_key = Console.ReadKey(true);
+                // if(ConsoleKey.Escape == old_key.Key){
+                //     // key_pw = Console.ReadKey(false);
+                //     break;
+                // }
                 if (old_key.Key != ConsoleKey.Backspace && old_key.Key != ConsoleKey.Enter)
                 {
                     oldPassword += old_key.KeyChar;
@@ -131,8 +104,9 @@ public class AccountInfo : MenuLogic
                 }
             } while (old_key.Key != ConsoleKey.Enter);
             Console.WriteLine();
-
-            if (AccountsLogic.DecryptPassword(oldPassword, AccountsLogic.CurrentAccount.Password) == false) // MOET NOG AANGEPAST WORDEN, WANT HET DOET HET MAAR 1 KEER
+            string oldPW = AccountsLogic.CurrentAccount.Password;
+            var oldPW_decrypted = AccountsLogic.DecryptPassword(oldPassword, oldPW);
+            if (oldPW_decrypted == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Uw oude wachtwoord is niet correct.");
@@ -143,6 +117,7 @@ public class AccountInfo : MenuLogic
                 // Console.ReadKey();
                 Main();
             }
+            
 
             Console.WriteLine("Voer uw nieuwe wachtwoord in");
             string newPassword = "";

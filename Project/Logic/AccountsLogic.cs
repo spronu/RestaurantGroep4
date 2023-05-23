@@ -185,23 +185,19 @@ class AccountsLogic
 
         _accounts.Remove(acc);
 
+        var lastaccount = _accounts.Count;
+        
+
         AccountsAccess.WriteAll(_accounts);
+    }
+
+    public bool LogOut(int id){
+        CurrentAccount = null;
+        return true;
     }
 
     public void ShowAllAccounts(){
         Console.Clear();
-        // foreach(var all_acc in _accounts){
-        //     // Console.WriteLine($"ID: {all_acc.Id}, Email: {all_acc.EmailAddress}, Full Name: {all_acc.FullName}");
-        //     // Console.Clear();
-        //     Console.WriteLine("Account informatie");
-        //     Console.WriteLine("====================================");
-        //     Console.WriteLine($"AccountID: {all_acc.Id}");
-        //     Console.WriteLine($"Volledige naam: {all_acc.FullName}");
-        //     Console.WriteLine($"Email: {all_acc.EmailAddress}");
-        //     Console.WriteLine("====================================");
-            
-        //     Console.WriteLine();
-        // }
 
         int select_index = 1;
         int option_index = 0;
@@ -209,8 +205,6 @@ class AccountsLogic
         bool loop = true;
         while (loop)
         {
-            // Console.Clear();
-            // Console.WriteLine("Account informatie");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("====================================");
@@ -221,7 +215,6 @@ class AccountsLogic
             for (int i = 0; i < _accounts.Count; i++)
             {
                 var all_acc = _accounts[i];
-                // Console.WriteLine("Account informatie");
                 Console.WriteLine("====================================");
                 Console.WriteLine($"AccountID: {all_acc.Id}");
                 Console.WriteLine($"Volledige naam: {all_acc.FullName}");
@@ -237,38 +230,35 @@ class AccountsLogic
                 }
             }
 
+            Console.WriteLine("Terug");
+
             Console.ResetColor();
-            // Console.ForegroundColor = option_index == _accounts.Count ? ConsoleColor.Black : ConsoleColor.DarkGreen;
-            // Console.BackgroundColor = option_index == _accounts.Count ? ConsoleColor.DarkGreen : ConsoleColor.Black;
-            // Console.WriteLine("Terug");
-            // Console.ResetColor();
-            // Console.WriteLine("====================================");
+            Console.WriteLine("====================================");
+
             ConsoleKeyInfo key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow){
                 if(select_index > 0){
                     select_index--;
-                    // option_index = select_index;
-
                 }
-                // else{
-                //     option_index = _accounts.Count;
-                // }
             }
             else if (key.Key == ConsoleKey.DownArrow){
                 if(select_index < _accounts.Count - 1){
                     select_index++;
-                    // option_index = select_index;
                 }
-                // else{
-                //     option_index = _accounts.Count;
-                // }
             }
             else if (key.Key == ConsoleKey.Enter){
-                select = true;
-                // option_index = 0;
+                var lastdigit = _accounts.Count - 1;
+                if(select_index == lastdigit){
+                    Menu.Start();
+                    // break;
+                }
+                else{
+                    select = true;
+                }
             }
             else if (key.Key == ConsoleKey.Escape){
                 Menu.Start();
+                // break;
             }
             if (select){
                 int num = 3;
@@ -316,12 +306,18 @@ class AccountsLogic
                             do
                             {
                                 key_pw = Console.ReadKey(true);
-                                // if(ConsoleKey.Escape == key_pw.Key){
-                                //     select = false;
-                                //     select_bool = false;
-                                // }
+                                if(ConsoleKey.Escape == key_pw.Key){
+                                    // key_pw = Console.ReadKey(false);
+                                    select = false;
+                                    select_bool = false;
+                                    break;
+                                }
                                 if (key_pw.Key != ConsoleKey.Backspace && key_pw.Key != ConsoleKey.Enter)
                                 {
+                                    // if(key_pw.Key == ConsoleKey.Escape){
+                                    //     select = false;
+                                    //     select_bool = false;
+                                    // }
                                     newPassword += key_pw.KeyChar;
                                     Console.Write("*");
                                 }
@@ -341,12 +337,18 @@ class AccountsLogic
                         }
                         else if(option_index == 1){
                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine("Weet u zeker dat u dit account wilt verwijderen? (Y/N)");
+                            Console.WriteLine("Weet u zeker dat u dit account wilt verwijderen? (J/N)");
                             Console.ResetColor();
                             string deleting = Console.ReadLine().ToUpper().Trim();
-                            if(deleting == "Y"){
+                            if(deleting == "J"){
                                 DeleteAccount(selectedAccount.Id);
-                                Console.WriteLine("Account is verwijderd");
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine();
+                                Console.WriteLine("====================================");
+                                Console.WriteLine("|      Account is verwijderd!      |");
+                                Console.WriteLine("====================================");
+                                Console.ResetColor();
+                                Thread.Sleep(1000);
                                 select = false;
                                 select_bool = false;
                             }
@@ -378,92 +380,3 @@ class AccountsLogic
         }
     }
 }
-
-
-//                 }
-
-//                 for (int i = 0; i < 1; i++){
-//                     Console.WriteLine("Verander wachtwoord");
-//                     if (i == select_index2){
-//                         Console.BackgroundColor = ConsoleColor.DarkGreen;
-//                         Console.ForegroundColor = ConsoleColor.Black;
-//                     }
-//                     else{
-//                         Console.ResetColor();
-//                     }
-//                 }
-//                 for (int i = 0; i < 1; i++)
-//                 {
-//                     Console.WriteLine("Verwijder account");
-//                     if (i == select_index2){
-//                         Console.BackgroundColor = ConsoleColor.DarkGreen;
-//                         Console.ForegroundColor = ConsoleColor.Black;
-//                     }
-//                     else{
-//                         Console.ResetColor();
-//                     }
-//                 }
-//                 ConsoleKeyInfo enter_key = Console.ReadKey(true);
-//                 if (enter_key.Key == ConsoleKey.UpArrow){
-//                     if(select_index2 > 0){
-//                         select_index2--;
-//                     }
-//                 }
-//                 else if (enter_key.Key == ConsoleKey.DownArrow){
-//                     if(select_index2 < _accounts.Count - 1){
-//                         select_index2++;
-//                     }
-//                 }
-//                 else if(enter_key.Key == ConsoleKey.Enter){
-//                     if(select_index2 == 0){
-//                         Console.WriteLine("Voer uw nieuwe wachtwoord in");
-//                         string newPassword = "";
-//                         ConsoleKeyInfo key_pw;
-//                         do
-//                         {
-//                             key_pw = Console.ReadKey(true);
-//                             if (key_pw.Key != ConsoleKey.Backspace && key_pw.Key != ConsoleKey.Enter)
-//                             {
-//                                 newPassword += key_pw.KeyChar;
-//                                 Console.Write("*");
-//                             }
-//                             else
-//                             {
-//                                 if (key_pw.Key == ConsoleKey.Backspace && newPassword.Length > 0)
-//                                 {
-//                                     newPassword = newPassword.Substring(0, (newPassword.Length - 1));
-//                                     Console.Write("\b \b");
-//                                 }
-//                             }
-//                         } while (key_pw.Key != ConsoleKey.Enter);
-//                         Console.WriteLine();
-//                         ChangePassword(selectedAccount.Id, newPassword);
-
-//                     }
-//                     else if(select_index2 == 1){
-//                         Console.WriteLine("Weet u zeker dat u dit account wilt verwijderen? (Y/N)");
-//                         string deleting = Console.ReadLine();
-//                         deleting.ToUpper();
-//                         if(deleting == "Y"){
-//                             DeleteAccount(selectedAccount.Id);
-//                             Console.WriteLine("Account is verwijderd. Klik op een toets om terug te keren.");
-//                             Console.ReadLine();
-//                         }
-//                         else if(deleting == "N"){
-//                             Console.WriteLine("Account wordt niet verwijderd. klik op een toets om terug te keren.");
-//                             Console.ReadLine();
-
-//                         }
-//                         else{
-//                             Console.WriteLine("Geen geldig optie. Klik op een toets om terug te keren.");
-//                             Console.ReadLine();
-//                         }
-//                     }
-//                     else if(enter_key.Key == ConsoleKey.Escape){
-                        
-//                     }
-//             }
-//             }
-//         }
-//     }
-// }

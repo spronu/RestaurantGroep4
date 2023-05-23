@@ -26,6 +26,7 @@ static class Menu
             items.Add("Bekijk reservering info");
             items.Add("Bekijk account info");
             items.Add("Informatie over Restaurant");
+            items.Add("Uitloggen");
             items.Add("Exit");
         }
         else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
@@ -33,6 +34,7 @@ static class Menu
             items.Add("Welkom " + AccountsLogic.CurrentAccount.FullName);
             items.Add("Bekijk menukaart");
             items.Add("Admin Center");
+            items.Add("Uitloggen");
             items.Add("Exit");
         }
         else

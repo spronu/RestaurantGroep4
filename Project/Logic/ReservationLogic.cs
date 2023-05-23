@@ -56,22 +56,17 @@ public class ReservationLogic
 
     public bool CheckReservation(int tableId, DateTime date)
     {
-        return _reservations.Exists(i => i.TableId == tableId && i.Date.Date == date.Date);
+        return _reservations.Exists(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
     }
 
 
-    public void AddReservation(int tableId, int numberOfPeople, DateTime date, DateTime time)
-    {
-        ReservationModel reservation = new ReservationModel(AccountsLogic.CurrentAccount.Id, AccountsLogic.CurrentAccount.FullName, tableId, numberOfPeople, date, time);
-        reservation.AccountId = AccountsLogic.CurrentAccount.Id;
-        reservation.FullName = AccountsLogic.CurrentAccount.FullName;
-        reservation.TableId = tableId;
-        reservation.NumberOfPeople = numberOfPeople;
-        reservation.Date = date;
-        reservation.Time = time;
 
+    public void AddReservation(int tableId, int numberOfPeople, DateTime reservationDateTime)
+    {
+        ReservationModel reservation = new ReservationModel(AccountsLogic.CurrentAccount.Id, AccountsLogic.CurrentAccount.FullName, tableId, numberOfPeople, reservationDateTime);
         _reservations.Add(reservation);
         ReservationsAccess.WriteAll(_reservations);
         CorrectInputCheck.ShowMenu(reservation);
     }
+
 }
