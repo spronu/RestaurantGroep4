@@ -113,7 +113,6 @@ public class SeatingandTableLayout
         return reservationlogics.CheckReservation(tableId, dateTime);
     }
 
-
     public int GetUserPartySize()
     {
         int partySize;
@@ -121,14 +120,21 @@ public class SeatingandTableLayout
         {
             Console.Write("Met hoeveel mensen wilt u dineren? ");
             partySize = Convert.ToInt32(Console.ReadLine());
+            if (partySize <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Waarschuwing: Het aantal mensen moet groter zijn dan 0.");
+                Console.ResetColor();
+            }
+            else if (partySize > 6)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Waarschuwing: Het aantal mensen kan niet meer dan 6 zijn.");
+                Console.ResetColor();
+            }
         } while (partySize <= 0 || partySize > 6);
 
         return partySize;
-    }
-
-    public bool IsTableSuitable(Table table, int partySize)
-    {
-        return table.Capacity >= partySize;
     }
 
     public void PrintSelectedSeat(int tableId, int capacity)
@@ -155,6 +161,17 @@ public class SeatingandTableLayout
 
     public void PrintSeatingChart(int desiredCapacity, int selectedRow = -1, int selectedCol = -1)
     {
+        // Check if the user is logged in
+        if (AccountsLogic.CurrentAccount == null)
+        {
+            Console.WriteLine("U moet inloggen of registreren om deze functie te kunnen gebruiken");
+            Console.WriteLine("U wordt teruggeleid naar het menu");
+            Console.WriteLine("Klik op een toets om door te gaan");
+            Console.ReadKey();
+            Menu.Start();
+            return; // Return from the function to prevent the rest of the code from executing
+        }
+
         int tableRows = 5;
         int tableCols = (int)Math.Ceiling(tables.Count / (double)tableRows);
         // DateTime reservationTime = GetReservationTime();

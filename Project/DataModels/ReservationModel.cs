@@ -8,8 +8,11 @@ public class ReservationModel
     [JsonPropertyName("reservationId")]
     public Guid ReservationId { get; set; }
 
-    [JsonPropertyName("orders")]
-    public List<string> Orders { get; set; }
+    [JsonPropertyName("orderItemIDs")]
+    public List<int> OrderItemIDs { get; set; }
+
+    [JsonPropertyName("totalPrice")]
+    public double TotalPrice { get; set; }
 
     [JsonPropertyName("accountId")]
     public int AccountId { get; set; }
