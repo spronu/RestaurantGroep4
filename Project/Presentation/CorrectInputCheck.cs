@@ -58,10 +58,10 @@ static class CorrectInputCheck
                 if (orderItemIDs.Count < reservation.NumberOfPeople)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Warning: Fewer dishes have been ordered than the number of people in the reservation.");
+                    Console.WriteLine("Waarschuwing: Er zijn minder gerechten besteld dan het aantal personen in de reservering.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Do the remaining people also want to order something? (y/n)");
+                    Console.WriteLine("Willen de overige mensen ook iets bestellen? (y/n)");
                     Console.ResetColor();
                     string response = Console.ReadLine();
                     if (response.ToLower() == "y")
