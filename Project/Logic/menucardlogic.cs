@@ -11,7 +11,6 @@ class menucardpresentasion
         Tuple<string, string> all = MenuDataLogic.hallo();
         string option = all.Item1;
         string course = all.Item2;
-        // string course = MenuDataLogic.hallo().Item2;
 
 
 
@@ -34,10 +33,6 @@ class menucardpresentasion
             Console.WriteLine("");
             return true;
         }
-        // Console.WriteLine(food["name"]); manier om de prijs te printen
         return false;
     }
 }
-
-
-

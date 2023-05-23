@@ -16,8 +16,11 @@ static class CorrectInputCheck
         List<int> orderItemIDs = new List<int>();
         double totalPrice = 0.0;
 
-        while (menucardpresentasion.menucard() && done)
+        while (done)
         {
+            // Call the menu display method at the beginning of the loop
+            menucardpresentasion.menucard();
+
             Console.WriteLine("schrijf het nummer van de bestelling die je wilt! Of type 'return' als je klaar bent.");
             Console.WriteLine("");
             string option = Console.ReadLine();
@@ -32,24 +35,54 @@ static class CorrectInputCheck
                     Console.WriteLine($"{item["name"].ToString()} succesvol toegevoegd aan bestelling");
                     Thread.Sleep(1000);
                     notFound = false;
+
+                    // Update the JSON immediately after an order is made.
+                    UpdateReservationJson(orderItemIDs, totalPrice, reservation);
+
+                    // Call the menu display method after an order is made.
+                    menucardpresentasion.menucard();
                 }
             }
             if (notFound && option != "return")
             {
                 Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
                 Thread.Sleep(1000);
+
+                // Call the menu display method if an order is not found.
+                menucardpresentasion.menucard();
             }
 
             if (option == "return")
             {
+                // Move the warning check here
+                if (orderItemIDs.Count < reservation.NumberOfPeople)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Warning: Fewer dishes have been ordered than the number of people in the reservation.");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Do the remaining people also want to order something? (y/n)");
+                    Console.ResetColor();
+                    string response = Console.ReadLine();
+                    if (response.ToLower() == "y")
+                    {
+                        done = true;  // Only continue with the loop if there are more orders to be made and the user confirms they want to order more
+                        continue;
+                    }
+                }
+
+                // Finish the order if no more orders are to be made or the user doesn't want to continue ordering
                 done = false;
             }
         }
 
-        // Assign the order items to the reservation
-        reservation.OrderItemIDs = orderItemIDs;
-        reservation.TotalPrice = totalPrice;
+        Console.WriteLine("bestelling succesvol opgeslagen");
+    }
 
+
+
+    private static void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
+    {
         // Create a new dictionary with reservationId and orders
         var newDict = new Dictionary<string, object>
         {
@@ -83,20 +116,19 @@ static class CorrectInputCheck
 
         // Write the updated JSON data to the file
         File.WriteAllText(jsonFilePath, existingData.ToString());
-
-        Console.WriteLine("bestelling succesvol opgeslagen");
     }
 
-public static string GetDishNameById(int id)
-{
-    JArray jsonArray = MenuRecive.getdata();
-    foreach (JObject item in jsonArray)
+
+    public static string GetDishNameById(int id)
     {
-        if (id == Convert.ToInt32(item["id"]))
+        JArray jsonArray = MenuRecive.getdata();
+        foreach (JObject item in jsonArray)
         {
-            return item["name"].ToString();
+            if (id == Convert.ToInt32(item["id"]))
+            {
+                return item["name"].ToString();
+            }
         }
+        return "Unknown dish"; // return this if the id is not found
     }
-    return "Unknown dish"; // return this if the id is not found
-}
 }
