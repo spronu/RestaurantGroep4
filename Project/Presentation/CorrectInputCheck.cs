@@ -19,9 +19,9 @@ static class CorrectInputCheck
         while (done)
         {
             // Call the menu display method at the beginning of the loop
-            menucardpresentasion.menucard();
+            menucardpresentasion.menucard(true);
 
-            Console.WriteLine("schrijf het nummer van de bestelling die je wilt! Of type 'return' als je klaar bent.");
+            Console.WriteLine("schrijf het nummer van de bestelling die je wilt! Of type 'x' als je klaar bent.");
             Console.WriteLine("");
             string option = Console.ReadLine();
 
@@ -40,19 +40,19 @@ static class CorrectInputCheck
                     UpdateReservationJson(orderItemIDs, totalPrice, reservation);
 
                     // Call the menu display method after an order is made.
-                    menucardpresentasion.menucard();
+                    menucardpresentasion.menucard(true);
                 }
             }
-            if (notFound && option != "return")
+            if (notFound && option != "x")
             {
                 Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
                 Thread.Sleep(1000);
 
                 // Call the menu display method if an order is not found.
-                menucardpresentasion.menucard();
+                menucardpresentasion.menucard(true);
             }
 
-            if (option == "return")
+            if (option == "x")
             {
                 // Move the warning check here
                 if (orderItemIDs.Count < reservation.NumberOfPeople)
