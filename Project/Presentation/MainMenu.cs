@@ -23,22 +23,25 @@ public class MainMenu : MenuLogic
                     }
                     else if (pos == 2)
                     {
-// MenuShowData.Main();
-                        MenuShowData MSD = new MenuShowData();
-                        bool choosing = true;
+                        // menukaart met login
+                        bool coursecheck = true;
+                        bool done = true;
                         string option = "";
-                        while (choosing == true)
-                        {
-                            choosing = menucardpresentasion.menucard();
-                            Console.WriteLine("druk x om weg te gaan of enter om iets anders te zien.");
+                        // done = menucardpresentasion.menucard();
+                        while(done){
+                            done = menucardpresentasion.menucard(coursecheck);
+                            if(done){
+                            Console.WriteLine(" druk enter om iets anders te zien.");
                             option = Console.ReadLine() ?? string.Empty;
-                            if (option == "x")
-                            {
-                                selecting = true;
-                                Menu.Start();
                             }
+                            coursecheck = false;
+                            // if (option == "return")
+                            // {
+                            //     done = false;
+                            // }
                         }
-
+                        Menu.Start();
+                        
 
                     }
                     else if (pos == 3)
@@ -81,21 +84,23 @@ public class MainMenu : MenuLogic
                 {
                     if (pos == 1)
                     {
-                        // MenuShowData.Main();
-                        MenuShowData MSD = new MenuShowData();
-                        bool choosing = true;
+                        bool coursecheck = true;
+                        bool done = true;
                         string option = "";
-                        while (choosing == true)
-                        {
-                            choosing = menucardpresentasion.menucard();
-                            Console.WriteLine("druk x om weg te gaan of enter om iets anders te zien.");
+                        // done = menucardpresentasion.menucard();
+                        while(done){
+                            done = menucardpresentasion.menucard(coursecheck);
+                            if(done){
+                            Console.WriteLine(" druk enter om iets anders te zien.");
                             option = Console.ReadLine() ?? string.Empty;
-                            if (option == "x")
-                            {
-                                selecting = true;
-                                Menu.Start();
                             }
+                            coursecheck = false;
+                            // if (option == "return")
+                            // {
+                            //     done = false;
+                            // }
                         }
+                        Menu.Start();
 
 
                     }
@@ -140,21 +145,26 @@ public class MainMenu : MenuLogic
                     }
                     else if (pos == 4)
                     {
-                        // MenuShowData.Main();
-                        MenuShowData MSD = new MenuShowData();
-                        bool choosing = true;
+                        // show menu zonder login
+                        bool coursecheck = true;
+                        bool done = true;
                         string option = "";
-                        while (choosing == true)
-                        {
-                            choosing = menucardpresentasion.menucard();
-                            Console.WriteLine("druk x om weg te gaan of enter om iets anders te zien.");
+                        // done = menucardpresentasion.menucard();
+                        while(done){
+                            done = menucardpresentasion.menucard(coursecheck);
+                            if(done){
+                            Console.WriteLine(" druk enter om iets anders te zien.");
                             option = Console.ReadLine() ?? string.Empty;
-                            if (option == "x")
-                            {
-                                selecting = true;
-                                Menu.Start();
                             }
+                            coursecheck = false;
+                            // if (option == "return")
+                            // {
+                            //     done = false;
+                            // }
                         }
+                        Menu.Start();
+                        
+
                     }
                     else if (pos == 5)
                     {

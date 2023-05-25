@@ -17,7 +17,10 @@ public class AdminMenu : MenuLogic
             {
                 if (pos == 0)
                 {
-                    AddNewFoodItem.givenames();
+
+                    // deze is voor nieuw ding toeoegen pas volgende sprint goed aan
+                    // AddNewFoodItem.givenames();
+                    ChangeTheme.ChangeIt();
                     selecting = false;
                 }
                 else if (pos == 1)
