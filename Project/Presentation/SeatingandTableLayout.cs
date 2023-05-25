@@ -10,11 +10,10 @@ public class SeatingandTableLayout
     private SeatingandTableAccess accessLayer;
     static ReservationLogic reservationlogics = new ReservationLogic();
 
-    SeatingandTableLogic seatingandTableLogic = new SeatingandTableLogic();
+    SeatingandTableLogic seatingandTableLogic = new SeatingandTableLogic(15, 15);
 
+    private List<Table> tables = new List<Table>();
 
-    private List<Table> tables;
-    private const string TableDataFile = @"DataSources/tableData.json";
 
 
     public SeatingandTableLayout(int numRows, int numCols)
@@ -50,37 +49,6 @@ public class SeatingandTableLayout
     }
 
 
-
-
-    // public SeatingandTableLayout(int numRows, int numCols)
-    // {
-    //     seatingChart = new bool[numRows, numCols];
-    //     tableSizes = new int[numRows, numCols];
-
-    //     accessLayer = new SeatingandTableAccess(tableSizes); // Instantiate the accessLayer
-    //     accessLayer.LoadTableData(DateTime.Now);
-
-    //     // Load seating data from JSON file
-    //     accessLayer.LoadTableData(DateTime.Now);
-
-    //     // Initialize tables with different capacities
-    //     int[] numTables = { 8, 5, 2 };
-    //     int tableIdx = 0;
-    //     for (int row = 0; row < numRows; row++)
-    //     {
-    //         for (int col = 0; col < numCols; col++)
-    //         {
-    //             if (tableIdx < numTables.Length && numTables[tableIdx] > 0)
-    //             {
-    //                 tableSizes[row, col] = tableCapacity[tableIdx];
-    //                 numTables[tableIdx]--;
-    //                 if (numTables[tableIdx] == 0) tableIdx++;
-    //             }
-    //         }
-    //     }
-    // }
-
-
     public DateTime GetReservationTime()
     {
         DateTime reservationTime;
@@ -108,21 +76,6 @@ public class SeatingandTableLayout
         return reservationTime;
     }
 
-
-
-
-
-
-    private string GetTableDataFilename(DateTime date)
-    {
-        return $"DataSources/tableData_{date.ToString("yyyyMMdd")}.json";
-    }
-
-
-
-
-
-
     public int GetUserPartySize()
     {
         int partySize;
@@ -147,18 +100,6 @@ public class SeatingandTableLayout
         return partySize;
     }
 
-    public void PrintSelectedSeat(int tableId, int capacity)
-    {
-        Console.ForegroundColor = ConsoleColor.DarkBlue;
-        Console.WriteLine($"U heeft tafel {tableId} gekozen met een capaciteit van {capacity}.");
-        Console.ResetColor();
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("Klik op een toets om door te gaan.");
-        Console.ResetColor();
-        Console.ReadKey();
-    }
-
-
     public void PrintSeatingChart(int desiredCapacity, int selectedRow = -1, int selectedCol = -1)
     {
         // Check if the user is logged in
@@ -174,21 +115,21 @@ public class SeatingandTableLayout
 
         int tableRows = 5;
         int tableCols = (int)Math.Ceiling(tables.Count / (double)tableRows);
-        // DateTime reservationTime = GetReservationTime();
+
 
         SchedulingChart schedulingChart = new SchedulingChart();
         DateTime selectedDate = schedulingChart.SelectDate();
-        // DateTime reservationTime = GetReservationTime();
+
 
         DateTime reservationDateTime = GetReservationTime();
-        // LoadTableData(reservationDateTime.Date);
+
 
         reservationDateTime = new DateTime(
-            selectedDate.Year, 
-            selectedDate.Month, 
-            selectedDate.Day, 
-            reservationDateTime.Hour, 
-            reservationDateTime.Minute, 
+            selectedDate.Year,
+            selectedDate.Month,
+            selectedDate.Day,
+            reservationDateTime.Hour,
+            reservationDateTime.Minute,
             reservationDateTime.Second
         );
 
@@ -213,12 +154,7 @@ public class SeatingandTableLayout
                         break;
                     }
 
-                    // if (!IsTableOccupied(table.TableId, selectedDate, reservationTime) && table.Capacity >= desiredCapacity)
-                    // {
-                    //     selectedRow = i;
-                    //     selectedCol = j;
-                    //     break;
-                    // }
+
                 }
                 if (selectedRow != -1 && selectedCol != -1) break;
             }
@@ -254,10 +190,7 @@ public class SeatingandTableLayout
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
 
-                    // if (IsTableOccupied(table.TableId, selectedDate, reservationTime))
-                    // {
-                    //     Console.ForegroundColor = ConsoleColor.Red;
-                    // }
+
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -300,25 +233,11 @@ public class SeatingandTableLayout
                         seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
                         selectedTable.ReservationDateTime = reservationDateTime;
                         accessLayer.SaveTableData(reservationDateTime.Date);
-                        // tables[selectedIndex] = selectedTable;
-                        // accessLayer.SaveTableData(reservationDateTime.Date);
+
+                        accessLayer.UpdateTable(selectedTable, reservationDateTime.Date);
+
                         reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
-                        // hieronder is old code
 
-                        // seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
-                        // selectedTable.ReservationDateTime = reservationDateTime;
-                        // accessLayer.SaveTableData(reservationDateTime.Date);
-                        // reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
-
-                    // if (!IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime) && selectedTable.Capacity >= desiredCapacity)
-                    // {
-
-
-                    //     IsTableOccupied(selectedTable.TableId, selectedDate, reservationTime);
-                    //     selectedTable.ReservationDate = selectedDate;
-                    //     selectedTable.ReservationTime = reservationTime;
-                    //     SaveTableData(selectedDate);
-                    //     reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, selectedDate, reservationTime);
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("============================================================================================================");
@@ -363,24 +282,12 @@ public class SeatingandTableLayout
         }
     }
 
-
-    // public void SaveTablesToJSON()
-    // {
-    //     string json = JsonConvert.SerializeObject(tables, Formatting.Indented);
-    //     File.WriteAllText(@"DataSources/tableData.json", json);
-    // }
-
-
-
-
-
-
     public static void Main()
     {
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
         seatingChart.PrintSeatingChart(partySize);
         // seatingChart.ChooseSeat(partySize);
-        seatingChart.PrintSeatingChart(partySize);
+        // seatingChart.PrintSeatingChart(partySize);
     }
 }

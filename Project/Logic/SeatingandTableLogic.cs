@@ -10,33 +10,34 @@ public class SeatingandTableLogic
 
     static ReservationLogic reservationlogics = new ReservationLogic();
 
+    private List<ReservationModel> _reservations = new List<ReservationModel>();  // Initialize _reservations to an empty list
     private List<Table> tables;
 
     private bool[,] seatingChart;
 
     private int[,] tableSizes;
 
-
-    public SeatingandTableLogic()
+    public SeatingandTableLogic(int numRows, int numCols)
     {
+        seatingChart = new bool[numRows, numCols];
         accessLayer = new SeatingandTableAccess(tableSizes);
+        _reservations = reservationlogics.GetAll();
     }
+
 
     public bool IsTableOccupied(int tableId, DateTime dateTime)
     {
         return reservationlogics.CheckReservation(tableId, dateTime);
     }
 
-    public bool IsSeatAvailable(int row, int col)
+
+
+
+    public void UpdateSeatingChart(ReservationModel reservation)
     {
-        return seatingChart[row, col];
+        seatingChart[reservation.TableId / seatingChart.GetLength(0), reservation.TableId % seatingChart.GetLength(1)] = true;
     }
 
-    private Table GetTableAt(int row, int col)
-    {
-        int index = row * seatingChart.GetLength(1) + col;
-        return tables[index];
-    }
 
 
 }

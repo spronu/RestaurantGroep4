@@ -5,12 +5,9 @@ using System.IO;
 
 public class SeatingandTableAccess
 {
-    private const string TableDataFile = @"DataSources/tableData.json";
     private int[,] tableSizes;
 
     private List<Table> tables;
-
-    private bool[,] seatingChart;
 
     public SeatingandTableAccess(int[,] tableSizes)
     {
@@ -21,44 +18,10 @@ public class SeatingandTableAccess
 
     private string GetTableDataFilename(DateTime date)
     {
-            return $"DataSources/tableData_{date.ToString("yyyyMMdd")}.json";
-        }
-
-    // public List<Table> LoadTableData(DateTime date)
-    // {
-    //     string tableDataFile = GetTableDataFilename(date);
-
-    //     if (File.Exists(tableDataFile))
-    //     {
-    //         var tableDataJson = File.ReadAllText(tableDataFile);
-    //         tables = JsonConvert.DeserializeObject<List<Table>>(tableDataJson);
-    //     }
-    //     else
-    //     {
-    //         tables = GenerateDefaultTableData();
-    //     }
-
-    //     return tables;
-    // }
+        return $"DataSources/tableData_{date.ToString("yyyyMMdd")}.json";
+    }
 
 
-//seminewest
-    // public List<Table> LoadTableData(DateTime date)
-    // {
-    //     string tableDataFile = GetTableDataFilename(date);
-
-    //     if (File.Exists(tableDataFile))
-    //     {
-    //         var tableDataJson = File.ReadAllText(tableDataFile);
-    //         return JsonConvert.DeserializeObject<List<Table>>(tableDataJson);
-    //     }
-    //     else
-    //     {
-    //         return GenerateDefaultTableData();
-    //     }
-    // }
-
-//oldest!!!
     public List<Table> LoadTableData(DateTime date)
     {
         string tableDataFile = GetTableDataFilename(date);
@@ -66,14 +29,15 @@ public class SeatingandTableAccess
         if (File.Exists(tableDataFile))
         {
             var tableDataJson = File.ReadAllText(tableDataFile);
-            return tables = JsonConvert.DeserializeObject<List<Table>>(tableDataJson);
+            tables = JsonConvert.DeserializeObject<List<Table>>(tableDataJson);
         }
         else
         {
-            return tables = GenerateDefaultTableData();
+            tables = GenerateDefaultTableData();
         }
-    }
 
+        return tables;
+    }
 
 
     public void SaveTableData(DateTime date)
@@ -83,29 +47,15 @@ public class SeatingandTableAccess
         File.WriteAllText(tableDataFile, tableDataJson);
     }
 
-    private void LoadSeatingData()
+    public void UpdateTable(Table updatedTable, DateTime date)
     {
-        if (File.Exists(TableDataFile))
+        // Replace the table with updated data in the tables list
+        int index = tables.FindIndex(t => t.TableId == updatedTable.TableId);
+        if (index != -1)
         {
-            var seatingDataJson = File.ReadAllText(TableDataFile);
-            seatingChart = JsonConvert.DeserializeObject<bool[,]>(seatingDataJson);
+            tables[index] = updatedTable;
+            SaveTableData(date);
         }
-        else
-        {
-            for (int row = 0; row < seatingChart.GetLength(0); row++)
-            {
-                for (int col = 0; col < seatingChart.GetLength(1); col++)
-                {
-                    seatingChart[row, col] = true;
-                }
-            }
-        }
-    }
-
-    private void SaveSeatingData()
-    {
-        var seatingDataJson = JsonConvert.SerializeObject(seatingChart);
-        File.WriteAllText(TableDataFile, seatingDataJson);
     }
 
     public List<Table> GenerateDefaultTableData()
