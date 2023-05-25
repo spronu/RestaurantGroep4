@@ -61,10 +61,10 @@ static class CorrectInputCheck
                     Console.WriteLine("Waarschuwing: Er zijn minder gerechten besteld dan het aantal personen in de reservering.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Willen de overige mensen ook iets bestellen? (y/n)");
+                    Console.WriteLine("Willen de overige mensen ook iets bestellen? (j/n)");
                     Console.ResetColor();
                     string response = Console.ReadLine();
-                    if (response.ToLower() == "y")
+                    if (response.ToLower() == "j")
                     {
                         done = true;  // Only continue with the loop if there are more orders to be made and the user confirms they want to order more
                         continue;
@@ -83,6 +83,9 @@ static class CorrectInputCheck
 
     private static void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
     {
+        // Assign the order items to the reservation
+        reservation.OrderItemIDs = orderItemIDs;
+        reservation.TotalPrice = totalPrice;
         // Create a new dictionary with reservationId and orders
         var newDict = new Dictionary<string, object>
         {

@@ -20,6 +20,11 @@ public class ReservationLogic
         _reservations = ReservationsAccess.LoadAll();
     }
 
+    public void ReloadData()
+    {
+        _reservations = ReservationsAccess.LoadAll();
+    }
+
     public void UpdateList(ReservationModel res)
     {
         //Find if there is already an model with the same id
@@ -48,25 +53,23 @@ public class ReservationLogic
         return _reservations;
     }
 
-    // public void Delete(int id)
-    // {
-    //     _reservations.RemoveAll(i => i.Id == id);
-    //     ReservationsAccess.WriteAll(_reservations);
-    // }
 
     public bool CheckReservation(int tableId, DateTime date)
     {
+        ReloadData();
         return _reservations.Exists(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
     }
-
 
 
     public void AddReservation(int tableId, int numberOfPeople, DateTime reservationDateTime)
     {
         ReservationModel reservation = new ReservationModel(AccountsLogic.CurrentAccount.Id, AccountsLogic.CurrentAccount.FullName, tableId, numberOfPeople, reservationDateTime);
-        _reservations.Add(reservation);
-        ReservationsAccess.WriteAll(_reservations);
+        UpdateList(reservation);
         CorrectInputCheck.ShowMenu(reservation);
+
     }
+
+
+
 
 }

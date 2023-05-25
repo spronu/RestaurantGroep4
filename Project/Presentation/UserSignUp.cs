@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 public class UserSignUp
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
+    private static AccountsLogic accountsLogic = new AccountsLogic();
     public static void Start()
     {
         Console.Clear();
