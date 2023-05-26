@@ -49,20 +49,5 @@ public class ReservationInfo
             Console.ReadKey();
             Menu.Start();
         }
-        // foreach (ReservationModel reservation in reservations)
-        // {
-        //     Console.Clear();
-        //     Console.WriteLine("Reservering informatie");
-        //     Console.WriteLine("====================================");
-        //     Console.WriteLine("AccountID: " + reservation.AccountId);
-        //     Console.WriteLine("Volledige naam: " + reservation.FullName);
-        //     Console.WriteLine("Tafel Id: " + reservation.TableId);
-        //     Console.WriteLine("Aantal mensen: " + reservation.NumberOfPeople);
-        //     Console.WriteLine("====================================");
-        //     Console.WriteLine();
-        // }
-        // Console.WriteLine("Klik op een knop om terug te keren");
-        // Console.ReadKey();
-        // Menu.Start();
     }
 }
