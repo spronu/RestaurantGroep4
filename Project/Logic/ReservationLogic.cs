@@ -27,21 +27,41 @@ public class ReservationLogic
 
     public void UpdateList(ReservationModel res)
     {
-        //Find if there is already an model with the same id
         int index = _reservations.FindIndex(s => s.TableId == res.TableId);
 
         if (index != -1)
         {
-            //update existing model
             _reservations[index] = res;
         }
         else
         {
-            //add new model
             _reservations.Add(res);
         }
-        ReservationsAccess.WriteAll(_reservations);
+        List<ReservationModel> existingReservations = ReservationsAccess.LoadAll();
+        existingReservations.AddRange(_reservations);
+        ReservationsAccess.WriteAll(existingReservations); // write existingReservations instead of _reservations
     }
+
+
+    // public void UpdateList(ReservationModel res)
+    // {
+    //     //Find if there is already an model with the same id
+    //     int index = _reservations.FindIndex(s => s.TableId == res.TableId);
+
+    //     if (index != -1)
+    //     {
+    //         //update existing model
+    //         _reservations[index] = res;
+    //     }
+    //     else
+    //     {
+    //         //add new model
+    //         _reservations.Add(res);
+    //     }
+    //     List<ReservationModel> existingReservations = ReservationsAccess.LoadAll();
+    //     existingReservations.AddRange(_reservations);
+    //     ReservationsAccess.WriteAll(_reservations);
+    // }
 
     public ReservationModel GetById(int id)
     {
