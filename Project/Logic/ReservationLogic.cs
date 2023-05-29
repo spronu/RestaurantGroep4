@@ -38,8 +38,11 @@ public class ReservationLogic
             _reservations.Add(res);
         }
         List<ReservationModel> existingReservations = ReservationsAccess.LoadAll();
-        existingReservations.AddRange(_reservations);
-        ReservationsAccess.WriteAll(existingReservations); // write existingReservations instead of _reservations
+        if (!existingReservations.Contains(res))
+        {
+            existingReservations.Add(res);
+        }
+        ReservationsAccess.WriteAll(existingReservations);
     }
 
 
