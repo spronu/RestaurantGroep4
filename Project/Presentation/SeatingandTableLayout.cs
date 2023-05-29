@@ -232,7 +232,8 @@ public class SeatingandTableLayout
                     {
                         seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
                         selectedTable.ReservationDateTime = reservationDateTime;
-                        accessLayer.SaveTableData(reservationDateTime.Date);
+                        accessLayer.SaveTableData(tables, reservationDateTime.Date);
+                        // accessLayer.SaveTableData(reservationDateTime.Date);
 
                         seatingandTableLogic.UpdateTable(selectedTable, reservationDateTime.Date);
                         reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);

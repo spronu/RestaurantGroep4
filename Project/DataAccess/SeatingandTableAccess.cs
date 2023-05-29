@@ -35,10 +35,18 @@ public class SeatingandTableAccess
         return tables;
     }
 
-    public void SaveTableData(DateTime date)
+    public void SaveTableData(List<Table> tables, DateTime date)
     {
         string tableDataFile = GetTableDataFilename(date);
         var tableDataJson = JsonConvert.SerializeObject(tables);
         File.WriteAllText(tableDataFile, tableDataJson);
     }
+
+
+    // public void SaveTableData(DateTime date)
+    // {
+    //     string tableDataFile = GetTableDataFilename(date);
+    //     var tableDataJson = JsonConvert.SerializeObject(tables);
+    //     File.WriteAllText(tableDataFile, tableDataJson);
+    // }
 }

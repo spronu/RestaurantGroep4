@@ -43,17 +43,31 @@ public class SeatingandTableLogic
 
     public void UpdateTable(Table updatedTable, DateTime date)
     {
-        // Replace the table with updated data in the tables list
         if (tables != null && updatedTable != null) 
         {
             int index = tables.FindIndex(t => t.TableId == updatedTable.TableId);
             if (index != -1)
             {
                 tables[index] = updatedTable;
-                accessLayer.SaveTableData(date);
+                accessLayer.SaveTableData(tables, date); // Pass the tables list to be saved
             }
         }
     }
+
+
+    // public void UpdateTable(Table updatedTable, DateTime date)
+    // {
+    //     // Replace the table with updated data in the tables list
+    //     if (tables != null && updatedTable != null) 
+    //     {
+    //         int index = tables.FindIndex(t => t.TableId == updatedTable.TableId);
+    //         if (index != -1)
+    //         {
+    //             tables[index] = updatedTable;
+    //             accessLayer.SaveTableData(date);
+    //         }
+    //     }
+    // }
 
     public List<Table> GenerateDefaultTableData()
     {
