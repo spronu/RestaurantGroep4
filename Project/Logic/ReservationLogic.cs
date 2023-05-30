@@ -45,27 +45,6 @@ public class ReservationLogic
         ReservationsAccess.WriteAll(existingReservations);
     }
 
-
-    // public void UpdateList(ReservationModel res)
-    // {
-    //     //Find if there is already an model with the same id
-    //     int index = _reservations.FindIndex(s => s.TableId == res.TableId);
-
-    //     if (index != -1)
-    //     {
-    //         //update existing model
-    //         _reservations[index] = res;
-    //     }
-    //     else
-    //     {
-    //         //add new model
-    //         _reservations.Add(res);
-    //     }
-    //     List<ReservationModel> existingReservations = ReservationsAccess.LoadAll();
-    //     existingReservations.AddRange(_reservations);
-    //     ReservationsAccess.WriteAll(_reservations);
-    // }
-
     public ReservationModel GetById(int id)
     {
         return _reservations.Find(i => i.TableId == id);
@@ -75,7 +54,6 @@ public class ReservationLogic
     {
         return _reservations;
     }
-
 
     public bool CheckReservation(int tableId, DateTime date)
     {
