@@ -39,8 +39,6 @@ static class CorrectInputCheck
                     // Update the JSON immediately after an order is made.
                     UpdateReservationJson(orderItemIDs, totalPrice, reservation);
 
-                    // Call the menu display method after an order is made.
-                    menucardpresentasion.menucard(true);
                 }
             }
             if (notFound && option != "x")
@@ -48,8 +46,6 @@ static class CorrectInputCheck
                 Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
                 Thread.Sleep(1000);
 
-                // Call the menu display method if an order is not found.
-                menucardpresentasion.menucard(true);
             }
 
             if (option == "x")

@@ -50,10 +50,4 @@ static class Menu
         MainMenu menu = new MainMenu(items, 0);
         menu.Logics(title);
     }
-    // MainMenu menu = new MainMenu(items, 0);
-    // bool ongoing = true;
-    // while (ongoing = true)
-    // {
-    //     menu.Logics(title);
-    // }
 }
