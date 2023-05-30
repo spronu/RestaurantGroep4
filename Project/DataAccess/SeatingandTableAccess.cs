@@ -6,7 +6,7 @@ using System.IO;
 public class SeatingandTableAccess
 {
     private int[,] tableSizes;
-    
+
     private List<Table> tables;
 
     public SeatingandTableAccess(int[,] tableSizes)
@@ -19,8 +19,6 @@ public class SeatingandTableAccess
     {
         return $"DataSources/tableData_{date.ToString("yyyyMMdd")}.json";
     }
-
-
 
     public List<Table> LoadTableData(DateTime date)
     {
@@ -41,12 +39,4 @@ public class SeatingandTableAccess
         var tableDataJson = JsonConvert.SerializeObject(tables);
         File.WriteAllText(tableDataFile, tableDataJson);
     }
-
-
-    // public void SaveTableData(DateTime date)
-    // {
-    //     string tableDataFile = GetTableDataFilename(date);
-    //     var tableDataJson = JsonConvert.SerializeObject(tables);
-    //     File.WriteAllText(tableDataFile, tableDataJson);
-    // }
 }

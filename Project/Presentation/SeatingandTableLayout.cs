@@ -10,17 +10,14 @@ public class SeatingandTableLayout
     private SeatingandTableAccess accessLayer;
     static ReservationLogic reservationlogics = new ReservationLogic();
 
-    // SeatingandTableLogic seatingandTableLogic = new SeatingandTableLogic(15, 15);
     private SeatingandTableLogic seatingandTableLogic;
     private List<Table> tables = new List<Table>();
-
-
 
     public SeatingandTableLayout(int numRows, int numCols)
     {
         seatingChart = new bool[numRows, numCols];
         tableSizes = new int[numRows, numCols];
-        seatingandTableLogic = new SeatingandTableLogic(tableSizes); // Pass tableSizes
+        seatingandTableLogic = new SeatingandTableLogic(tableSizes);
         accessLayer = new SeatingandTableAccess(tableSizes);
 
         tables = accessLayer.LoadTableData(DateTime.Now);
@@ -37,17 +34,11 @@ public class SeatingandTableLayout
                     numTables[tableIdx]--;
                     if (numTables[tableIdx] == 0) tableIdx++;
                 }
-                else
-                {
-                    // This is changed to a warning, since we have run out of predefined tables
-                    // The table will be initialized with 0 capacity
-                }
             }
         }
 
-        tables = seatingandTableLogic.GenerateDefaultTableData(); // Generate the default table data after defining table sizes.
+        tables = seatingandTableLogic.GenerateDefaultTableData();
     }
-
 
     public DateTime GetReservationTime()
     {
@@ -110,7 +101,7 @@ public class SeatingandTableLayout
             Console.WriteLine("Klik op een toets om door te gaan");
             Console.ReadKey();
             Menu.Start();
-            return; // Return from the function to prevent the rest of the code from executing
+            return;
         }
 
         int tableRows = 5;
@@ -135,7 +126,6 @@ public class SeatingandTableLayout
 
         accessLayer.LoadTableData(reservationDateTime.Date);
 
-        // LoadTableData(selectedDate);
 
         if (selectedRow == -1 && selectedCol == -1)
         {
@@ -233,7 +223,6 @@ public class SeatingandTableLayout
                         seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
                         selectedTable.ReservationDateTime = reservationDateTime;
                         accessLayer.SaveTableData(tables, reservationDateTime.Date);
-                        // accessLayer.SaveTableData(reservationDateTime.Date);
 
                         seatingandTableLogic.UpdateTable(selectedTable, reservationDateTime.Date);
                         reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
@@ -287,7 +276,5 @@ public class SeatingandTableLayout
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
         seatingChart.PrintSeatingChart(partySize);
-        // seatingChart.ChooseSeat(partySize);
-        // seatingChart.PrintSeatingChart(partySize);
     }
 }
