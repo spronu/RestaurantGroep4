@@ -10,8 +10,8 @@ public class SeatingandTableLayout
     private SeatingandTableAccess accessLayer;
     static ReservationLogic reservationlogics = new ReservationLogic();
 
-    SeatingandTableLogic seatingandTableLogic = new SeatingandTableLogic(15, 15);
-
+    // SeatingandTableLogic seatingandTableLogic = new SeatingandTableLogic(15, 15);
+    private SeatingandTableLogic seatingandTableLogic;
     private List<Table> tables = new List<Table>();
 
 
@@ -20,7 +20,7 @@ public class SeatingandTableLayout
     {
         seatingChart = new bool[numRows, numCols];
         tableSizes = new int[numRows, numCols];
-
+        seatingandTableLogic = new SeatingandTableLogic(tableSizes); // Pass tableSizes
         accessLayer = new SeatingandTableAccess(tableSizes);
 
         tables = accessLayer.LoadTableData(DateTime.Now);
@@ -45,7 +45,7 @@ public class SeatingandTableLayout
             }
         }
 
-        tables = accessLayer.GenerateDefaultTableData(); // Generate the default table data after defining table sizes.
+        tables = seatingandTableLogic.GenerateDefaultTableData(); // Generate the default table data after defining table sizes.
     }
 
 
@@ -232,10 +232,10 @@ public class SeatingandTableLayout
                     {
                         seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
                         selectedTable.ReservationDateTime = reservationDateTime;
-                        accessLayer.SaveTableData(reservationDateTime.Date);
+                        accessLayer.SaveTableData(tables, reservationDateTime.Date);
+                        // accessLayer.SaveTableData(reservationDateTime.Date);
 
-                        accessLayer.UpdateTable(selectedTable, reservationDateTime.Date);
-
+                        seatingandTableLogic.UpdateTable(selectedTable, reservationDateTime.Date);
                         reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
 
                         Console.Clear();
