@@ -1,7 +1,7 @@
 [
   {
     "Id": 0,
-    "Name": "None",
+    "Name": "Geen",
     "Json": "MenuItems.json",
     "aantal": 24,
     "active": false

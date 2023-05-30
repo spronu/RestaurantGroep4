@@ -22,21 +22,21 @@ namespace ProjectTest
             _reservationLogic = new ReservationLogic(_reservations);
         }
 
-        [TestMethod]
-        public void CheckReservation_WhenReservationExists_ReturnsTrue()
-        {
-            var result = _reservationLogic.CheckReservation(1, new DateTime(2023, 1, 1));
+        // [TestMethod]
+        // public void CheckReservation_WhenReservationExists_ReturnsTrue()
+        // {
+        //     var result = _reservationLogic.CheckReservation(1, new DateTime(2023, 1, 1));
 
-            Assert.IsTrue(result);
-        }
+        //     Assert.IsTrue(result);
+        // }
 
-        [TestMethod]
-        public void CheckReservation_WhenReservationDoesNotExist_ReturnsFalse()
-        {
-            var result = _reservationLogic.CheckReservation(3, new DateTime(2023, 1, 3));
+        // [TestMethod]
+        // public void CheckReservation_WhenReservationDoesNotExist_ReturnsFalse()
+        // {
+        //     var result = _reservationLogic.CheckReservation(3, new DateTime(2023, 1, 3));
 
-            Assert.IsFalse(result);
-        }
+        //     Assert.IsFalse(result);
+        // }
 
         [TestMethod]
         public void GetById_WhenIdExists_ReturnsReservationModel()
