@@ -236,7 +236,6 @@ public class SeatingandTableLayout
                         Console.WriteLine();
                         Console.ReadKey();
                         ReservationModel reservation = new ReservationModel();
-                        CorrectInputCheck.ShowMenu(reservation);
                         Menu.Start();
                     }
                     else if (seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime))
