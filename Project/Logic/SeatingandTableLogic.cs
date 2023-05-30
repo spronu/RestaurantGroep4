@@ -22,14 +22,6 @@ public class SeatingandTableLogic
         tables = new List<Table>();
     }
 
-
-    // public SeatingandTableLogic(int numRows, int numCols)
-    // {
-    //     seatingChart = new bool[numRows, numCols];
-    //     accessLayer = new SeatingandTableAccess(tableSizes);
-    //     _reservations = reservationlogics.GetAll();
-    // }
-
     public bool IsTableOccupied(int tableId, DateTime dateTime)
     {
         return reservationlogics.CheckReservation(tableId, dateTime);
@@ -40,7 +32,6 @@ public class SeatingandTableLogic
         seatingChart[reservation.TableId / seatingChart.GetLength(0), reservation.TableId % seatingChart.GetLength(1)] = true;
     }
 
-
     public void UpdateTable(Table updatedTable, DateTime date)
     {
         if (tables != null && updatedTable != null) 
@@ -49,25 +40,10 @@ public class SeatingandTableLogic
             if (index != -1)
             {
                 tables[index] = updatedTable;
-                accessLayer.SaveTableData(tables, date); // Pass the tables list to be saved
+                accessLayer.SaveTableData(tables, date);
             }
         }
     }
-
-
-    // public void UpdateTable(Table updatedTable, DateTime date)
-    // {
-    //     // Replace the table with updated data in the tables list
-    //     if (tables != null && updatedTable != null) 
-    //     {
-    //         int index = tables.FindIndex(t => t.TableId == updatedTable.TableId);
-    //         if (index != -1)
-    //         {
-    //             tables[index] = updatedTable;
-    //             accessLayer.SaveTableData(date);
-    //         }
-    //     }
-    // }
 
     public List<Table> GenerateDefaultTableData()
     {
