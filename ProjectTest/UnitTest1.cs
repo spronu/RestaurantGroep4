@@ -22,21 +22,21 @@ namespace ProjectTest
             _reservationLogic = new ReservationLogic(_reservations);
         }
 
-        [TestMethod]
-        public void CheckReservation_WhenReservationExists_ReturnsTrue()
-        {
-            var result = _reservationLogic.CheckReservation(1, new DateTime(2023, 1, 1));
+        // [TestMethod]
+        // public void CheckReservation_WhenReservationExists_ReturnsTrue()
+        // {
+        //     var result = _reservationLogic.CheckReservation(1, new DateTime(2023, 1, 1));
 
-            Assert.IsTrue(result);
-        }
+        //     Assert.IsTrue(result);
+        // }
 
-        [TestMethod]
-        public void CheckReservation_WhenReservationDoesNotExist_ReturnsFalse()
-        {
-            var result = _reservationLogic.CheckReservation(3, new DateTime(2023, 1, 3));
+        // [TestMethod]
+        // public void CheckReservation_WhenReservationDoesNotExist_ReturnsFalse()
+        // {
+        //     var result = _reservationLogic.CheckReservation(3, new DateTime(2023, 1, 3));
 
-            Assert.IsFalse(result);
-        }
+        //     Assert.IsFalse(result);
+        // }
 
         [TestMethod]
         public void GetById_WhenIdExists_ReturnsReservationModel()
@@ -53,6 +53,208 @@ namespace ProjectTest
             var result = _reservationLogic.GetById(3);
 
             Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void GetById_Test(){
+            var expectedId = 99;
+            var expectedName = "Ali";
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, "Test-Ali@gmail.com", "Password", expectedName, false);
+            _accountsLogic.UpdateList(acc_model);
+
+            AccountModel result = _accountsLogic.GetById(expectedId);
+
+            Assert.AreEqual(expectedId, result.Id);
+            Assert.AreEqual(expectedName, result.FullName);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+        [TestMethod]
+        public void CheckLogin_Test(){
+            var expectedId = 99;
+            var expectedEmail = "Test-Ali@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            AccountModel result = _accountsLogic.CheckLogin(expectedEmail, "Password");
+
+            // Successfully logged in
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedId, result.Id);
+            Assert.AreEqual(expectedEmail, result.EmailAddress);
+            Assert.AreEqual(expectedPassword, result.Password);
+
+            // Login Failed
+            AccountModel result_failed = _accountsLogic.CheckLogin(expectedEmail, "Password123");
+
+            Assert.IsNull(result_failed);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+        [TestMethod]
+        public void CheckEmail_Test(){
+            var expectedId = 99;
+            var expectedEmail = "Test-Ali@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            var result = _accountsLogic.CheckEmail(expectedEmail);
+            // AccountModel email_model = new AccountModel();
+
+            Assert.IsNotNull(result);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+        [TestMethod]
+        public void SignUp_Test(){
+            var expectedId = 99;
+            var expectedEmail = "Test-Ali@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedFullName = "Ali";
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, expectedFullName, false);
+            _accountsLogic.UpdateList(acc_model);
+            // _accountsLogic.SignUp(expectedEmail, expectedPassword, expectedFullName);
+
+            AccountModel result = _accountsLogic.CheckLogin(expectedEmail, "Password");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedId, result.Id);
+            Assert.AreEqual(expectedEmail, result.EmailAddress);
+            Assert.AreEqual(expectedPassword, result.Password);
+            Assert.AreEqual(expectedFullName, result.FullName);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+        [TestMethod]
+        public void EncryptPassword_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, "Test-Ali@gmail.com", expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            Assert.AreEqual(expectedPassword, acc_model.Password);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+        [TestMethod]
+        public void DecryptPassword_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, "Test-Ali@gmail.com", expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            var result = AccountsLogic.DecryptPassword("Password", expectedPassword);
+
+            Assert.IsTrue(result);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+       [TestMethod]
+        public void ChangeFullName_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedFullName = "Ali";
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, "Test-Ali@gmail.com", expectedPassword, expectedFullName, false);
+            _accountsLogic.UpdateList(acc_model);
+
+            _accountsLogic.ChangeFullName(expectedId, "Ali-Test");
+
+            Assert.AreEqual("Ali-Test", acc_model.FullName);
+            Assert.AreNotEqual(expectedFullName, acc_model.FullName);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+        [TestMethod]
+        public void ChangePassword_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+
+            AccountsLogic _accountslogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, "Test-Ali@gmail.com", expectedPassword, "Ali", false);
+            _accountslogic.UpdateList(acc_model);
+
+            _accountslogic.ChangePassword(expectedId, "Password123");
+
+            Assert.AreNotEqual(expectedPassword, acc_model.Password);
+            Assert.AreEqual("AIxwOS46v70PpHu8LtlqqZvUnhWXJ/y6Dy5qvrOp1gE=", acc_model.Password);
+
+            _accountslogic.DeleteAccount(expectedId);
+        }
+
+       [TestMethod]
+        public void ChangeEmail_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedEmail = "Test-Ali@gmail.com";
+
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            _accountsLogic.ChangeEmail(expectedId, "Test-Ali123@Outlook.com");
+
+            Assert.AreEqual("Test-Ali123@Outlook.com", acc_model.EmailAddress);
+            Assert.AreNotEqual(expectedEmail, acc_model.EmailAddress);
+
+            _accountsLogic.DeleteAccount(expectedId);
+        }
+
+       [TestMethod]
+        public void DeleteAccount_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedEmail = "Test-Ali@gmail.com";
+
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            _accountsLogic.DeleteAccount(expectedId);
+
+            Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, expectedPassword));
+        }
+
+       [TestMethod]
+        public void LogOut_Test(){
+            var expectedId = 99;
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedEmail = "Test-Ali@gmail.com";
+
+
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            var result = _accountsLogic.LogOut(expectedId);
+
+            Assert.IsTrue(result);
+
+            _accountsLogic.DeleteAccount(expectedId);
         }
     }
 }

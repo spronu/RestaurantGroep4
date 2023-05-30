@@ -23,7 +23,7 @@ public class SchedulingChart
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("====================================");
-            Console.WriteLine("|         Scheduling Chart:        |");
+            Console.WriteLine("|         Planningsschema:        |");
             Console.WriteLine("====================================");
             Console.ResetColor();
             Console.WriteLine();
@@ -40,7 +40,7 @@ public class SchedulingChart
                 Console.ResetColor();
             }
 
-            Console.WriteLine("\nUse the arrow keys to navigate and press Enter to select a date.");
+            Console.WriteLine("\nGebruik de pijltjestoetsen om te navigeren en druk op Enter om een datum te selecteren.");
 
             ConsoleKeyInfo key = Console.ReadKey();
             if (key.Key == ConsoleKey.LeftArrow)

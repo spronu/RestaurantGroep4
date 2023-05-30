@@ -27,15 +27,15 @@ static class Menu
             items.Add("Bekijk account info");
             items.Add("Informatie over Restaurant");
             items.Add("Uitloggen");
-            items.Add("Exit");
+            items.Add("Afsluiten");
         }
         else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
             items.Add("Welkom " + AccountsLogic.CurrentAccount.FullName);
             items.Add("Bekijk menukaart");
-            items.Add("Admin Center");
+            items.Add("Beheercentrum");
             items.Add("Uitloggen");
-            items.Add("Exit");
+            items.Add("Afsluiten");
         }
         else
         {
@@ -45,15 +45,9 @@ static class Menu
             items.Add("Registreer");
             items.Add("Bekijk menukaart");
             items.Add("Informatie over Restaurant");
-            items.Add("Exit");
+            items.Add("Afsluiten");
         }
         MainMenu menu = new MainMenu(items, 0);
         menu.Logics(title);
     }
-    // MainMenu menu = new MainMenu(items, 0);
-    // bool ongoing = true;
-    // while (ongoing = true)
-    // {
-    //     menu.Logics(title);
-    // }
 }

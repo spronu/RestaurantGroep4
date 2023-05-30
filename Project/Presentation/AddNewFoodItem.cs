@@ -11,7 +11,7 @@ static class AddNewFoodItem
     {
         Console.WriteLine("geef de naam van het nieuwe gerecht:  ");
         string NAME = Console.ReadLine() ?? string.Empty;
-        Console.WriteLine("geef deaan of de type maaltijd main of side is: ");
+        Console.WriteLine("geef aan of de type maaltijd main of side is: ");
         string COURSE = Console.ReadLine() ?? string.Empty;
         Console.WriteLine("geef aan of de categorie vis, vlees, veganistisch, vegetarisch is ");
         string CATEGORY = Console.ReadLine() ?? string.Empty;
@@ -23,7 +23,7 @@ static class AddNewFoodItem
         }
         else
         {
-            Console.WriteLine("Invalid input or unable to parse.");
+            Console.WriteLine("Ongeldige invoer of niet in staat om te parsen.");
         }
         //  Read existing JSON data from the file
         string filePath = "DataSources/MenuItems.json";
@@ -52,7 +52,7 @@ static class AddNewFoodItem
         // Write the updated JSON back to the file
         File.WriteAllText(filePath, updatedJson);
 
-        Console.WriteLine("het gerecht is sucsesvol toegevoegd aan de menukaart!");
+        Console.WriteLine("het gerecht is succesvol toegevoegd aan de menukaart!");
 
     }
 }

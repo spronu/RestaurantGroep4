@@ -26,5 +26,12 @@
     "password": "n4bQgYhMfWWaL\u002BqgxVrQFaO/TxsrC4Is0V1sFbDwCgg=",
     "fullName": "Test",
     "admin": false
+  },
+  {
+    "id": 5,
+    "emailAddress": "hallo@gmail.com",
+    "password": "8MPNb8SyPq6V453hlDeS9izO/YNxWLacY6668wQe00U=",
+    "fullName": "hallo",
+    "admin": true
   }
 ]

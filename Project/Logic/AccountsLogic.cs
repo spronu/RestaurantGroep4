@@ -8,7 +8,7 @@ using System.Text;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class AccountsLogic
+public class AccountsLogic // Public of iets anders, zoals interface?
 {
     private List<AccountModel> _accounts;
 
@@ -68,24 +68,6 @@ class AccountsLogic
         return _accounts.Exists(i => i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
     }
 
-    // public void SignUp(string email, string password, string fullName)
-    // {
-    //     // Creating a new account model
-    //     AccountModel SignUp_acc = new AccountModel();
-
-    //     // Setting the properties of the account model
-    //     SignUp_acc.Id = _accounts.Count + 1;
-    //     SignUp_acc.EmailAddress = email;
-    //     SignUp_acc.Password = password;
-    //     SignUp_acc.FullName = fullName;
-
-    //     // Add the account model to the list of accounts
-    //     _accounts.Add(SignUp_acc);
-
-    //     // Save the list of accounts to the json
-    //     AccountsAccess.WriteAll(_accounts);
-    // }
-
     public void SignUp(string email, string password, string fullName)
     {
         // Creating a new account model
@@ -142,17 +124,6 @@ class AccountsLogic
         AccountsAccess.WriteAll(_accounts);
     }
 
-    // public void adminRight_changeUserPasswords(int id, string password){
-    //     for (int i = 0; i < _accounts.Count; i++)
-    //     {
-    //         var acc = _accounts[i];
-    //         if(acc.Id == id){
-    //             acc.Password = EncryptPassword(password);
-    //             AccountsAccess.WriteAll(_accounts);
-    //         }
-    //     }
-    // }
-
     public void ChangeEmail(int id, string email){
         // Find the account with the given id
         AccountModel acc = _accounts.Find(i => i.Id == id);
@@ -164,29 +135,12 @@ class AccountsLogic
         AccountsAccess.WriteAll(_accounts);
     }
 
-    // public void DeleteAccount(int id){
-    //     for (int i = 0; i < _accounts.Count; i++)
-    //     {
-    //         var acc = _accounts[i];
-    //         if(acc.Id == id){
-    //             _accounts.RemoveAt(i);
-    //             break;
-    //         }
-    //     }
-
-    //     // AccountModel acc = _accounts.Find(i => i.Id == id);
-
-    //     // _accounts.Remove(acc);
-
-    //     // AccountsAccess.WriteAll(_accounts);
-    // }
     public void DeleteAccount(int id){
         AccountModel acc = _accounts.Find(i => i.Id == id);
 
         _accounts.Remove(acc);
 
         var lastaccount = _accounts.Count;
-        
 
         AccountsAccess.WriteAll(_accounts);
     }
@@ -310,7 +264,8 @@ class AccountsLogic
                                     // key_pw = Console.ReadKey(false);
                                     select = false;
                                     select_bool = false;
-                                    break;
+                                    Menu.Start();
+                                    // break;
                                 }
                                 if (key_pw.Key != ConsoleKey.Backspace && key_pw.Key != ConsoleKey.Enter)
                                 {
@@ -332,6 +287,13 @@ class AccountsLogic
                             } while (key_pw.Key != ConsoleKey.Enter);
                             Console.WriteLine();
                             ChangePassword(selectedAccount.Id, newPassword);
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine();
+                            Console.WriteLine("====================================");
+                            Console.WriteLine("|     Wachtwoord is veranderd!     |");
+                            Console.WriteLine("====================================");
+                            Console.ResetColor();
+                            Thread.Sleep(1000);
                             select = false;
                             select_bool = false;
                         }

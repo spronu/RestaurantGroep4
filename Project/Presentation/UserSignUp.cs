@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 public class UserSignUp
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
+    private static AccountsLogic accountsLogic = new AccountsLogic();
     public static void Start()
     {
         Console.Clear();
@@ -25,13 +25,6 @@ public class UserSignUp
             email = email.Trim();
         }
 
-        // while (accountsLogic.CheckEmail(email))
-        // {
-        //     Console.WriteLine("Dit email adres bestaat al");
-        //     Console.WriteLine("Voer een ander email adres in");
-        //     email = Console.ReadLine();
-        //     email = email.Trim().ToLower();       
-        // }
         Console.WriteLine("Voer uw wachtwoord in");
         string password = "";
         ConsoleKeyInfo key;

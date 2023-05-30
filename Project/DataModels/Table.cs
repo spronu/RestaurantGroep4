@@ -2,10 +2,10 @@ using System.Text.Json.Serialization;
 
 public class Table
 {
-    [JsonPropertyName("tableId")]
+    [JsonPropertyName("TableId")]
     public int TableId { get; set; }
 
-    [JsonPropertyName("capacity")]
+    [JsonPropertyName("Capacity")]
     public int Capacity { get; set; }
 
     // [JsonPropertyName("reservationDate")]
@@ -14,7 +14,7 @@ public class Table
     // [JsonPropertyName("reservationTime")]
     // public DateTime? ReservationTime { get; set; }
 
-    [JsonPropertyName("reservationDateTime")]
+    [JsonPropertyName("ReservationDateTime")]
     public DateTime? ReservationDateTime { get; set; }
     // public DateTime ReservationDateTime { get; set; }
 }
