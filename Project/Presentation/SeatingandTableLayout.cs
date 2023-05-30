@@ -7,7 +7,6 @@ public class SeatingandTableLayout
     private int[,] tableSizes;
     private int[] tableCapacity = { 2, 4, 6 };
 
-    private SeatingandTableAccess accessLayer;
     static ReservationLogic reservationlogics = new ReservationLogic();
 
     private SeatingandTableLogic seatingandTableLogic;
@@ -18,9 +17,6 @@ public class SeatingandTableLayout
         seatingChart = new bool[numRows, numCols];
         tableSizes = new int[numRows, numCols];
         seatingandTableLogic = new SeatingandTableLogic(tableSizes);
-        accessLayer = new SeatingandTableAccess(tableSizes);
-
-        tables = accessLayer.LoadTableData(DateTime.Now);
 
         int[] numTables = { 8, 5, 2 };
         int tableIdx = 0;
@@ -124,8 +120,6 @@ public class SeatingandTableLayout
             reservationDateTime.Second
         );
 
-        accessLayer.LoadTableData(reservationDateTime.Date);
-
 
         if (selectedRow == -1 && selectedCol == -1)
         {
@@ -222,7 +216,6 @@ public class SeatingandTableLayout
                     {
                         seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
                         selectedTable.ReservationDateTime = reservationDateTime;
-                        accessLayer.SaveTableData(tables, reservationDateTime.Date);
 
                         seatingandTableLogic.UpdateTable(selectedTable, reservationDateTime.Date);
                         reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
