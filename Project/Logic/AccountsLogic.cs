@@ -68,24 +68,6 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         return _accounts.Exists(i => i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
     }
 
-    // public void SignUp(string email, string password, string fullName)
-    // {
-    //     // Creating a new account model
-    //     AccountModel SignUp_acc = new AccountModel();
-
-    //     // Setting the properties of the account model
-    //     SignUp_acc.Id = _accounts.Count + 1;
-    //     SignUp_acc.EmailAddress = email;
-    //     SignUp_acc.Password = password;
-    //     SignUp_acc.FullName = fullName;
-
-    //     // Add the account model to the list of accounts
-    //     _accounts.Add(SignUp_acc);
-
-    //     // Save the list of accounts to the json
-    //     AccountsAccess.WriteAll(_accounts);
-    // }
-
     public void SignUp(string email, string password, string fullName)
     {
         // Creating a new account model
