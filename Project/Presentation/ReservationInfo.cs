@@ -48,7 +48,7 @@ public class ReservationInfo
                 Console.WriteLine();
 
                 Console.WriteLine("Reservering " + (index + 1) + " van " + reservations.Count);
-                Console.WriteLine("Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu.");
+                Console.WriteLine("Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu. \nDruk op E om de reservering te wijzigen");
 
                 var key = Console.ReadKey(true);
                 switch (key.Key)
@@ -59,9 +59,14 @@ public class ReservationInfo
                     case ConsoleKey.DownArrow:
                         if (index < reservations.Count - 1) index++;
                         break;
+                    case ConsoleKey.E:
+                        Console.WriteLine("selectie elementen menu + verwijder optie");
+                        Thread.Sleep(2000);
+                        break;
                     case ConsoleKey.Enter:
                         Menu.Start();
                         break;
+
                 }
             } while (true);
 
