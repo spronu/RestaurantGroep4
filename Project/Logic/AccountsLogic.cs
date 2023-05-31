@@ -86,11 +86,12 @@ public class AccountsLogic // Public of iets anders, zoals interface?
             SignUp_acc.Admin = false;
         }
 
-        // Add the account model to the list of accounts
-        _accounts.Add(SignUp_acc);
+        UpdateList(SignUp_acc);
+        // // Add the account model to the list of accounts
+        // _accounts.Add(SignUp_acc);
 
-        // Save the list of accounts to the json
-        AccountsAccess.WriteAll(_accounts);
+        // // Save the list of accounts to the json
+        // AccountsAccess.WriteAll(_accounts);
     }
 
     public static string EncryptPassword(string password){
@@ -111,7 +112,9 @@ public class AccountsLogic // Public of iets anders, zoals interface?
 
         acc.FullName = fullName;
 
-        AccountsAccess.WriteAll(_accounts);
+        UpdateList(acc);
+
+        // AccountsAccess.WriteAll(_accounts);
     }
     public void ChangePassword(int id, string password){
         // Find the account with the given id
@@ -120,8 +123,9 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         // Change the password of the account
         acc.Password = EncryptPassword(password);
 
-        // Save the list of accounts to the json
-        AccountsAccess.WriteAll(_accounts);
+        UpdateList(acc);
+
+        // AccountsAccess.WriteAll(_accounts);
     }
 
     public void ChangeEmail(int id, string email){
@@ -131,8 +135,9 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         // Change the email of the account
         acc.EmailAddress = email;
 
-        // Save the list of accounts to the json
-        AccountsAccess.WriteAll(_accounts);
+        UpdateList(acc);
+
+        // AccountsAccess.WriteAll(_accounts);
     }
 
     public void DeleteAccount(int id){
@@ -141,6 +146,8 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         _accounts.Remove(acc);
 
         var lastaccount = _accounts.Count;
+
+        // UpdateList(acc);
 
         AccountsAccess.WriteAll(_accounts);
     }
@@ -157,4 +164,6 @@ public class AccountsLogic // Public of iets anders, zoals interface?
     public List<AccountModel> AllUsers(){
         return _accounts;
     }
+
+    // id updaten
 }

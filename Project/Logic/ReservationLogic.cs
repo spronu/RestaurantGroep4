@@ -67,4 +67,11 @@ public class ReservationLogic
         CorrectInputCheck.ShowMenu(reservation);
 
     }
+
+    public void RemoveReservation(int tableId, DateTime date)
+    {
+        ReloadData();
+        _reservations.RemoveAll(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
+        ReservationsAccess.WriteAll(_reservations);
+    }
 }
