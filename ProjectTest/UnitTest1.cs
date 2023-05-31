@@ -22,22 +22,6 @@ namespace ProjectTest
             _reservationLogic = new ReservationLogic(_reservations);
         }
 
-        // [TestMethod]
-        // public void CheckReservation_WhenReservationExists_ReturnsTrue()
-        // {
-        //     var result = _reservationLogic.CheckReservation(1, new DateTime(2023, 1, 1));
-
-        //     Assert.IsTrue(result);
-        // }
-
-        // [TestMethod]
-        // public void CheckReservation_WhenReservationDoesNotExist_ReturnsFalse()
-        // {
-        //     var result = _reservationLogic.CheckReservation(3, new DateTime(2023, 1, 3));
-
-        //     Assert.IsFalse(result);
-        // }
-
         [TestMethod]
         public void GetById_WhenIdExists_ReturnsReservationModel()
         {
@@ -57,7 +41,7 @@ namespace ProjectTest
 
         [TestMethod]
         public void GetById_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedName = "Ali";
 
             AccountsLogic _accountsLogic = new AccountsLogic();
@@ -68,13 +52,16 @@ namespace ProjectTest
 
             Assert.AreEqual(expectedId, result.Id);
             Assert.AreEqual(expectedName, result.FullName);
+            
+            Assert.AreNotEqual(-100, result.Id);
+
 
             _accountsLogic.DeleteAccount(expectedId);
         }
 
         [TestMethod]
         public void CheckLogin_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedEmail = "Test-Ali@gmail.com";
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
@@ -100,7 +87,7 @@ namespace ProjectTest
 
         [TestMethod]
         public void CheckEmail_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedEmail = "Test-Ali@gmail.com";
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
@@ -112,13 +99,16 @@ namespace ProjectTest
             // AccountModel email_model = new AccountModel();
 
             Assert.IsNotNull(result);
+            Assert.AreEqual(expectedEmail, acc_model.EmailAddress);
+
+            Assert.AreNotEqual("Ali-Test@gmail.com", acc_model.EmailAddress);
 
             _accountsLogic.DeleteAccount(expectedId);
         }
 
         [TestMethod]
         public void SignUp_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedEmail = "Test-Ali@gmail.com";
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
@@ -136,12 +126,17 @@ namespace ProjectTest
             Assert.AreEqual(expectedPassword, result.Password);
             Assert.AreEqual(expectedFullName, result.FullName);
 
+            Assert.AreNotEqual(-100, result.Id);
+            Assert.AreNotEqual("Ali-Test@gmail.com", result.EmailAddress);
+            Assert.AreNotEqual("password!", result.Password);
+            Assert.AreNotEqual("Ali2", result.FullName);
+
             _accountsLogic.DeleteAccount(expectedId);
         }
 
         [TestMethod]
         public void EncryptPassword_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
             AccountsLogic _accountsLogic = new AccountsLogic();
@@ -149,13 +144,15 @@ namespace ProjectTest
             _accountsLogic.UpdateList(acc_model);
 
             Assert.AreEqual(expectedPassword, acc_model.Password);
+            
+            Assert.AreNotEqual("<588+9PF8OZmpTyxvYS6KiI5bECaHjk4ZOYsjvTjsIho=", acc_model.Password);
 
             _accountsLogic.DeleteAccount(expectedId);
         }
 
         [TestMethod]
         public void DecryptPassword_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
             AccountsLogic _accountsLogic = new AccountsLogic();
@@ -163,15 +160,17 @@ namespace ProjectTest
             _accountsLogic.UpdateList(acc_model);
 
             var result = AccountsLogic.DecryptPassword("Password", expectedPassword);
+            var wrong_result = AccountsLogic.DecryptPassword("password1", expectedPassword);
 
             Assert.IsTrue(result);
+            Assert.IsFalse(wrong_result);
 
             _accountsLogic.DeleteAccount(expectedId);
         }
 
        [TestMethod]
         public void ChangeFullName_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
 
@@ -189,7 +188,7 @@ namespace ProjectTest
 
         [TestMethod]
         public void ChangePassword_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
             AccountsLogic _accountslogic = new AccountsLogic();
@@ -206,7 +205,7 @@ namespace ProjectTest
 
        [TestMethod]
         public void ChangeEmail_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedEmail = "Test-Ali@gmail.com";
 
@@ -225,7 +224,7 @@ namespace ProjectTest
 
        [TestMethod]
         public void DeleteAccount_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedEmail = "Test-Ali@gmail.com";
 
@@ -241,7 +240,7 @@ namespace ProjectTest
 
        [TestMethod]
         public void LogOut_Test(){
-            var expectedId = 99;
+            var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedEmail = "Test-Ali@gmail.com";
 
