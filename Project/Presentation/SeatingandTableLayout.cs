@@ -100,17 +100,6 @@ public class SeatingandTableLayout
 
     public void PrintSeatingChart(int desiredCapacity, int selectedRow = -1, int selectedCol = -1)
     {
-        // Check if the user is logged in
-        if (AccountsLogic.CurrentAccount == null)
-        {
-            Console.WriteLine("U moet inloggen of registreren om deze functie te kunnen gebruiken");
-            Console.WriteLine("U wordt teruggeleid naar het menu");
-            Console.WriteLine("Klik op een toets om door te gaan");
-            Console.ReadKey();
-            Menu.Start();
-            return;
-        }
-
         int tableRows = 5;
         int tableCols = (int)Math.Ceiling(tables.Count / (double)tableRows);
 
@@ -253,7 +242,7 @@ public class SeatingandTableLayout
                         );
                         Console.ResetColor();
                         Console.WriteLine();
-                        Console.ReadKey();
+                        Thread.Sleep(1500);
                         ReservationModel reservation = new ReservationModel();
                         Menu.Start();
                     }
@@ -281,16 +270,6 @@ public class SeatingandTableLayout
                         Console.ReadKey();
                     }
                 }
-            }
-            else if (key.Key == ConsoleKey.Enter && AccountsLogic.CurrentAccount == null)
-            {
-                Console.WriteLine(
-                    "U moet inloggen of registreren om deze functie te kunnen gebruiken"
-                );
-                Console.WriteLine("U wordt teruggeleid naar het menu");
-                Console.WriteLine("Klik op een toets om door te gaan");
-                Console.ReadKey();
-                Menu.Start();
             }
             else if (key.Key == ConsoleKey.Escape)
             {
