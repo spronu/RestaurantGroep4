@@ -6,7 +6,6 @@ using System.IO;
 
 public class SeatingandTableLogic
 {
-    private SeatingandTableAccess accessLayer;
     static ReservationLogic reservationlogics = new ReservationLogic();
     private List<ReservationModel> _reservations = new List<ReservationModel>();
     private List<Table> tables;
@@ -17,7 +16,6 @@ public class SeatingandTableLogic
     {
         this.tableSizes = tableSizes;
         seatingChart = new bool[tableSizes.GetLength(0), tableSizes.GetLength(1)];
-        accessLayer = new SeatingandTableAccess(tableSizes);
         _reservations = reservationlogics.GetAll();
         tables = new List<Table>();
     }
@@ -25,11 +23,6 @@ public class SeatingandTableLogic
     public bool IsTableOccupied(int tableId, DateTime dateTime)
     {
         return reservationlogics.CheckReservation(tableId, dateTime);
-    }
-
-    public void UpdateSeatingChart(ReservationModel reservation)
-    {
-        seatingChart[reservation.TableId / seatingChart.GetLength(0), reservation.TableId % seatingChart.GetLength(1)] = true;
     }
 
     public void UpdateTable(Table updatedTable, DateTime date)
@@ -40,7 +33,6 @@ public class SeatingandTableLogic
             if (index != -1)
             {
                 tables[index] = updatedTable;
-                accessLayer.SaveTableData(tables, date);
             }
         }
     }

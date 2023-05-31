@@ -9,7 +9,6 @@ public class ReservationLogic
 
     public static ReservationModel? CurrentReservation { get; private set; }
 
-
     public ReservationLogic(List<ReservationModel> reservations = null)
     {
         _reservations = reservations ?? ReservationsAccess.LoadAll();
@@ -61,7 +60,6 @@ public class ReservationLogic
         return _reservations.Exists(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
     }
 
-
     public void AddReservation(int tableId, int numberOfPeople, DateTime reservationDateTime)
     {
         ReservationModel reservation = new ReservationModel(AccountsLogic.CurrentAccount.Id, AccountsLogic.CurrentAccount.FullName, tableId, numberOfPeople, reservationDateTime);
@@ -69,8 +67,4 @@ public class ReservationLogic
         CorrectInputCheck.ShowMenu(reservation);
 
     }
-
-
-
-
 }
