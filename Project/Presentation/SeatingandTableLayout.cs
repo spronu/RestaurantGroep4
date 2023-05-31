@@ -28,7 +28,8 @@ public class SeatingandTableLayout
                 {
                     tableSizes[row, col] = tableCapacity[tableIdx];
                     numTables[tableIdx]--;
-                    if (numTables[tableIdx] == 0) tableIdx++;
+                    if (numTables[tableIdx] == 0)
+                        tableIdx++;
                 }
             }
         }
@@ -43,7 +44,15 @@ public class SeatingandTableLayout
         {
             Console.Write("Voer de reserveringstijd in (HH:mm formaat): ");
             string timeInput = Console.ReadLine();
-            if (DateTime.TryParseExact(timeInput, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out reservationTime))
+            if (
+                DateTime.TryParseExact(
+                    timeInput,
+                    "HH:mm",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out reservationTime
+                )
+            )
             {
                 if (reservationTime.Hour >= 18 && reservationTime.Hour < 23)
                 {
@@ -51,7 +60,9 @@ public class SeatingandTableLayout
                 }
                 else
                 {
-                    Console.WriteLine("Ongeldige tijd. Het restaurant is geopend van 18:00 tot 23:00.");
+                    Console.WriteLine(
+                        "Ongeldige tijd. Het restaurant is geopend van 18:00 tot 23:00."
+                    );
                 }
             }
             else
@@ -103,13 +114,10 @@ public class SeatingandTableLayout
         int tableRows = 5;
         int tableCols = (int)Math.Ceiling(tables.Count / (double)tableRows);
 
-
         SchedulingChart schedulingChart = new SchedulingChart();
         DateTime selectedDate = schedulingChart.SelectDate();
 
-
         DateTime reservationDateTime = GetReservationTime();
-
 
         reservationDateTime = new DateTime(
             selectedDate.Year,
@@ -120,7 +128,6 @@ public class SeatingandTableLayout
             reservationDateTime.Second
         );
 
-
         if (selectedRow == -1 && selectedCol == -1)
         {
             for (int i = 0; i < tableRows; i++)
@@ -128,19 +135,22 @@ public class SeatingandTableLayout
                 for (int j = 0; j < tableCols; j++)
                 {
                     int index = i * tableCols + j;
-                    if (index >= tables.Count) break;
+                    if (index >= tables.Count)
+                        break;
 
                     var table = tables[index];
-                    if (!seatingandTableLogic.IsTableOccupied(table.TableId, reservationDateTime) && table.Capacity >= desiredCapacity)
+                    if (
+                        !seatingandTableLogic.IsTableOccupied(table.TableId, reservationDateTime)
+                        && table.Capacity >= desiredCapacity
+                    )
                     {
                         selectedRow = i;
                         selectedCol = j;
                         break;
                     }
-
-
                 }
-                if (selectedRow != -1 && selectedCol != -1) break;
+                if (selectedRow != -1 && selectedCol != -1)
+                    break;
             }
         }
 
@@ -154,13 +164,13 @@ public class SeatingandTableLayout
             Console.ResetColor();
             Console.WriteLine();
 
-
             for (int i = 0; i < tableRows; i++)
             {
                 for (int j = 0; j < tableCols; j++)
                 {
                     int index = i * tableCols + j;
-                    if (index >= tables.Count) break;
+                    if (index >= tables.Count)
+                        break;
 
                     var table = tables[index];
 
@@ -173,8 +183,6 @@ public class SeatingandTableLayout
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
-
-
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -211,37 +219,64 @@ public class SeatingandTableLayout
                 {
                     Table selectedTable = tables[selectedIndex];
 
-
-                    if (!seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime) && selectedTable.Capacity >= desiredCapacity)
+                    if (
+                        !seatingandTableLogic.IsTableOccupied(
+                            selectedTable.TableId,
+                            reservationDateTime
+                        )
+                        && selectedTable.Capacity >= desiredCapacity
+                    )
                     {
-                        seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime);
+                        seatingandTableLogic.IsTableOccupied(
+                            selectedTable.TableId,
+                            reservationDateTime
+                        );
                         selectedTable.ReservationDateTime = reservationDateTime;
 
                         seatingandTableLogic.UpdateTable(selectedTable, reservationDateTime.Date);
-                        reservationlogics.AddReservation(selectedTable.TableId, desiredCapacity, reservationDateTime);
+                        reservationlogics.AddReservation(
+                            selectedTable.TableId,
+                            desiredCapacity,
+                            reservationDateTime
+                        );
 
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("============================================================================================================");
-                        Console.WriteLine($"|                        Tafel T{selectedTable.TableId} is succesvol gereserveerd.                        |");
-                        Console.WriteLine("============================================================================================================");
+                        Console.WriteLine(
+                            "============================================================================================================"
+                        );
+                        Console.WriteLine(
+                            $"|                        Tafel T{selectedTable.TableId} is succesvol gereserveerd.                        |"
+                        );
+                        Console.WriteLine(
+                            "============================================================================================================"
+                        );
                         Console.ResetColor();
                         Console.WriteLine();
                         Console.ReadKey();
                         ReservationModel reservation = new ReservationModel();
                         Menu.Start();
                     }
-                    else if (seatingandTableLogic.IsTableOccupied(selectedTable.TableId, reservationDateTime))
+                    else if (
+                        seatingandTableLogic.IsTableOccupied(
+                            selectedTable.TableId,
+                            reservationDateTime
+                        )
+                    )
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nDeze tafel is al in gebruik. Kiest u alstublieft een andere tafel.");
+                        Console.WriteLine(
+                            "\nDeze tafel is al in gebruik. Kiest u alstublieft een andere tafel."
+                        );
                         Console.ResetColor();
                         Console.ReadKey();
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nDeze tafel is niet geschikt voor het aantal dinerende mensen. Kiest u alstublieft een andere tafel.");
+                        Console.WriteLine(
+                            "\nDeze tafel is niet geschikt voor het aantal dinerende mensen. Kiest u alstublieft een andere tafel."
+                        );
                         Console.ResetColor();
                         Console.ReadKey();
                     }
@@ -249,13 +284,14 @@ public class SeatingandTableLayout
             }
             else if (key.Key == ConsoleKey.Enter && AccountsLogic.CurrentAccount == null)
             {
-                Console.WriteLine("U moet inloggen of registreren om deze functie te kunnen gebruiken");
+                Console.WriteLine(
+                    "U moet inloggen of registreren om deze functie te kunnen gebruiken"
+                );
                 Console.WriteLine("U wordt teruggeleid naar het menu");
                 Console.WriteLine("Klik op een toets om door te gaan");
                 Console.ReadKey();
                 Menu.Start();
             }
-
             else if (key.Key == ConsoleKey.Escape)
             {
                 Menu.Start();
