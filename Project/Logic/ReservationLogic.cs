@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
 public class ReservationLogic
@@ -26,7 +27,7 @@ public class ReservationLogic
 
     public void UpdateList(ReservationModel res)
     {
-        int index = _reservations.FindIndex(s => s.TableId == res.TableId);
+        int index = _reservations.FindIndex(s => s.ReservationId == res.ReservationId);
 
         if (index != -1)
         {
@@ -36,12 +37,7 @@ public class ReservationLogic
         {
             _reservations.Add(res);
         }
-        List<ReservationModel> existingReservations = ReservationsAccess.LoadAll();
-        if (!existingReservations.Contains(res))
-        {
-            existingReservations.Add(res);
-        }
-        ReservationsAccess.WriteAll(existingReservations);
+        ReservationsAccess.WriteAll(_reservations);
     }
 
     public ReservationModel GetById(int id)
@@ -57,14 +53,46 @@ public class ReservationLogic
     public bool CheckReservation(int tableId, DateTime date)
     {
         ReloadData();
-        return _reservations.Exists(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
+        return _reservations.Exists(
+            i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date
+        );
     }
 
     public void AddReservation(int tableId, int numberOfPeople, DateTime reservationDateTime)
     {
-        ReservationModel reservation = new ReservationModel(AccountsLogic.CurrentAccount.Id, AccountsLogic.CurrentAccount.FullName, tableId, numberOfPeople, reservationDateTime);
+        ReservationModel reservation = new ReservationModel(
+            AccountsLogic.CurrentAccount.Id,
+            AccountsLogic.CurrentAccount.FullName,
+            tableId,
+            numberOfPeople,
+            reservationDateTime
+        );
         UpdateList(reservation);
         CorrectInputCheck.ShowMenu(reservation);
+    }
 
+    public void UpdateReservationJson(
+        List<int> orderItemIDs,
+        double totalPrice,
+        ReservationModel reservation
+    )
+    {
+        reservation.OrderItemIDs = orderItemIDs;
+        reservation.TotalPrice = totalPrice;
+
+        UpdateList(reservation);
+    }
+
+    public string GetDishNameById(int id)
+    {
+        JArray jsonArray = MenuRecive.getdata();
+        foreach (JObject item in jsonArray)
+        {
+            if (id == Convert.ToInt32(item["id"]))
+            {
+                return item["name"].ToString();
+            }
+        }
+        return "Unknown dish"; // return this if the id is not found
     }
 }
