@@ -135,7 +135,11 @@ public class MainMenu : MenuLogic
                     if (pos == 1)
                     {
                         // Check if the user is logged in
-                        Console.WriteLine("Je bent niet ingelogd");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "Je bent niet ingelogd. Log eerst in of registreer eerst. Je wordt nu teruggeleid naar het menu."
+                        );
+                        Console.ResetColor();
                         Thread.Sleep(1000);
                         Menu.Start();
 
