@@ -9,6 +9,7 @@ namespace ProjectTest
     {
 
         [TestMethod]
+<<<<<<< HEAD
         public void UpdateList_AccountTest()
         {
             var expectedId = -99;
@@ -35,6 +36,9 @@ namespace ProjectTest
         [TestMethod]
         public void GetById_AccountTest()
         {
+=======
+        public void GetById_Test(){
+>>>>>>> b3232776ac5d24b619f6b26734616bdc38bdb66f
             var expectedId = -99;
             var expectedName = "Ali";
 
@@ -258,5 +262,55 @@ namespace ProjectTest
 
             _accountsLogic.DeleteAccount(expectedId);
         }
+<<<<<<< HEAD
+=======
+
+        [TestMethod]
+        public void IsTableOccupied_Test()
+        {
+
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            2022,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+            var result = _seatingandTableLogic.IsTableOccupied(2, reservationDateTime);
+
+            Assert.IsTrue(result);
+
+        }
+//concept UpdateTable_Test is nog niet af
+        [TestMethod]
+        public void UpdateTable_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            2022,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+
+
+        }
+>>>>>>> b3232776ac5d24b619f6b26734616bdc38bdb66f
     }
 }
