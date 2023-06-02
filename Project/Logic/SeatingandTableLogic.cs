@@ -25,18 +25,6 @@ public class SeatingandTableLogic
         return reservationlogics.CheckReservation(tableId, dateTime);
     }
 
-    public void UpdateTable(Table updatedTable, DateTime date)
-    {
-        if (tables != null && updatedTable != null)
-        {
-            int index = tables.FindIndex(t => t.TableId == updatedTable.TableId);
-            if (index != -1)
-            {
-                tables[index] = updatedTable;
-            }
-        }
-    }
-
     public List<Table> GenerateDefaultTableData()
     {
         List<Table> defaultTables = new List<Table>();
