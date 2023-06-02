@@ -96,10 +96,16 @@ public class ReservationLogic
         return "Unknown dish"; // return this if the id is not found
     }
 
-    public void RemoveReservation(int tableId, DateTime date)
+    public void RemoveReservation(int acc_id)
     {
         ReloadData();
-        _reservations.RemoveAll(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
+        _reservations.RemoveAll(x => x.AccountId == acc_id);
         ReservationsAccess.WriteAll(_reservations);
     }
+
+    // public ReservationModel GetAccountID(int id)
+    // {   
+    //     var Getacc = _reservations.Find(i => i.AccountId == id);
+    //     _reservations.RemoveAll(x => x.AccountId == id)
+    // }
 }

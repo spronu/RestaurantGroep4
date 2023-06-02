@@ -255,5 +255,21 @@ namespace ProjectTest
 
             _accountsLogic.DeleteAccount(expectedId);
         }
+
+        // public void test()
+        // {
+        //     DateTime reservationDateTime = new DateTime(
+        //         2022,
+        //         04,
+        //         21,
+        //         22,
+        //         00,
+        //         00
+        //     );
+
+        //     ReservationLogic _accountsLogic = new ReservationLogic();
+        //     ReservationModel acc_model = new ReservationModel(-99, "Ali",2, 2, reservationDateTime);
+
+        // }
     }
 }

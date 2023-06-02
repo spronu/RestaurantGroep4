@@ -1,6 +1,6 @@
 static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
+    private static AccountsLogic accountsLogic = new AccountsLogic();
 
     public static void Start()
     {
