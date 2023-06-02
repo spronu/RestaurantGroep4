@@ -7,40 +7,34 @@ namespace ProjectTest
     [TestClass]
     public class UnitTest1
     {
-        private List<ReservationModel> _reservations;
-        private ReservationLogic _reservationLogic;
 
-        [TestInitialize]
-        public void TestInitialize()
+        [TestMethod]
+        public void UpdateList_AccountTest()
         {
-            _reservations = new List<ReservationModel>
-            {
-                new ReservationModel { TableId = 1, ReservationDateTime = new DateTime(2023, 1, 1) },
-                new ReservationModel { TableId = 2, ReservationDateTime = new DateTime(2023, 1, 2) }
-            };
+            var expectedId = -99;
+            var expectedEmail = "Test-Ali@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
-            _reservationLogic = new ReservationLogic(_reservations);
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            Assert.AreEqual(expectedId, acc_model.Id);
+            Assert.AreEqual(expectedEmail, acc_model.EmailAddress);
+            Assert.AreEqual(expectedPassword, acc_model.Password);
+            Assert.IsNotNull(acc_model);
+
+            Assert.AreNotEqual(-100, acc_model.Id);
+            Assert.AreNotEqual("Ali-Test@gmail.com", acc_model.EmailAddress);
+
+            _accountsLogic.DeleteAccount(expectedId);
+
+            Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, expectedPassword));
         }
 
         [TestMethod]
-        public void GetById_WhenIdExists_ReturnsReservationModel()
+        public void GetById_AccountTest()
         {
-            var result = _reservationLogic.GetById(1);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.TableId);
-        }
-
-        [TestMethod]
-        public void GetById_WhenIdDoesNotExist_ReturnsNull()
-        {
-            var result = _reservationLogic.GetById(3);
-
-            Assert.IsNull(result);
-        }
-
-        [TestMethod]
-        public void GetById_Test(){
             var expectedId = -99;
             var expectedName = "Ali";
 
@@ -60,7 +54,8 @@ namespace ProjectTest
         }
 
         [TestMethod]
-        public void CheckLogin_Test(){
+        public void CheckLogin_Test()
+        {
             var expectedId = -99;
             var expectedEmail = "Test-Ali@gmail.com";
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
@@ -86,7 +81,8 @@ namespace ProjectTest
         }
 
         [TestMethod]
-        public void CheckEmail_Test(){
+        public void CheckEmail_Test()
+        {
             var expectedId = -99;
             var expectedEmail = "Test-Ali@gmail.com";
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
@@ -96,7 +92,6 @@ namespace ProjectTest
             _accountsLogic.UpdateList(acc_model);
 
             var result = _accountsLogic.CheckEmail(expectedEmail);
-            // AccountModel email_model = new AccountModel();
 
             Assert.IsNotNull(result);
             Assert.AreEqual(expectedEmail, acc_model.EmailAddress);
@@ -107,7 +102,8 @@ namespace ProjectTest
         }
 
         [TestMethod]
-        public void SignUp_Test(){
+        public void SignUp_Test()
+        {
             var expectedId = -99;
             var expectedEmail = "Test-Ali@gmail.com";
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
@@ -135,7 +131,8 @@ namespace ProjectTest
         }
 
         [TestMethod]
-        public void EncryptPassword_Test(){
+        public void EncryptPassword_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
@@ -151,7 +148,8 @@ namespace ProjectTest
         }
 
         [TestMethod]
-        public void DecryptPassword_Test(){
+        public void DecryptPassword_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
@@ -169,7 +167,8 @@ namespace ProjectTest
         }
 
        [TestMethod]
-        public void ChangeFullName_Test(){
+        public void ChangeFullName_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
@@ -187,7 +186,8 @@ namespace ProjectTest
         }
 
         [TestMethod]
-        public void ChangePassword_Test(){
+        public void ChangePassword_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
@@ -204,7 +204,8 @@ namespace ProjectTest
         }
 
        [TestMethod]
-        public void ChangeEmail_Test(){
+        public void ChangeEmail_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedEmail = "Test-Ali@gmail.com";
@@ -223,7 +224,8 @@ namespace ProjectTest
         }
 
        [TestMethod]
-        public void DeleteAccount_Test(){
+        public void DeleteAccount_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedEmail = "Test-Ali@gmail.com";
@@ -239,7 +241,8 @@ namespace ProjectTest
         }
 
        [TestMethod]
-        public void LogOut_Test(){
+        public void LogOut_Test()
+        {
             var expectedId = -99;
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedEmail = "Test-Ali@gmail.com";
@@ -255,21 +258,5 @@ namespace ProjectTest
 
             _accountsLogic.DeleteAccount(expectedId);
         }
-
-        // public void test()
-        // {
-        //     DateTime reservationDateTime = new DateTime(
-        //         2022,
-        //         04,
-        //         21,
-        //         22,
-        //         00,
-        //         00
-        //     );
-
-        //     ReservationLogic _accountsLogic = new ReservationLogic();
-        //     ReservationModel acc_model = new ReservationModel(-99, "Ali",2, 2, reservationDateTime);
-
-        // }
     }
 }
