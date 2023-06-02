@@ -222,7 +222,6 @@ public class SeatingandTableLayout
                         );
                         selectedTable.ReservationDateTime = reservationDateTime;
 
-                        seatingandTableLogic.UpdateTable(selectedTable, reservationDateTime.Date);
                         reservationlogics.AddReservation(
                             selectedTable.TableId,
                             desiredCapacity,
