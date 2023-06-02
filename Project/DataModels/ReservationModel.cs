@@ -2,8 +2,6 @@ using System.Text.Json.Serialization;
 
 public class ReservationModel
 {
-    // [JsonPropertyName("id")]
-    // public int Id { get; set; }
 
     [JsonPropertyName("reservationId")]
     public Guid ReservationId { get; set; }
