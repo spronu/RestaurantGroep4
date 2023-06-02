@@ -40,11 +40,6 @@ public class ReservationLogic
         ReservationsAccess.WriteAll(_reservations);
     }
 
-    public ReservationModel GetById(int id)
-    {
-        return _reservations.Find(i => i.TableId == id);
-    }
-
     public List<ReservationModel> GetAll()
     {
         return _reservations;
