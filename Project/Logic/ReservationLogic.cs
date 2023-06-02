@@ -94,13 +94,13 @@ public class ReservationLogic
     public void RemoveReservation(int acc_id)
     {
         ReloadData();
-        _reservations.RemoveAll(x => x.AccountId == acc_id);
+        var future_reservations = _reservations.Where(x => x.AccountId == acc_id && x.ReservationDateTime > DateTime.Now).ToList();
+
+        foreach (var item in future_reservations)
+        {
+            _reservations.Remove(item);
+        }
+
         ReservationsAccess.WriteAll(_reservations);
     }
-
-    // public ReservationModel GetAccountID(int id)
-    // {   
-    //     var Getacc = _reservations.Find(i => i.AccountId == id);
-    //     _reservations.RemoveAll(x => x.AccountId == id)
-    // }
 }

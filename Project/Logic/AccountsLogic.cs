@@ -155,13 +155,7 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         return true;
     }
 
-    public int CountAllUsers(){
-        return _accounts.Count;
-    }
-
     public List<AccountModel> AllUsers(){
         return _accounts;
     }
-
-    // id updaten
 }
