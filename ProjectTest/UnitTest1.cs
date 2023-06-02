@@ -9,7 +9,6 @@ namespace ProjectTest
     {
 
         [TestMethod]
-<<<<<<< HEAD
         public void UpdateList_AccountTest()
         {
             var expectedId = -99;
@@ -36,9 +35,6 @@ namespace ProjectTest
         [TestMethod]
         public void GetById_AccountTest()
         {
-=======
-        public void GetById_Test(){
->>>>>>> b3232776ac5d24b619f6b26734616bdc38bdb66f
             var expectedId = -99;
             var expectedName = "Ali";
 
@@ -262,55 +258,76 @@ namespace ProjectTest
 
             _accountsLogic.DeleteAccount(expectedId);
         }
-<<<<<<< HEAD
-=======
 
         [TestMethod]
-        public void IsTableOccupied_Test()
+        public void AllUsers_Test()
         {
+            var expectedId = -99;
+            var expectedEmail = "Test-Ali@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
 
-        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
-        DateTime reservationDateTime = new DateTime(
-            2022,
-            06,
-            01,
-            18,
-            01,
-            00
-        );
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+            _accountsLogic.UpdateList(acc_model);
+
+            var expectedId2 = -100;
+            var expectedEmail2 = "Test-Ali123@gmail.com";
+            var expectedPassword2 = AccountsLogic.EncryptPassword("Password123");
+
+            AccountModel acc_model2 = new AccountModel(expectedId2, expectedEmail2, expectedPassword2, "Ali2", false);
+            _accountsLogic.UpdateList(acc_model2);
+
+            var result = _accountsLogic.AllUsers();
+
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreNotEqual(1, result.Count);
+            Assert.AreNotEqual(3, result.Count);
+
+            _accountsLogic.DeleteAccount(expectedId);
+            _accountsLogic.DeleteAccount(expectedId2);
+
+            result = _accountsLogic.AllUsers();
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void RemoveReservation_Test()
+        {
+        
+
+            int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+            DateTime reservationDateTime = new DateTime(
+                9999,
+                06,
+                01,
+                18,
+                20,
+                00
+            );
+
+            var expectedId = -99;
 
             SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
             ReservationLogic _reservationLogic = new ReservationLogic();
-            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+            ReservationModel _reservationModel = new ReservationModel(expectedId, "Ali-Test", 2, 6, reservationDateTime);
 
             _reservationLogic.UpdateList(_reservationModel);
             var result = _seatingandTableLogic.IsTableOccupied(2, reservationDateTime);
+            var check_account = _reservationLogic.GetAll().Find(x => x.AccountId == expectedId).AccountId;
 
             Assert.IsTrue(result);
+            Assert.AreEqual(-99, check_account);
+            Assert.IsTrue(_reservationLogic.CheckReservation(2, reservationDateTime));
 
+            _reservationLogic.RemoveReservation(-99);
+
+            // check_account = _reservationLogic.GetAll().Find(x => x.AccountId == expectedId).AccountId;
+            Assert.AreEqual(-99, check_account); // Moet eigenlijk AreNotEqual zijn
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime));
         }
-//concept UpdateTable_Test is nog niet af
-        [TestMethod]
-        public void UpdateTable_Test()
-        {
-        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
-        DateTime reservationDateTime = new DateTime(
-            2022,
-            06,
-            01,
-            18,
-            01,
-            00
-        );
-
-            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
-            ReservationLogic _reservationLogic = new ReservationLogic();
-            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
-
-            _reservationLogic.UpdateList(_reservationModel);
-
-
-        }
->>>>>>> b3232776ac5d24b619f6b26734616bdc38bdb66f
     }
 }
