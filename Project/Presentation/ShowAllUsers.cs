@@ -3,9 +3,7 @@ public class ShowAllUsers{
     private static AccountsLogic _accountsLogic_Users = new AccountsLogic();
 
     public static void Show(){  
-        // accountsLogic_Users.ShowAllAccounts();
         var all_accounts = _accountsLogic_Users.AllUsers();
-        var all_accounts_count = _accountsLogic_Users.CountAllUsers();
         Console.Clear();
 
         int select_index = 1;
@@ -21,7 +19,7 @@ public class ShowAllUsers{
             Console.WriteLine("====================================");
             Console.ResetColor();
             Console.WriteLine();
-            for (int i = 0; i < all_accounts_count; i++)
+            for (int i = 0; i < all_accounts.Count; i++)
             {
                 var all_acc = all_accounts[i];
                 Console.WriteLine("====================================");
@@ -51,12 +49,12 @@ public class ShowAllUsers{
                 }
             }
             else if (key.Key == ConsoleKey.DownArrow){
-                if(select_index < all_accounts_count - 1){
+                if(select_index < all_accounts.Count - 1){
                     select_index++;
                 }
             }
             else if (key.Key == ConsoleKey.Enter){
-                var lastdigit = all_accounts_count - 1;
+                var lastdigit = all_accounts.Count - 1;
                 if(select_index == lastdigit){
                     Menu.Start();
                     // break;

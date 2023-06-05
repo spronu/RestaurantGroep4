@@ -1,6 +1,6 @@
 static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
+    private static AccountsLogic _accountsLogic = new AccountsLogic();
 
     public static void Start()
     {
@@ -52,7 +52,7 @@ static class UserLogin
             }
         } while (key.Key != ConsoleKey.Enter);
         Console.WriteLine();
-        AccountModel acc = accountsLogic.CheckLogin(email, password);
+        AccountModel acc = _accountsLogic.CheckLogin(email, password);
         if (acc != null)
         {
             Console.Clear();

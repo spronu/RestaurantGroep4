@@ -40,11 +40,6 @@ public class ReservationLogic
         ReservationsAccess.WriteAll(_reservations);
     }
 
-    public ReservationModel GetById(int id)
-    {
-        return _reservations.Find(i => i.TableId == id);
-    }
-
     public List<ReservationModel> GetAll()
     {
         return _reservations;
@@ -96,10 +91,16 @@ public class ReservationLogic
         return "Unknown dish"; // return this if the id is not found
     }
 
-    public void RemoveReservation(int tableId, DateTime date)
+    public void RemoveReservation(int acc_id)
     {
         ReloadData();
-        _reservations.RemoveAll(i => i.TableId == tableId && i.ReservationDateTime.Date == date.Date);
+        var future_reservations = _reservations.Where(x => x.AccountId == acc_id && x.ReservationDateTime > DateTime.Now).ToList();
+
+        foreach (var item in future_reservations)
+        {
+            _reservations.Remove(item);
+        }
+
         ReservationsAccess.WriteAll(_reservations);
     }
 }

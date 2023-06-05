@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Security.Cryptography;
-using System.Security;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 
@@ -145,9 +140,12 @@ public class AccountsLogic // Public of iets anders, zoals interface?
 
         _accounts.Remove(acc);
 
-        var lastaccount = _accounts.Count;
+        ReservationModel res = new ReservationModel();
+        ReservationLogic res_logic = new ReservationLogic();
 
-        // UpdateList(acc);
+        res_logic.RemoveReservation(id);
+
+        var lastaccount = _accounts.Count;
 
         AccountsAccess.WriteAll(_accounts);
     }
@@ -157,13 +155,7 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         return true;
     }
 
-    public int CountAllUsers(){
-        return _accounts.Count;
-    }
-
     public List<AccountModel> AllUsers(){
         return _accounts;
     }
-
-    // id updaten
 }
