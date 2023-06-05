@@ -378,7 +378,9 @@ namespace ProjectTest
 
             List<ReservationModel> result = _reservationLogic.GetAll();
 
-            Assert.AreEqual(1, result.Count, "De lijst is gelijk aan elkaar (1) (true)");
+            var vind = result.Find(x => x.AccountId == -99);
+
+            Assert.IsNotNull(vind, "De gebruiker bestaat (-99) (true)");
 
             _reservationLogic.RemoveReservation(-99);
 
@@ -387,7 +389,7 @@ namespace ProjectTest
 
             result = _reservationLogic.GetAll();
 
-            Assert.AreEqual(0, result.Count, "De lijst is gelijk aan elkaar (0) (false)");
+            Assert.IsNull(result.Find(x => x.AccountId == -99), "De gebruiker bestaat niet meer (-99) (false)");
         }
 
         [TestMethod]
@@ -453,6 +455,85 @@ namespace ProjectTest
 
             Assert.AreNotEqual(1, result.Count, "De lijst is niet gelijk aan elkaar (1) (false)");
         }
+
+        [TestMethod]
+        public void CheckReservation_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+
+            var result = _reservationLogic.CheckReservation(2, reservationDateTime);
+
+            Assert.IsTrue(result, "De reservatie bestaat (true)");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            List<ReservationModel> result2 = _reservationLogic.GetAll();
+
+            Assert.IsFalse(result2.Any(reservation => reservation.AccountId == -99), "check of de gebruiker niet meer bestaat (-99) (false)");
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
+        }
+
+        // [TestMethod]
+        // public void AddReservation_Test()
+        // {
+        //     // Use more reasonable values for test data
+        //     var expectedId = -99;
+        //     var expectedEmail = "Test-Ali@gmail.com";
+        //     var expectedPassword = AccountsLogic.EncryptPassword("Password");
+        //     int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        //     DateTime reservationDateTime = new DateTime(
+        //         9999,
+        //         06,
+        //         01,
+        //         18,
+        //         01,
+        //         00
+        //     );
+
+        //     // Initialize the accounts logic and add a test account
+        //     AccountsLogic _accountsLogic = new AccountsLogic();
+        //     AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, "Ali", false);
+        //     _accountsLogic.UpdateList(acc_model);
+
+        //     // Set the current account to the test account
+        //     AccountsLogic.CurrentAccount = acc_model;
+
+        //     SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+        //     ReservationLogic _reservationLogic = new ReservationLogic();
+
+        //     // Use the current account's id
+        //     ReservationModel _reservationModel = new ReservationModel(expectedId, "Yahya-Test", 2, 6, reservationDateTime);
+
+        //     _reservationLogic.AddReservation(_reservationModel.TableId, _reservationModel.NumberOfPeople, _reservationModel.ReservationDateTime);
+
+        //     var result = _reservationLogic.CheckReservation(2, reservationDateTime);
+
+        //     Assert.IsTrue(result, "De reservatie bestaat (true)");
+
+        //     _reservationLogic.RemoveReservation(expectedId);
+
+        //     List<ReservationModel> result2 = _reservationLogic.GetAll();
+
+        //     Assert.IsFalse(result2.Any(reservation => reservation.AccountId == expectedId), "check of de gebruiker niet meer bestaat (-99) (false)");
+
+        //     Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
+        // }
 
         [TestMethod]
         public void RemoveReservation_Test()
