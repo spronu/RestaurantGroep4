@@ -378,7 +378,9 @@ namespace ProjectTest
 
             List<ReservationModel> result = _reservationLogic.GetAll();
 
-            Assert.AreEqual(1, result.Count, "De lijst is gelijk aan elkaar (1) (true)");
+            var vind = result.Find(x => x.AccountId == -99);
+
+            Assert.IsNotNull(vind, "De gebruiker bestaat (-99) (true)");
 
             _reservationLogic.RemoveReservation(-99);
 
@@ -387,7 +389,7 @@ namespace ProjectTest
 
             result = _reservationLogic.GetAll();
 
-            Assert.AreEqual(0, result.Count, "De lijst is gelijk aan elkaar (0) (false)");
+            Assert.IsNull(result.Find(x => x.AccountId == -99), "De gebruiker bestaat niet meer (-99) (false)");
         }
 
         [TestMethod]
