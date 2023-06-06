@@ -8,6 +8,11 @@ public class MenuLogic
     public MenuLogic(List<String> Elements, int pos)
     {
         this.Elements = Elements;
+        pos = pos;
+    }
+        public MenuLogic(List<String> Elements)
+    {
+        this.Elements = Elements;
         pos = 0;
     }
 

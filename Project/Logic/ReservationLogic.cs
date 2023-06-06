@@ -103,4 +103,26 @@ public class ReservationLogic
 
         ReservationsAccess.WriteAll(_reservations);
     }
+    public void ChangeNumberOfPeople(Guid id, int numberOfPeople)
+    {
+        // Find the reservation with the given ID
+        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
+
+        if (reservation != null)
+        {
+            // Update the number of people for the reservation
+            reservation.NumberOfPeople = numberOfPeople;
+
+            // Write the updated reservations back to the JSON file
+            ReservationsAccess.WriteAll(_reservations);
+
+
+            ReloadData();
+        }
+        else
+        {
+            Console.WriteLine("Reservation not found.");
+        }
+    }
+
 }
