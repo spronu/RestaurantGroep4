@@ -25,15 +25,30 @@ public class AdminMenu : MenuLogic
                 }
                 else if (pos == 1)
                 {
-                    ShowAllUsers.Show();
+                    AddNewFoodItem.givenames();
                     selecting = false;
                 }
                 else if (pos == 2)
                 {
-                    Console.WriteLine("Nog niet gemaakt");
+                    ChangeThemeOrder.ChangeOrder();
                     selecting = false;
                 }
                 else if (pos == 3)
+                {
+                    removeItem.removeItemList();
+                    selecting = false;
+                }
+                else if (pos == 4)
+                {
+                    ShowAllUsers.Show();
+                    selecting = false;
+                }
+                else if (pos == 5)
+                {
+                    Console.WriteLine("Nog niet gemaakt");
+                    selecting = false;
+                }
+                else if (pos == 6)
                 {
                     Menu.Start();
                     selecting = false;

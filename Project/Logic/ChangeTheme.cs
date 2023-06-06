@@ -9,6 +9,7 @@ public class ChangeTheme
     {
 
         // Parse the JSON into a JArray
+        // maak een normale arrey( gebruik de objects )
         JArray jsonArray = GetThemes.getheme();
 
         // Set all 'active' properties to false
