@@ -1,7 +1,7 @@
 public class MainMenu : MenuLogic
 {
-
-    public MainMenu(List<String> Elements, int pos) : base(Elements, pos) { }
+    public MainMenu(List<String> Elements, int pos)
+        : base(Elements, pos) { }
 
     public override void Logics(string title)
     {
@@ -14,12 +14,14 @@ public class MainMenu : MenuLogic
 
             if (input.Key == ConsoleKey.Enter)
             {
-                if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == false)
+                if (
+                    AccountsLogic.CurrentAccount != null
+                    && AccountsLogic.CurrentAccount.Admin == false
+                )
                 {
                     if (pos == 1)
                     {
                         SeatingandTableLayout.Main();
-
                     }
                     else if (pos == 2)
                     {
@@ -28,11 +30,13 @@ public class MainMenu : MenuLogic
                         bool done = true;
                         string option = "";
                         // done = menucardpresentasion.menucard();
+
                         while(done){
                             done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
                             if(done){
                             Console.WriteLine(" druk enter om iets anders te zien.");
                             option = Console.ReadLine() ?? string.Empty;
+
                             }
                             coursecheck = false;
                             // if (option == "return")
@@ -41,22 +45,20 @@ public class MainMenu : MenuLogic
                             // }
                         }
                         Menu.Start();
-                        
-
                     }
                     else if (pos == 3)
                     {
                         ReservationInfo.ShowReservationInfo();
                     }
                     else if (pos == 4)
-                    {   
+                    {
                         AccountInfo.Main();
                     }
                     else if (pos == 5)
                     {
                         RestaurantInformation.Print();
                     }
-                    else if(pos == 6)
+                    else if (pos == 6)
                     {
                         AccountsLogic accountsLogic = new AccountsLogic();
                         accountsLogic.LogOut(AccountsLogic.CurrentAccount.Id);
@@ -80,7 +82,10 @@ public class MainMenu : MenuLogic
                     //     menu.Logics(title);
                     // }
                 }
-                else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
+                else if (
+                    AccountsLogic.CurrentAccount != null
+                    && AccountsLogic.CurrentAccount.Admin == true
+                )
                 {
                     if (pos == 1)
                     {
@@ -88,11 +93,13 @@ public class MainMenu : MenuLogic
                         bool done = true;
                         string option = "";
                         // done = menucardpresentasion.menucard();
+
                         while(done){
                             done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
                             if(done){
                             Console.WriteLine(" druk enter om iets anders te zien.");
                             option = Console.ReadLine() ?? string.Empty;
+
                             }
                             coursecheck = false;
                             // if (option == "return")
@@ -101,8 +108,6 @@ public class MainMenu : MenuLogic
                             // }
                         }
                         Menu.Start();
-
-
                     }
                     else if (pos == 2)
                     {
@@ -115,10 +120,9 @@ public class MainMenu : MenuLogic
                         items.Add("reservering overzicht");
                         items.Add("terug");
                         AdminMenu menu = new AdminMenu(items, 0);
-                        menu.Logics(title);                        // veranderen thema menus, admin overzicht gebruikers, overzicht reserveringen
-
+                        menu.Logics(title); // veranderen thema menus, admin overzicht gebruikers, overzicht reserveringen
                     }
-                    else if(pos == 3)
+                    else if (pos == 3)
                     {
                         AccountsLogic accountslogic = new AccountsLogic();
                         accountslogic.LogOut(AccountsLogic.CurrentAccount.Id);
@@ -133,18 +137,24 @@ public class MainMenu : MenuLogic
                 {
                     if (pos == 1)
                     {
-                        SeatingandTableLayout.Main();
+                        // Check if the user is logged in
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "Je bent niet ingelogd. Log eerst in of registreer eerst. Je wordt nu teruggeleid naar het menu."
+                        );
+                        Console.ResetColor();
+                        Thread.Sleep(1000);
+                        Menu.Start();
 
+                        SeatingandTableLayout.Main();
                     }
                     else if (pos == 2)
                     {
                         UserLogin.Start();
-
                     }
                     else if (pos == 3)
                     {
                         UserSignUp.Start();
-
                     }
                     else if (pos == 4)
                     {
@@ -153,11 +163,13 @@ public class MainMenu : MenuLogic
                         bool done = true;
                         string option = "";
                         // done = menucardpresentasion.menucard();
+
                         while(done){
                             done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
                             if(done){
                             Console.WriteLine(" druk enter om iets anders te zien.");
                             option = Console.ReadLine() ?? string.Empty;
+
                             }
                             coursecheck = false;
                             // if (option == "return")
@@ -166,8 +178,6 @@ public class MainMenu : MenuLogic
                             // }
                         }
                         Menu.Start();
-                        
-
                     }
                     else if (pos == 5)
                     {
@@ -191,7 +201,5 @@ public class MainMenu : MenuLogic
                 }
             }
         }
-
     }
-
 }

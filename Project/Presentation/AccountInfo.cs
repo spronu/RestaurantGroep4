@@ -64,164 +64,19 @@ public class AccountInfo : MenuLogic
 
         else if (accountInfo.returnedOption == "Verander Naam")
         {
-            Console.WriteLine("Voer uw nieuwe naam in");
-            string newName = Console.ReadLine();
-            accountsLogic_info.ChangeFullName(AccountsLogic.CurrentAccount.Id, newName);
-            AccountsLogic.CurrentAccount.FullName = newName;
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"Uw naam is succesvol veranderd naar {newName}");
-            Console.WriteLine("Klik op een knop om terug te keren");
-            Console.ResetColor();
-            Console.ReadKey();
-            Main();
+            Change_AccName();
         }
 
         else if (accountInfo.returnedOption == "Verander wachtwoord")
         {
-
-            Console.WriteLine("Voer uw oude wachtwoord in");
-            string oldPassword = "";
-            ConsoleKeyInfo old_key;
-            do
-            {
-                old_key = Console.ReadKey(true);
-                // if(ConsoleKey.Escape == old_key.Key){
-                //     // key_pw = Console.ReadKey(false);
-                //     break;
-                // }
-                if (old_key.Key != ConsoleKey.Backspace && old_key.Key != ConsoleKey.Enter)
-                {
-                    oldPassword += old_key.KeyChar;
-                    Console.Write("*");
-                }
-                else
-                {
-                    if (old_key.Key == ConsoleKey.Backspace && oldPassword.Length > 0)
-                    {
-                        oldPassword = oldPassword.Substring(0, (oldPassword.Length - 1));
-                        Console.Write("\b \b");
-                    }
-                }
-            } while (old_key.Key != ConsoleKey.Enter);
-            Console.WriteLine();
-            string currentPassword = AccountsLogic.CurrentAccount.Password;
-            if (AccountsLogic.DecryptPassword(oldPassword,currentPassword))
-            {
-                Console.WriteLine("Voer uw nieuwe wachtwoord in");
-                string newPassword = "";
-                ConsoleKeyInfo key;
-                do
-                {
-                    key = Console.ReadKey(true);
-                    if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
-                    {
-                        newPassword += key.KeyChar;
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        if (key.Key == ConsoleKey.Backspace && newPassword.Length > 0)
-                        {
-                            newPassword = newPassword.Substring(0, (newPassword.Length - 1));
-                            Console.Write("\b \b");
-                        }
-                    }
-                } while (key.Key != ConsoleKey.Enter);
-                Console.WriteLine();
-
-                Console.WriteLine("Voer uw nieuwe wachtwoord nogmaals in");
-                string newPassword2 = "";
-                ConsoleKeyInfo key2;
-                do
-                {
-                    key2 = Console.ReadKey(true);
-                    if (key2.Key != ConsoleKey.Backspace && key2.Key != ConsoleKey.Enter)
-                    {
-                        newPassword2 += key2.KeyChar;
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        if (key2.Key == ConsoleKey.Backspace && newPassword2.Length > 0)
-                        {
-                            newPassword2 = newPassword2.Substring(0, (newPassword2.Length - 1));
-                            Console.Write("\b \b");
-                        }
-                    }
-                } while (key2.Key != ConsoleKey.Enter);
-                Console.WriteLine();
-                if (newPassword == newPassword2)
-                {
-                    string hashespw = AccountsLogic.EncryptPassword(newPassword);
-                    accountsLogic_info.ChangePassword(AccountsLogic.CurrentAccount.Id, hashespw);
-                    AccountsLogic.CurrentAccount.Password = hashespw;
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine($"Uw wachtwoord is veranderd");
-                    Console.WriteLine("Klik op een knop om terug te keren");
-                    Console.ResetColor();
-                    Console.ReadKey();
-                    Main();
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("De wachtwoorden komen niet overeen");
-                    Console.WriteLine("Klik op een knop om terug te keren");
-                    Console.ResetColor();
-                    Console.ReadKey();
-                    Main();
-                }
-            }
-            else{
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Uw oude wachtwoord is niet correct.");
-                // Console.WriteLine("Klik op een knop om terug te keren");
-                Console.ResetColor();
-                Thread.Sleep(1000);
-                // return;
-                // Console.ReadKey();
-                Main();
-            }
+            Change_AccPW();
         }
+
         else if (accountInfo.returnedOption == "Verander Email-adres")
         {
-            AccountsLogic accountslogic2 = new AccountsLogic();
-            Console.WriteLine("Voer uw nieuwe email-adres in");
-            string newEmail = Console.ReadLine();
-            newEmail = newEmail.Trim();
-            while (!UserSignUp.IsValidEmailAdress(newEmail) || accountslogic2.CheckEmail(newEmail)){
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Dit email adres bestaat al of is niet geldig");
-                Thread.Sleep(1000);
-                Console.ResetColor();
-                // newEmail = Console.ReadLine();
-                // newEmail = newEmail.Trim();
-                Main();
-            }
-            Console.WriteLine("Voer uw nieuwe email-adres nogmaals in");
-            string newEmail2 = Console.ReadLine();
-            newEmail2 = newEmail2.Trim();
-            if (newEmail.ToLower() == newEmail2.ToLower())
-            {
-                accountsLogic_info.ChangeEmail(AccountsLogic.CurrentAccount.Id, newEmail);
-                AccountsLogic.CurrentAccount.EmailAddress = newEmail;
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine($"Uw email-adres is veranderd naar {newEmail}");
-                Console.WriteLine("Klik op een knop om terug te keren");
-                Console.ResetColor();
-                Console.ReadKey();
-                Main();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("De email-adressen komen niet overeen");
-                Console.WriteLine("Klik op een knop om terug te keren");
-                Console.ResetColor();
-                Console.ReadKey();
-                Main();
-            }
+            Change_AccEmail();
         }
+
         else if (accountInfo.returnedOption == "Terug")
         {
             Menu.Start();
@@ -255,6 +110,167 @@ public class AccountInfo : MenuLogic
 
         Console.ReadKey();
         Main();
+    }
 
+    public static void Change_AccName()
+    {
+        Console.WriteLine("Voer uw nieuwe naam in");
+        string newName = Console.ReadLine();
+        accountsLogic_info.ChangeFullName(AccountsLogic.CurrentAccount.Id, newName);
+        AccountsLogic.CurrentAccount.FullName = newName;
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine($"Uw naam is succesvol veranderd naar {newName}");
+        Console.WriteLine("Klik op een knop om terug te keren");
+        Console.ResetColor();
+        Console.ReadKey();
+        Main();
+    }
+
+    public static void Change_AccPW()
+    {
+        Console.WriteLine("Voer uw oude wachtwoord in");
+        string oldPassword = "";
+        ConsoleKeyInfo old_key;
+        do
+        {
+            old_key = Console.ReadKey(true);
+            // if(ConsoleKey.Escape == old_key.Key){
+            //     // key_pw = Console.ReadKey(false);
+            //     break;
+            // }
+            if (old_key.Key != ConsoleKey.Backspace && old_key.Key != ConsoleKey.Enter)
+            {
+                oldPassword += old_key.KeyChar;
+                Console.Write("*");
+            }
+            else
+            {
+                if (old_key.Key == ConsoleKey.Backspace && oldPassword.Length > 0)
+                {
+                    oldPassword = oldPassword.Substring(0, (oldPassword.Length - 1));
+                    Console.Write("\b \b");
+                }
+            }
+        } while (old_key.Key != ConsoleKey.Enter);
+        Console.WriteLine();
+        string currentPassword = AccountsLogic.CurrentAccount.Password;
+        if (AccountsLogic.DecryptPassword(oldPassword,currentPassword))
+        {
+            Console.WriteLine("Voer uw nieuwe wachtwoord in");
+            string newPassword = "";
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    newPassword += key.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && newPassword.Length > 0)
+                    {
+                        newPassword = newPassword.Substring(0, (newPassword.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                }
+            } while (key.Key != ConsoleKey.Enter);
+            Console.WriteLine();
+
+            Console.WriteLine("Voer uw nieuwe wachtwoord nogmaals in");
+            string newPassword2 = "";
+            ConsoleKeyInfo key2;
+            do
+            {
+                key2 = Console.ReadKey(true);
+                if (key2.Key != ConsoleKey.Backspace && key2.Key != ConsoleKey.Enter)
+                {
+                    newPassword2 += key2.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (key2.Key == ConsoleKey.Backspace && newPassword2.Length > 0)
+                    {
+                        newPassword2 = newPassword2.Substring(0, (newPassword2.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                }
+            } while (key2.Key != ConsoleKey.Enter);
+            Console.WriteLine();
+            if (newPassword == newPassword2)
+            {
+                string hashespw = AccountsLogic.EncryptPassword(newPassword);
+                accountsLogic_info.ChangePassword(AccountsLogic.CurrentAccount.Id, hashespw);
+                AccountsLogic.CurrentAccount.Password = hashespw;
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine($"Uw wachtwoord is veranderd");
+                Console.WriteLine("Klik op een knop om terug te keren");
+                Console.ResetColor();
+                Console.ReadKey();
+                Main();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("De wachtwoorden komen niet overeen");
+                Console.WriteLine("Klik op een knop om terug te keren");
+                Console.ResetColor();
+                Console.ReadKey();
+                Main();
+            }
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Uw oude wachtwoord is niet correct.");
+            // Console.WriteLine("Klik op een knop om terug te keren");
+            Console.ResetColor();
+            Thread.Sleep(1000);
+            // return;
+            // Console.ReadKey();
+            Main();
+        }  
+    }
+
+    public static void Change_AccEmail()
+    {
+        AccountsLogic accountslogic2 = new AccountsLogic();
+        Console.WriteLine("Voer uw nieuwe email-adres in");
+        string newEmail = Console.ReadLine();
+        newEmail = newEmail.Trim();
+        while (!UserSignUp.IsValidEmailAdress(newEmail) || accountslogic2.CheckEmail(newEmail)){
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Dit email adres bestaat al of is niet geldig");
+            Thread.Sleep(1000);
+            Console.ResetColor();
+            // newEmail = Console.ReadLine();
+            // newEmail = newEmail.Trim();
+            Main();
+        }
+        Console.WriteLine("Voer uw nieuwe email-adres nogmaals in");
+        string newEmail2 = Console.ReadLine();
+        newEmail2 = newEmail2.Trim();
+        if (newEmail.ToLower() == newEmail2.ToLower())
+        {
+            accountsLogic_info.ChangeEmail(AccountsLogic.CurrentAccount.Id, newEmail);
+            AccountsLogic.CurrentAccount.EmailAddress = newEmail;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"Uw email-adres is veranderd naar {newEmail}");
+            Console.WriteLine("Klik op een knop om terug te keren");
+            Console.ResetColor();
+            Console.ReadKey();
+            Main();
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("De email-adressen komen niet overeen");
+            Console.WriteLine("Klik op een knop om terug te keren");
+            Console.ResetColor();
+            Console.ReadKey();
+            Main();
+        }
     }
 }

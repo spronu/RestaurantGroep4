@@ -37,7 +37,7 @@ public class MenuLogic
     {
         Console.Clear();
         Console.WriteLine(title);
-        Console.WriteLine("kies een optie");
+        Console.WriteLine("Kies een optie"); // Moet weg
         foreach (string str in Elements)
         {
             Console.WriteLine(Mark(str, pos));

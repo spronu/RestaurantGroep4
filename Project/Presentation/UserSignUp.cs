@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 public class UserSignUp
 {
-    private static AccountsLogic accountsLogic = new AccountsLogic();
+    private static AccountsLogic _accountsLogic = new AccountsLogic();
     public static void Start()
     {
         Console.Clear();
@@ -17,7 +17,7 @@ public class UserSignUp
         Console.WriteLine("Voer uw email adres in");
         string email = Console.ReadLine();
         email = email.Trim();
-        while (!IsValidEmailAdress(email) || accountsLogic.CheckEmail(email)){
+        while (!IsValidEmailAdress(email) || _accountsLogic.CheckEmail(email)){
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Dit email adres bestaat al of is niet geldig");
             Console.ResetColor();
@@ -51,7 +51,7 @@ public class UserSignUp
         Console.WriteLine();
         Console.WriteLine("Voer uw volledige naam in");
         string fullName = Console.ReadLine();
-        accountsLogic.SignUp(email, password, fullName);
+        _accountsLogic.SignUp(email, password, fullName);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine("====================================");
