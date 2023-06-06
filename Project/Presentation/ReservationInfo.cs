@@ -1,13 +1,12 @@
 public class ReservationInfo
 {
     private static ReservationLogic reservationLogic = new ReservationLogic();
+
     public static void ShowReservationInfo()
     {
         List<ReservationModel> reservations = ReservationsAccess.LoadAll();
 
         reservations = reservations.FindAll(i => i.AccountId == AccountsLogic.CurrentAccount.Id);
-
-
 
         if (reservations.Count == 0)
         {
@@ -34,30 +33,37 @@ public class ReservationInfo
                 reservation.FullName = AccountsLogic.CurrentAccount.FullName;
 
                 Console.WriteLine("====================================");
+                Console.WriteLine("Reservation ID: " + reservation.ReservationId);
                 Console.WriteLine("AccountID: " + reservation.AccountId);
                 Console.WriteLine("Volledige naam: " + reservation.FullName);
                 Console.WriteLine("Tafel Id: " + reservation.TableId);
                 Console.WriteLine("Aantal mensen: " + reservation.NumberOfPeople);
-                Console.WriteLine("Reserveringsdatum en tijd: " + reservation.ReservationDateTime.ToString());
+                Console.WriteLine(
+                    "Reserveringsdatum en tijd: " + reservation.ReservationDateTime.ToString()
+                );
                 Console.WriteLine("Totaal prijs: " + reservation.TotalPrice);
                 foreach (var itemID in reservation.OrderItemIDs)
                 {
-                    Console.WriteLine("Bestelling: " + CorrectInputCheck.GetDishNameById(itemID));
+                    Console.WriteLine("Bestelling: " + reservationLogic.GetDishNameById(itemID));
                 }
                 Console.WriteLine("====================================");
                 Console.WriteLine();
 
                 Console.WriteLine("Reservering " + (index + 1) + " van " + reservations.Count);
+
                 Console.WriteLine("Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu. \nDruk op E om de reservering te wijzigen");
+
 
                 var key = Console.ReadKey(true);
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        if (index > 0) index--;
+                        if (index > 0)
+                            index--;
                         break;
                     case ConsoleKey.DownArrow:
-                        if (index < reservations.Count - 1) index++;
+                        if (index < reservations.Count - 1)
+                            index++;
                         break;
                     case ConsoleKey.E:
                         // Console.WriteLine("selectie elementen menu + verwijder optie");

@@ -25,25 +25,22 @@ public class SeatingandTableLogic
         return reservationlogics.CheckReservation(tableId, dateTime);
     }
 
-    public void UpdateTable(Table updatedTable, DateTime date)
-    {
-        if (tables != null && updatedTable != null) 
-        {
-            int index = tables.FindIndex(t => t.TableId == updatedTable.TableId);
-            if (index != -1)
-            {
-                tables[index] = updatedTable;
-            }
-        }
-    }
-
     public List<Table> GenerateDefaultTableData()
     {
         List<Table> defaultTables = new List<Table>();
 
         for (int i = 1; i <= tableSizes.GetLength(0) * tableSizes.GetLength(1) && i <= 15; i++)
         {
-            defaultTables.Add(new Table { TableId = i, Capacity = tableSizes[(i - 1) / tableSizes.GetLength(1), (i - 1) % tableSizes.GetLength(1)] });
+            defaultTables.Add(
+                new Table
+                {
+                    TableId = i,
+                    Capacity = tableSizes[
+                        (i - 1) / tableSizes.GetLength(1),
+                        (i - 1) % tableSizes.GetLength(1)
+                    ]
+                }
+            );
         }
         return defaultTables;
     }
