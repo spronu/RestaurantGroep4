@@ -71,8 +71,9 @@ public class ReservationInfo
                         }
 
 
+
                         MenuLogic choosing = new MenuLogic(elements);
-                        
+
 
                         choosing.PrintOptions(0, "kies de wijziging: \n");
                         bool currently = true;
@@ -89,12 +90,12 @@ public class ReservationInfo
 
                                     int newNumberOfPeople;
                                     bool isValidNumber = false;
-                                    
+
                                     do
                                     {
                                         Console.WriteLine("Voer het nieuwe aantal personen in (1-6):");
                                         string inputs = Console.ReadLine();
-                                        
+
                                         if (int.TryParse(inputs, out newNumberOfPeople))
                                         {
                                             if (newNumberOfPeople >= 1 && newNumberOfPeople <= 6)
@@ -111,23 +112,24 @@ public class ReservationInfo
                                             Console.WriteLine("Ongeldige invoer. Voer alstublieft een geldig getal in.");
                                         }
                                     } while (!isValidNumber);
-                                    
+
                                     Guid reservationId = reservations[index].ReservationId;
                                     reservationLogic.ChangeNumberOfPeople(reservationId, newNumberOfPeople);
                                     Console.WriteLine("Aantal personen succesvol bijgewerkt.");
                                     Thread.Sleep(2000);
                                     reservations = ReservationsAccess.LoadAll();
                                     break;
-                                    
+
                                 }
                                 else if (choosing.pos == 1)
                                 {
-                                    Console.WriteLine("yes");
+                                    SeatingandTableLayout.Main();
                                 }
                                 else if (choosing.pos == 2)
                                 {
                                     Console.WriteLine("yes");
                                 }
+                                
                             }
                         }
                         break;
@@ -142,3 +144,4 @@ public class ReservationInfo
         }
     }
 }
+
