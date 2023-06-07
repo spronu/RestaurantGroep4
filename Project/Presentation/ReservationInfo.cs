@@ -73,7 +73,7 @@ public class ReservationInfo
                         elements.Add($"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}");
                         foreach (var id in reservation.OrderItemIDs)
                         {
-                            elements.Add($"Bestelling: {CorrectInputCheck.GetDishNameById(id)}");
+                            elements.Add($"Bestelling: {reservationLogic.GetDishNameById(id)}");
                         }
 
 
