@@ -106,4 +106,17 @@ public class ReservationLogic : ILogic<ReservationModel>
 
         ReservationsAccess.WriteAll(_reservations);
     }
+
+    public void RemoveReservation(Guid reservationID)
+    {
+        ReloadData();
+        var ReservationsID_Find = _reservations.Where(x => x.ReservationId == reservationID).ToList();
+
+        foreach (var item in ReservationsID_Find)
+        {
+            _reservations.Remove(item);
+        }
+
+        ReservationsAccess.WriteAll(_reservations);
+    }
 }
