@@ -3,7 +3,7 @@ using System.Text;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class AccountsLogic // Public of iets anders, zoals interface?
+public class AccountsLogic : ILogic<AccountModel>
 {
     private List<AccountModel> _accounts;
 
@@ -69,7 +69,8 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         AccountModel SignUp_acc = new AccountModel();
 
         // Setting the properties of the account model
-        SignUp_acc.Id = _accounts.Count + 1;
+        int maxId = _accounts.Max(acc => acc.Id);
+        SignUp_acc.Id = maxId + 1;
         SignUp_acc.EmailAddress = email;
         SignUp_acc.Password = EncryptPassword(password);
         SignUp_acc.FullName = fullName;
@@ -82,11 +83,6 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         }
 
         UpdateList(SignUp_acc);
-        // // Add the account model to the list of accounts
-        // _accounts.Add(SignUp_acc);
-
-        // // Save the list of accounts to the json
-        // AccountsAccess.WriteAll(_accounts);
     }
 
     public static string EncryptPassword(string password){
@@ -108,31 +104,27 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         acc.FullName = fullName;
 
         UpdateList(acc);
-
-        // AccountsAccess.WriteAll(_accounts);
     }
+
     public void ChangePassword(int id, string password){
         // Find the account with the given id
         AccountModel acc = _accounts.Find(i => i.Id == id);
 
-        // Change the password of the account
+        // Encrypting the password
         acc.Password = EncryptPassword(password);
 
         UpdateList(acc);
 
-        // AccountsAccess.WriteAll(_accounts);
     }
 
     public void ChangeEmail(int id, string email){
         // Find the account with the given id
         AccountModel acc = _accounts.Find(i => i.Id == id);
 
-        // Change the email of the account
+        // Changing email
         acc.EmailAddress = email;
 
         UpdateList(acc);
-
-        // AccountsAccess.WriteAll(_accounts);
     }
 
     public void DeleteAccount(int id){
@@ -140,12 +132,10 @@ public class AccountsLogic // Public of iets anders, zoals interface?
 
         _accounts.Remove(acc);
 
-        ReservationModel res = new ReservationModel();
+        //Reservering van de account
         ReservationLogic res_logic = new ReservationLogic();
 
         res_logic.RemoveReservation(id);
-
-        var lastaccount = _accounts.Count;
 
         AccountsAccess.WriteAll(_accounts);
     }
@@ -155,7 +145,12 @@ public class AccountsLogic // Public of iets anders, zoals interface?
         return true;
     }
 
-    public List<AccountModel> AllUsers(){
+    public List<AccountModel> GetAll(){
         return _accounts;
+    }
+
+    public void ReloadData()
+    {
+        _accounts = AccountsAccess.LoadAll();
     }
 }
