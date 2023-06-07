@@ -2,8 +2,9 @@ public class ShowAllUsers{
 
     private static AccountsLogic _accountsLogic_Users = new AccountsLogic();
 
-    public static void Show(){  
-        var all_accounts = _accountsLogic_Users.AllUsers();
+    public static void Show(){
+        _accountsLogic_Users.ReloadData();
+        var all_accounts = _accountsLogic_Users.GetAll();
         Console.Clear();
 
         int select_index = 1;

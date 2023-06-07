@@ -4,11 +4,11 @@ public class ReservationInfo
 
     public static void ShowReservationInfo()
     {
-        List<ReservationModel> reservations = ReservationsAccess.LoadAll();
+        var getdata = reservationLogic.GetAll();
 
-        reservations = reservations.FindAll(i => i.AccountId == AccountsLogic.CurrentAccount.Id);
+        getdata = getdata.FindAll(i => i.AccountId == AccountsLogic.CurrentAccount.Id);
 
-        if (reservations.Count == 0)
+        if (getdata.Count == 0)
         {
             Console.Clear();
             Console.WriteLine("U heeft geen reserveringen");
@@ -29,8 +29,8 @@ public class ReservationInfo
                 Console.ResetColor();
                 Console.WriteLine();
 
-                ReservationModel reservation = reservations[index];
-                reservation.FullName = AccountsLogic.CurrentAccount.FullName;
+                ReservationLogic getdata2 = new ReservationLogic();
+                var reservation = getdata2.GetAll()[index];
 
                 Console.WriteLine("====================================");
                 Console.WriteLine("Reservation ID: " + reservation.ReservationId);
@@ -49,7 +49,7 @@ public class ReservationInfo
                 Console.WriteLine("====================================");
                 Console.WriteLine();
 
-                Console.WriteLine("Reservering " + (index + 1) + " van " + reservations.Count);
+                Console.WriteLine("Reservering " + (index + 1) + " van " + getdata.Count);
                 Console.WriteLine(
                     "Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu."
                 );
@@ -62,7 +62,7 @@ public class ReservationInfo
                             index--;
                         break;
                     case ConsoleKey.DownArrow:
-                        if (index < reservations.Count - 1)
+                        if (index < getdata.Count - 1)
                             index++;
                         break;
                     case ConsoleKey.Enter:
@@ -70,8 +70,6 @@ public class ReservationInfo
                         break;
                 }
             } while (true);
-
-            Menu.Start();
         }
     }
 }
