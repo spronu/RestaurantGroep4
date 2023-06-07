@@ -44,4 +44,8 @@ public class SeatingandTableLogic
         }
         return defaultTables;
     }
+    public Table GetTableById(int tableId)
+    {
+        return tables.Find(table => table.TableId == tableId);
+    }
 }
