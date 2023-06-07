@@ -29,8 +29,7 @@ public class ReservationInfo
                 Console.ResetColor();
                 Console.WriteLine();
 
-                ReservationLogic getdata2 = new ReservationLogic();
-                var reservation = getdata2.GetAll()[index];
+                var reservation = getdata[index];
 
                 Console.WriteLine("====================================");
                 Console.WriteLine("Reservation ID: " + reservation.ReservationId);
@@ -49,12 +48,11 @@ public class ReservationInfo
                 Console.WriteLine("====================================");
                 Console.WriteLine();
 
-
                 Console.WriteLine("Reservering " + (index + 1) + " van " + getdata.Count);
 
-                Console.WriteLine("Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu. \nDruk op E om de reservering te wijzigen");
-
-
+                Console.WriteLine(
+                    "Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu. \nDruk op E om de reservering te wijzigen"
+                );
 
                 var key = Console.ReadKey(true);
                 switch (key.Key)
@@ -72,7 +70,9 @@ public class ReservationInfo
                         // Thread.Sleep(2000);
                         List<string> elements = new List<string>();
                         elements.Add($"Aantal mensen: {reservation.NumberOfPeople}");
-                        elements.Add($"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}");
+                        elements.Add(
+                            $"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}"
+                        );
                         elements.Add("Verwijder reservering");
                         // foreach (var id in reservation.OrderItemIDs)
                         // {
@@ -83,7 +83,6 @@ public class ReservationInfo
 
                         MenuLogic choosing = new MenuLogic(elements);
 
-
                         choosing.PrintOptions(0, "kies de wijziging: \n");
                         bool currently = true;
                         while (currently)
@@ -93,21 +92,22 @@ public class ReservationInfo
 
                             if (input.Key == ConsoleKey.Enter)
                             {
-
                                 if (choosing.pos == 0)
                                 {
-                                    SeatingandTableLayout.Main2(reservation.ReservationDateTime, reservation.ReservationId);
+                                    SeatingandTableLayout.Main2(
+                                        reservation.ReservationDateTime,
+                                        reservation.ReservationId
+                                    );
                                     getdata = ReservationsAccess.LoadAll();
                                     reservationLogic.ReloadData();
                                     break;
                                 }
                                 else if (choosing.pos == 1)
                                 {
-
                                     SchedulingChart schedulingChart = new SchedulingChart();
-                                    SeatingandTableLayout layoutS = new SeatingandTableLayout(3,5);
+                                    SeatingandTableLayout layoutS = new SeatingandTableLayout(3, 5);
                                     DateTime newDate = schedulingChart.SelectDate();
-                                    
+
                                     DateTime newTime = layoutS.GetReservationTime();
 
                                     DateTime newReservationDateTime = new DateTime(
@@ -120,29 +120,38 @@ public class ReservationInfo
                                     );
 
                                     Guid reservationId = getdata[index].ReservationId;
-                                    reservationLogic.ChangeReservationDateTime(reservationId, newReservationDateTime);
-                                    Console.WriteLine("Reserveringsdatum en tijd succesvol bijgewerkt.");
+                                    reservationLogic.ChangeReservationDateTime(
+                                        reservationId,
+                                        newReservationDateTime
+                                    );
+                                    Console.WriteLine(
+                                        "Reserveringsdatum en tijd succesvol bijgewerkt."
+                                    );
                                     Thread.Sleep(2000);
                                     getdata = ReservationsAccess.LoadAll();
                                     reservationLogic.ReloadData();
                                     break;
-// op zelfde dag geen zelfde tijd hebben
                                 }
                                 else if (choosing.pos == 2)
                                 {
-                                    Console.WriteLine("yes");
+                                    reservationLogic.RemoveReservation(reservation.ReservationId);
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine(
+                                        $"Reservering {reservation.ReservationId} succesvol verwijderd."
+                                    );
+                                    Console.ResetColor();
+                                    Thread.Sleep(2000);
+                                    reservationLogic.ReloadData();
+                                    Menu.Start();
                                 }
-                                
                             }
                         }
                         break;
                     case ConsoleKey.Enter:
                         Menu.Start();
                         break;
-
                 }
             } while (true);
         }
     }
 }
-
