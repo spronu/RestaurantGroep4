@@ -23,13 +23,10 @@ public static class GiveThemeLogic{
 
         if (selectedTheme != null)
         {
-            Console.WriteLine($"Current month: {currentMonth}");
-            Console.WriteLine($"Theme for the current month: {selectedTheme.Theme}");
             return selectedTheme.Theme;
         }
         else
         {
-            Console.WriteLine("No theme found for the current month.");
             return "Geen";
 
         }

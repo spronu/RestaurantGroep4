@@ -1,0 +1,20 @@
+[
+    {
+      "Id": 0,
+      "Name": "Geen",
+      "Json": "MenuItems.json",
+      "active": true
+    },
+    {
+      "Id": 1,
+      "Name": "Chinees",
+      "Json": "Chinees.json",
+      "active": false
+    },
+    {
+      "Id": 2,
+      "Name": "Mexicaans",
+      "Json": "Mexicaans.json",
+      "active": false
+    }
+  ]

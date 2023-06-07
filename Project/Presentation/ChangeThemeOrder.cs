@@ -9,7 +9,9 @@ class ChangeThemeOrder
     {
         // GiveThemeLogic.Givename(GiveThemeLogic.NumbersLogic());
         //  CallMenuPresentation.hoofd();
-                string json = GetThemes.gethemeNumber();
+        string json = GetThemes.gethemeNumber();
+        JArray jsonArray = GetThemes.getheme();
+
 
         // Deserialize the JSON array into a list of objects
         List<ThemeItem> themes = JsonConvert.DeserializeObject<List<ThemeItem>>(json);
@@ -26,24 +28,30 @@ class ChangeThemeOrder
         }
 
         // Get user input for the new theme option
-        Console.WriteLine("Select a new theme option:");
-        Console.WriteLine("1. Chinees");
-        Console.WriteLine("2. Mexicaans");
-        Console.WriteLine("3. Geen");
-        Console.WriteLine("4. Italiaans");
-        Console.Write("Enter the number of the theme option: ");
+        for (int i = 0; i < jsonArray.Count; i++)
+            {
+                var menuItem = jsonArray[i].ToObject<MenuItem>();
+                Console.WriteLine($"{menuItem.Id}. {menuItem.Name}");
+            }
         int themeOption = Convert.ToInt32(Console.ReadLine());
 
         // Validate the theme option number
-        if (themeOption < 1 || themeOption > 4)
+        if (themeOption < 0 || themeOption >= jsonArray.Count)
         {
             Console.WriteLine("Invalid theme option number.");
             return json;
         }
 
+        string selectedTheme = "";
+
         // Map the theme option number to the actual theme name
-        string[] themeOptions = { "Chinees", "Mexicaans", "Geen", "Italiaans" };
-        string selectedTheme = themeOptions[themeOption - 1];
+        for (int i = 0; i < jsonArray.Count; i++)
+            {
+                var menuItem = jsonArray[i].ToObject<MenuItem>();
+                if(menuItem.Id == themeOption){
+                    selectedTheme = menuItem.Name;
+                }
+            }
 
         // Find the corresponding theme item in the list and update the theme
         ThemeItem selectedMonthTheme = themes.FirstOrDefault(t => t.Month == monthNumber);
@@ -61,8 +69,7 @@ class ChangeThemeOrder
         string updatedJson = JsonConvert.SerializeObject(themes, Formatting.Indented);
 
         // Display the updated JSON
-        Console.WriteLine("\nUpdated JSON:");
-        Console.WriteLine(updatedJson);
+        ChangeThemeOrderData.WriteToJson(updatedJson);
         return updatedJson;
     }
 

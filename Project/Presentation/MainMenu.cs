@@ -112,7 +112,7 @@ public class MainMenu : MenuLogic
                     else if (pos == 2)
                     {
                         List<String> items = new List<String>();
-                        items.Add("veranderen thema's menu");
+                        items.Add("bekijk thema volgorde");
                         items.Add("voeg nieuw gerecht toe");
                         items.Add("Verander thema volgorde");
                         items.Add("Verwijder gerecht");
