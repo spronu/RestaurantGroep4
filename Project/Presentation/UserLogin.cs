@@ -5,6 +5,7 @@ static class UserLogin
     public static void Start()
     {
         Console.Clear();
+        _accountsLogic.ReloadData();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("====================================");
         Console.WriteLine("|              LOGIN               |");

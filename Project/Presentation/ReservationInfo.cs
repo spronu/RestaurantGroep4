@@ -70,8 +70,6 @@ public class ReservationInfo
                         break;
                 }
             } while (true);
-
-            Menu.Start();
         }
     }
 }

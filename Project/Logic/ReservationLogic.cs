@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
-public class ReservationLogic
+public class ReservationLogic : ILogic<ReservationModel>
 {
     private List<ReservationModel> _reservations;
 
