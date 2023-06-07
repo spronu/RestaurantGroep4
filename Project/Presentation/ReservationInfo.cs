@@ -50,7 +50,7 @@ public class ReservationInfo
                 Console.WriteLine();
 
 
-                Console.WriteLine("Reservering " + (index + 1) + " van " + reservations.Count);
+                Console.WriteLine("Reservering " + (index + 1) + " van " + getdata.Count);
 
                 Console.WriteLine("Gebruik de pijltjestoetsen om te navigeren. Druk op Enter om terug te keren naar het menu. \nDruk op E om de reservering te wijzigen");
 
@@ -95,43 +95,37 @@ public class ReservationInfo
 
                                 if (choosing.pos == 0)
                                 {
-
-                                    int newNumberOfPeople;
-                                    bool isValidNumber = false;
-
-                                    do
-                                    {
-                                        Console.WriteLine("Voer het nieuwe aantal personen in (1-6):");
-                                        string inputs = Console.ReadLine();
-
-                                        if (int.TryParse(inputs, out newNumberOfPeople))
-                                        {
-                                            if (newNumberOfPeople >= 1 && newNumberOfPeople <= 6)
-                                            {
-                                                isValidNumber = true;
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine("Ongeldig aantal personen. Voer een getal tussen 1 en 6 in.");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Ongeldige invoer. Voer alstublieft een geldig getal in.");
-                                        }
-                                    } while (!isValidNumber);
-
-                                    Guid reservationId = reservations[index].ReservationId;
-                                    reservationLogic.ChangeNumberOfPeople(reservationId, newNumberOfPeople);
-                                    Console.WriteLine("Aantal personen succesvol bijgewerkt.");
-                                    Thread.Sleep(2000);
-                                    reservations = ReservationsAccess.LoadAll();
+                                    SeatingandTableLayout.Main2(reservation.ReservationDateTime, reservation.ReservationId);
+                                    getdata = ReservationsAccess.LoadAll();
+                                    reservationLogic.ReloadData();
                                     break;
-
                                 }
                                 else if (choosing.pos == 1)
                                 {
-                                    SeatingandTableLayout.Main();
+
+                                    SchedulingChart schedulingChart = new SchedulingChart();
+                                    SeatingandTableLayout layoutS = new SeatingandTableLayout(3,5);
+                                    DateTime newDate = schedulingChart.SelectDate();
+                                    
+                                    DateTime newTime = layoutS.GetReservationTime();
+
+                                    DateTime newReservationDateTime = new DateTime(
+                                        newDate.Year,
+                                        newDate.Month,
+                                        newDate.Day,
+                                        newTime.Hour,
+                                        newTime.Minute,
+                                        0
+                                    );
+
+                                    Guid reservationId = getdata[index].ReservationId;
+                                    reservationLogic.ChangeReservationDateTime(reservationId, newReservationDateTime);
+                                    Console.WriteLine("Reserveringsdatum en tijd succesvol bijgewerkt.");
+                                    Thread.Sleep(2000);
+                                    getdata = ReservationsAccess.LoadAll();
+                                    reservationLogic.ReloadData();
+                                    break;
+// op zelfde dag geen zelfde tijd hebben
                                 }
                                 else if (choosing.pos == 2)
                                 {

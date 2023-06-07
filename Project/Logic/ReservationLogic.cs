@@ -10,6 +10,9 @@ public class ReservationLogic
 
     public static ReservationModel? CurrentReservation { get; private set; }
 
+    // public static int[,] tableSizes2 = new int[3, 5];
+    // private SeatingandTableLogic StLogic = new SeatingandTableLogic(tableSizes2);
+
     public ReservationLogic(List<ReservationModel> reservations = null)
     {
         _reservations = reservations ?? ReservationsAccess.LoadAll();
@@ -106,26 +109,37 @@ public class ReservationLogic
 
         ReservationsAccess.WriteAll(_reservations);
     }
-    public void ChangeNumberOfPeople(Guid id, int numberOfPeople)
+
+
+    public void ChangeReservationDateTime(Guid id, DateTime newDateTime)
     {
         // Find the reservation with the given ID
         ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
 
         if (reservation != null)
         {
-            // Update the number of people for the reservation
-            reservation.NumberOfPeople = numberOfPeople;
+            // Update the reservation date and time
+            reservation.ReservationDateTime = newDateTime;
 
             // Write the updated reservations back to the JSON file
             ReservationsAccess.WriteAll(_reservations);
 
-
             ReloadData();
         }
-        else
-        {
-            Console.WriteLine("Reservation not found.");
-        }
     }
+    
+    public void changeReservationSeatings(int tableId, int numberOfPeople, DateTime reservationDateTime, Guid id)
+    {
+        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);    
+
+        reservation.ReservationDateTime = reservationDateTime;
+        reservation.TableId = tableId;
+        reservation.NumberOfPeople = numberOfPeople;
+        ReservationsAccess.WriteAll(_reservations);
+
+        ReloadData();
+    }
+
+
 
 }
