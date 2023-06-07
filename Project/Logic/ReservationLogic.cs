@@ -4,11 +4,14 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
-public class ReservationLogic
+public class ReservationLogic : ILogic<ReservationModel>
 {
     private List<ReservationModel> _reservations;
 
     public static ReservationModel? CurrentReservation { get; private set; }
+
+    // public static int[,] tableSizes2 = new int[3, 5];
+    // private SeatingandTableLogic StLogic = new SeatingandTableLogic(tableSizes2);
 
     public ReservationLogic(List<ReservationModel> reservations = null)
     {
@@ -105,5 +108,49 @@ public class ReservationLogic
         }
 
         ReservationsAccess.WriteAll(_reservations);
+    }
+
+
+    public void RemoveReservation(Guid reservationID)
+    {
+        ReloadData();
+        var ReservationsID_Find = _reservations.Where(x => x.ReservationId == reservationID).ToList();
+
+        foreach (var item in ReservationsID_Find)
+        {
+            _reservations.Remove(item);
+        }
+
+        ReservationsAccess.WriteAll(_reservations);
+    }
+
+
+    public void ChangeReservationDateTime(Guid id, DateTime newDateTime)
+    {
+        // Find the reservation with the given ID
+        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
+
+        if (reservation != null)
+        {
+            // Update the reservation date and time
+            reservation.ReservationDateTime = newDateTime;
+
+            // Write the updated reservations back to the JSON file
+            ReservationsAccess.WriteAll(_reservations);
+
+            ReloadData();
+        }
+    }
+    
+    public void changeReservationSeatings(int tableId, int numberOfPeople, DateTime reservationDateTime, Guid id)
+    {
+        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);    
+
+        reservation.ReservationDateTime = reservationDateTime;
+        reservation.TableId = tableId;
+        reservation.NumberOfPeople = numberOfPeople;
+        ReservationsAccess.WriteAll(_reservations);
+
+        ReloadData();
     }
 }

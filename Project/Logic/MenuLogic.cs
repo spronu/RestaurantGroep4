@@ -8,6 +8,11 @@ public class MenuLogic
     public MenuLogic(List<String> Elements, int pos)
     {
         this.Elements = Elements;
+        pos = pos;
+    }
+        public MenuLogic(List<String> Elements)
+    {
+        this.Elements = Elements;
         pos = 0;
     }
 
@@ -37,7 +42,6 @@ public class MenuLogic
     {
         Console.Clear();
         Console.WriteLine(title);
-        Console.WriteLine("Kies een optie"); // Moet weg
         foreach (string str in Elements)
         {
             Console.WriteLine(Mark(str, pos));

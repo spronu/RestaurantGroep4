@@ -98,24 +98,33 @@ public class SeatingandTableLayout
         return partySize;
     }
 
-    public void PrintSeatingChart(int desiredCapacity, int selectedRow = -1, int selectedCol = -1)
+    public void PrintSeatingChart(string pathCheck, int desiredCapacity, DateTime orderDate = default, Guid resID = default,  int selectedRow = -1, int selectedCol = -1)
     {
         int tableRows = 5;
         int tableCols = (int)Math.Ceiling(tables.Count / (double)tableRows);
 
-        SchedulingChart schedulingChart = new SchedulingChart();
-        DateTime selectedDate = schedulingChart.SelectDate();
+        DateTime reservationDateTime = default;
 
-        DateTime reservationDateTime = GetReservationTime();
+        if (pathCheck == "ordering")
+        {
+            SchedulingChart schedulingChart = new SchedulingChart();
+            DateTime selectedDate = schedulingChart.SelectDate();
 
-        reservationDateTime = new DateTime(
-            selectedDate.Year,
-            selectedDate.Month,
-            selectedDate.Day,
-            reservationDateTime.Hour,
-            reservationDateTime.Minute,
-            reservationDateTime.Second
-        );
+            reservationDateTime = GetReservationTime();
+
+            reservationDateTime = new DateTime(
+                selectedDate.Year,
+                selectedDate.Month,
+                selectedDate.Day,
+                reservationDateTime.Hour,
+                reservationDateTime.Minute,
+                reservationDateTime.Second
+            );
+        }
+        else
+        {
+            reservationDateTime = orderDate;
+        }
 
         if (selectedRow == -1 && selectedCol == -1)
         {
@@ -222,28 +231,56 @@ public class SeatingandTableLayout
                         );
                         selectedTable.ReservationDateTime = reservationDateTime;
 
-                        reservationlogics.AddReservation(
-                            selectedTable.TableId,
-                            desiredCapacity,
-                            reservationDateTime
-                        );
+                        if (pathCheck == "ordering")
+                        {
+                            reservationlogics.AddReservation(
+                                selectedTable.TableId,
+                                desiredCapacity,
+                                reservationDateTime
+                            );
 
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine(
-                            "============================================================================================================"
-                        );
-                        Console.WriteLine(
-                            $"|                        Tafel T{selectedTable.TableId} is succesvol gereserveerd.                        |"
-                        );
-                        Console.WriteLine(
-                            "============================================================================================================"
-                        );
-                        Console.ResetColor();
-                        Console.WriteLine();
-                        Thread.Sleep(1500);
-                        ReservationModel reservation = new ReservationModel();
-                        Menu.Start();
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine(
+                                "============================================================================================================"
+                            );
+                            Console.WriteLine(
+                                $"|                        Tafel T{selectedTable.TableId} is succesvol gereserveerd.                        |"
+                            );
+                            Console.WriteLine(
+                                "============================================================================================================"
+                            );
+                            Console.ResetColor();
+                            Console.WriteLine();
+                            Thread.Sleep(1500);
+                            ReservationModel reservation = new ReservationModel();
+                            Menu.Start();
+                        }
+                        else
+                        {
+                            reservationlogics.changeReservationSeatings(
+                                selectedTable.TableId,
+                                desiredCapacity,
+                                reservationDateTime,
+                                resID);
+                        
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine(
+                                "============================================================================================================"
+                            );
+                            Console.WriteLine(
+                                $"|                                           succesvol gewijzigd                                            |"
+                            );
+                            Console.WriteLine(
+                                "============================================================================================================"
+                            );
+                            Console.ResetColor();
+                            Console.WriteLine();
+                            Thread.Sleep(1500);
+                            break;
+                        }
+                        break;
                     }
                     else if (
                         seatingandTableLogic.IsTableOccupied(
@@ -281,6 +318,13 @@ public class SeatingandTableLayout
     {
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
-        seatingChart.PrintSeatingChart(partySize);
+        seatingChart.PrintSeatingChart("ordering", partySize);
+    }
+
+    public static void Main2(DateTime orderDate, Guid resID)
+    {
+        SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
+        int partySize = seatingChart.GetUserPartySize();
+        seatingChart.PrintSeatingChart("updating", partySize, orderDate, resID);
     }
 }
