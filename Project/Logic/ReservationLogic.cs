@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
-public class ReservationLogic
+public class ReservationLogic : ILogic<ReservationModel>
 {
     private List<ReservationModel> _reservations;
 
@@ -42,6 +42,7 @@ public class ReservationLogic
 
     public List<ReservationModel> GetAll()
     {
+        ReloadData();
         return _reservations;
     }
 
@@ -94,7 +95,9 @@ public class ReservationLogic
     public void RemoveReservation(int acc_id)
     {
         ReloadData();
-        var future_reservations = _reservations.Where(x => x.AccountId == acc_id && x.ReservationDateTime > DateTime.Now).ToList();
+        var future_reservations = _reservations
+            .Where(x => x.AccountId == acc_id && x.ReservationDateTime > DateTime.Now)
+            .ToList();
 
         foreach (var item in future_reservations)
         {
