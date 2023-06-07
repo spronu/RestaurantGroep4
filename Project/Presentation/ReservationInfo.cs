@@ -128,7 +128,7 @@ public class ReservationInfo
                                         "Reserveringsdatum en tijd succesvol bijgewerkt."
                                     );
                                     Thread.Sleep(2000);
-                                    getdata = ReservationsAccess.LoadAll();
+                                    getdata = reservationLogic.GetAll();
                                     reservationLogic.ReloadData();
                                     break;
                                 }
