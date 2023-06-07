@@ -73,10 +73,11 @@ public class ReservationInfo
                         List<string> elements = new List<string>();
                         elements.Add($"Aantal mensen: {reservation.NumberOfPeople}");
                         elements.Add($"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}");
-                        foreach (var id in reservation.OrderItemIDs)
-                        {
-                            elements.Add($"Bestelling: {reservationLogic.GetDishNameById(id)}");
-                        }
+                        elements.Add("Verwijder reservering");
+                        // foreach (var id in reservation.OrderItemIDs)
+                        // {
+                        //     elements.Add($"Bestelling: {reservationLogic.GetDishNameById(id)}");
+                        // }
 
 
 
