@@ -1,7 +1,7 @@
 public class RemoveFoodItemJsonData{
-    public static void RemoveChosenItems(){
+    public static (List<MenuItems>, string ) RemoveChosenItems(){
         List<MenuItems> ListmenuItems = MenuRecive.getdata();
-        List<int> Removenumbers = removeItem.removeItemList();
+        (List<int> Removenumbers, string jsonName) = removeItem.removeItemList();
         List<MenuItems> ShorterList = new List<MenuItems>();
 
         foreach (MenuItems item in ListmenuItems){
@@ -10,10 +10,7 @@ public class RemoveFoodItemJsonData{
 
             }
         }
-        foreach (MenuItems item in ShorterList){
-            Console.WriteLine(item.id);
-        }
         
-        
+        return (ShorterList, jsonName );
     }
 }

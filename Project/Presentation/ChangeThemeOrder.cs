@@ -7,6 +7,8 @@ class ChangeThemeOrder
 {
     public static string ChangeOrder()
     {
+        Console.Clear();
+
         // GiveThemeLogic.Givename(GiveThemeLogic.NumbersLogic());
         //  CallMenuPresentation.hoofd();
         string json = GetThemes.gethemeNumber();
@@ -17,13 +19,13 @@ class ChangeThemeOrder
         List<ThemeItem> themes = JsonConvert.DeserializeObject<List<ThemeItem>>(json);
 
         // Get user input for the month number
-        Console.Write("Enter the month number you want to change: ");
+        Console.Write("Geef het nummer van de maand die je wilt aanpassen: ");
         int monthNumber = Convert.ToInt32(Console.ReadLine());
 
         // Check if the entered month number is valid
         if (monthNumber < 1 || monthNumber > 12)
         {
-            Console.WriteLine("Invalid month number.");
+            Console.WriteLine("Geen geldig nummer.");
             return json;
         }
 
@@ -36,9 +38,9 @@ class ChangeThemeOrder
         int themeOption = Convert.ToInt32(Console.ReadLine());
 
         // Validate the theme option number
-        if (themeOption < 0 || themeOption >= jsonArray.Count)
+        if (themeOption < 0 || themeOption >= (jsonArray.Count + 1))
         {
-            Console.WriteLine("Invalid theme option number.");
+            Console.WriteLine("Geen geldig Thema nummer.");
             return json;
         }
 
@@ -58,11 +60,13 @@ class ChangeThemeOrder
         if (selectedMonthTheme != null)
         {
             selectedMonthTheme.Theme = selectedTheme;
-            Console.WriteLine("Theme updated successfully.");
+            Console.Clear();
+
+            Console.WriteLine("Thema sucsessvol aangepast.");
         }
         else
         {
-            Console.WriteLine("No theme found for the given month number.");
+            Console.WriteLine("Geen thema gevonden voor dit nummer.");
         }
 
         // Convert the updated list back to JSON

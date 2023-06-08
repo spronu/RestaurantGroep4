@@ -20,7 +20,7 @@ public class AdminMenu : MenuLogic
 
                     // deze is voor nieuw ding toeoegen pas volgende sprint goed aan
                     // AddNewFoodItem.givenames();
-                    ChangeTheme.ChangeIt();
+                    ShowThemeDates.Showthemes();
                     selecting = false;
                 }
                 else if (pos == 1)
@@ -35,7 +35,7 @@ public class AdminMenu : MenuLogic
                 }
                 else if (pos == 3)
                 {
-                    removeItem.removeItemList();
+                    WriteItems.WriteToJson();
                     selecting = false;
                 }
                 else if (pos == 4)

@@ -1,14 +1,50 @@
 [
-    {"Month" : 1, "theme" : "Chinees"},
-    {"Month" : 2, "theme" : "Chinees"},
-    {"Month" : 3, "theme" : "Chinees"},
-    {"Month" : 4, "theme" : "Chinees"},
-    {"Month" : 5, "theme" : "Chinees"},
-    {"Month" : 6, "theme" : "Geen"},
-    {"Month" : 7, "theme" : "Chinees"},
-    {"Month" : 8, "theme" : "Chinees"},
-    {"Month" : 9, "theme" : "Chinees"},
-    {"Month" : 10, "theme" : "Chinees"},
-    {"Month" : 11, "theme" : "Chinees"},
-    {"Month" : 12, "theme" : "Geen"}
+  {
+    "Month": 1,
+    "Theme": "Chinees"
+  },
+  {
+    "Month": 2,
+    "Theme": "Chinees"
+  },
+  {
+    "Month": 3,
+    "Theme": "Italiaans"
+  },
+  {
+    "Month": 4,
+    "Theme": "Chinees"
+  },
+  {
+    "Month": 5,
+    "Theme": "Indiase"
+  },
+  {
+    "Month": 6,
+    "Theme": "Somalisch"
+  },
+  {
+    "Month": 7,
+    "Theme": "Turks"
+  },
+  {
+    "Month": 8,
+    "Theme": "Mexicaans"
+  },
+  {
+    "Month": 9,
+    "Theme": "Turks"
+  },
+  {
+    "Month": 10,
+    "Theme": "Italiaans"
+  },
+  {
+    "Month": 11,
+    "Theme": "Chinees"
+  },
+  {
+    "Month": 12,
+    "Theme": "Geen"
+  }
 ]

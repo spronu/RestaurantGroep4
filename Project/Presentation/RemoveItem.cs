@@ -8,12 +8,28 @@ using System.Threading;
 
 static class removeItem
 {
-    public static List<int> removeItemList()
+    public static (List<int>, string) removeItemList()
     {
 
-        List<MenuItems> ListmenuItems = MenuRecive.getdata();
         List<int> removeItems = new List<int>();
+        JArray jsonArray = GetThemes.getheme();
+        // Display the options to the user
+        Console.WriteLine("Kies een optie:");
+        for (int i = 0; i < jsonArray.Count; i++)
+        {
+            var menuItem = jsonArray[i].ToObject<MenuItem>();
+            Console.WriteLine($"{menuItem.Id}. {menuItem.Name}");
+        }
+
+        // Ask the user for the desired option
+        Console.Write("voer het nummer in van het thema waar je een gerecht aan wilt toevoegen: ");
+        int optionNumber = Convert.ToInt32(Console.ReadLine());
+        
+
+        JToken jsonObject = jsonArray.FirstOrDefault(j => (int)j["Id"] == optionNumber);
+        string JsonName = jsonObject?["Json"]?.ToString();
         bool done = true;
+        List<MenuItems> ListmenuItems = MenuRecive.getdata(JsonName);
 
         while (done)
         {
@@ -55,10 +71,7 @@ static class removeItem
         }
 
         Console.WriteLine("gerecht succesvol verwijdert");
-        return removeItems;
+        return (removeItems, JsonName);
 
     }
 }
-
-
-    

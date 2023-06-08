@@ -32,6 +32,6 @@
     "emailAddress": "hallo@gmail.com",
     "password": "8MPNb8SyPq6V453hlDeS9izO/YNxWLacY6668wQe00U=",
     "fullName": "hallo",
-    "admin": false
+    "admin": true
   }
 ]

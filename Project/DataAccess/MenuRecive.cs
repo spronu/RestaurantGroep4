@@ -11,4 +11,10 @@ public static class MenuRecive
         List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(jsonArray.ToString());
         return menuItems;
     }
+      public static List<MenuItems> getdata(string Namejson){
+        var jsonString = File.ReadAllText("DataSources/" +Namejson);
+        JArray jsonArray = JArray.Parse(jsonString);
+        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(jsonArray.ToString());
+        return menuItems;
+    }
 }
