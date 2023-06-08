@@ -32,7 +32,7 @@ public class ReservationInfo
                 var reservation = getdata[index];
 
                 Console.WriteLine("====================================");
-                Console.WriteLine("Reservation ID: " + reservation.ReservationId);
+                Console.WriteLine("Reserverings ID: " + reservation.ReservationId);
                 Console.WriteLine("AccountID: " + reservation.AccountId);
                 Console.WriteLine("Volledige naam: " + reservation.FullName);
                 Console.WriteLine("Tafel Id: " + reservation.TableId);
