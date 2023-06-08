@@ -84,12 +84,12 @@ public class ReservationLogic : ILogic<ReservationModel>
 
     public string GetDishNameById(int id)
     {
-        JArray jsonArray = MenuRecive.getdata();
-        foreach (JObject item in jsonArray)
+        List<MenuItems> ListmenuItems = MenuRecive.getdata();
+        foreach (var item in ListmenuItems)
         {
-            if (id == Convert.ToInt32(item["id"]))
+            if (id == Convert.ToInt32(item.id))
             {
-                return item["name"].ToString();
+                return item.name.ToString();
             }
         }
         return "Unknown dish"; // return this if the id is not found
