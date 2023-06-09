@@ -70,12 +70,10 @@ public class ReservationLogic : ILogic<ReservationModel>
         CorrectInputCheck.ShowMenu(reservation);
     }
 
-    public void UpdateReservationJson(
-        List<int> orderItemIDs,
-        double totalPrice,
-        ReservationModel reservation
-    )
+    public void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
     {
+        GetAll();
+        ReloadData();
         reservation.OrderItemIDs = orderItemIDs;
         reservation.TotalPrice = totalPrice;
 
@@ -84,12 +82,12 @@ public class ReservationLogic : ILogic<ReservationModel>
 
     public string GetDishNameById(int id)
     {
-        JArray jsonArray = MenuRecive.getdata();
-        foreach (JObject item in jsonArray)
+        List<MenuItems> ListmenuItems = MenuRecive.getdata();
+        foreach (var item in ListmenuItems)
         {
-            if (id == Convert.ToInt32(item["id"]))
+            if (id == Convert.ToInt32(item.id))
             {
-                return item["name"].ToString();
+                return item.name.ToString();
             }
         }
         return "Unknown dish"; // return this if the id is not found

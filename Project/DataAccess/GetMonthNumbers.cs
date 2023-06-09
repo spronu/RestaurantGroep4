@@ -5,15 +5,11 @@ using System.Linq;
 
 
 
-public static class GetThemes
+public static class GetMonthNumbers
 {
-    public static JArray getheme(){
+    public static JArray GetNumbers(){
         var jsonString = File.ReadAllText($"DataSources/themes.json");
         JArray jsonArray = JArray.Parse(jsonString);
         return jsonArray;
-    }
-    public static string gethemeNumber(){
-        var jsonString = File.ReadAllText($"DataSources/ThemeDates.json");
-        return jsonString;
     }
 }

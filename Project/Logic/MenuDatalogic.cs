@@ -19,9 +19,9 @@ static class MenuDataLogic
         List<string> Allallcatogories = new List<string>();
         List<string> Allallcourses = new List<string>();
         // Dictionary<string, int> x = fish;
-        JArray jsonArray = MenuRecive.getdata();
+        List<MenuItems> ListmenuItems = MenuRecive.getdata();
 
-        foreach (JObject item in jsonArray)
+        foreach (MenuItems item in ListmenuItems)
         {
 
             // Console.WriteLine(item["id"]);
@@ -31,8 +31,8 @@ static class MenuDataLogic
             // Console.WriteLine(item["price"]);
             // ---
             // Console.WriteLine($"{item["name"]}    :    {item["price"]}");
-            Allallcatogories.Add($"{item["category"]}");
-            Allallcourses.Add($"{item["course"]}");
+            Allallcatogories.Add($"{item.category}");
+            Allallcourses.Add($"{item.course}");
 
         }
 
@@ -116,7 +116,7 @@ static class MenuDataLogic
                     string value = entry.Value;
                     Console.WriteLine($"{key}. {value}");
                 }
-                Console.WriteLine("welke categorie wil je zien?");
+                Console.WriteLine("welke categorie wilt u?");
                 Console.WriteLine("");
                 string catogoriesave = Console.ReadLine() ?? string.Empty;
                 int save2 = Int32.Parse(catogoriesave);

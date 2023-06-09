@@ -772,6 +772,32 @@ namespace ProjectTest
         }
 
         [TestMethod]
+        public void GetDishNameById_Test()
+        {
+            ReservationLogic _reservationLogic = new ReservationLogic();
+
+            int dishId1 = 1;
+            int dishId2 = 2;
+            int dishIdInvalid = 1000;
+
+            string expectedDishName1 = "Zalmfilet met proseccoroomsaus";
+            string expectedDishName2 = "Kabeljauw met saffraansaus";
+            string expectedDishNameInvalid = "Unknown dish";
+
+
+            string actualDishName1 = _reservationLogic.GetDishNameById(dishId1);
+            string actualDishName2 = _reservationLogic.GetDishNameById(dishId2);
+            string actualDishNameInvalid = _reservationLogic.GetDishNameById(dishIdInvalid);
+
+
+            Assert.AreEqual(expectedDishName1, actualDishName1, "De verwachte en werkelijke gerechtnamen moeten hetzelfde zijn voor id=1");
+            Assert.AreEqual(expectedDishName2, actualDishName2, "De verwachte en werkelijke gerechtnamen moeten hetzelfde zijn voor id=2");
+            Assert.AreEqual(expectedDishNameInvalid, actualDishNameInvalid, "De verwachte en werkelijke gerechtnamen moeten hetzelfde zijn voor ongeldige id");
+        }
+
+
+
+        [TestMethod]
         public void RemoveReservation_Test()
         {
         

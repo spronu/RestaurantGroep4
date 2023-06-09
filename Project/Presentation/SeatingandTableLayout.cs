@@ -316,6 +316,8 @@ public class SeatingandTableLayout
 
     public static void Main()
     {
+        reservationlogics.ReloadData();
+        reservationlogics.GetAll();
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
         seatingChart.PrintSeatingChart("ordering", partySize);
@@ -323,6 +325,8 @@ public class SeatingandTableLayout
 
     public static void Main2(DateTime orderDate, Guid resID)
     {
+        reservationlogics.ReloadData();
+        reservationlogics.GetAll();
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
         seatingChart.PrintSeatingChart("updating", partySize, orderDate, resID);
