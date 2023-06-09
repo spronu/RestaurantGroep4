@@ -107,7 +107,7 @@ public class ReservationInfo
                                     SchedulingChart schedulingChart = new SchedulingChart();
 
                                     SeatingandTableLayout layoutS = new SeatingandTableLayout(3, 5);
-                                    DateTime newDate = schedulingChart.SelectDate();
+                                    // DateTime newDate = schedulingChart.SelectDate();
 
 
                                     DateTime newTime = layoutS.GetReservationTime();
