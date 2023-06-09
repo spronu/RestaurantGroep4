@@ -20,20 +20,35 @@ public class AdminMenu : MenuLogic
 
                     // deze is voor nieuw ding toeoegen pas volgende sprint goed aan
                     // AddNewFoodItem.givenames();
-                    ChangeTheme.ChangeIt();
+                    ShowThemeDates.Showthemes();
                     selecting = false;
                 }
                 else if (pos == 1)
                 {
-                    ShowAllUsers.Show();
+                    AddNewFoodItem.givenames();
                     selecting = false;
                 }
                 else if (pos == 2)
                 {
-                    Console.WriteLine("Nog niet gemaakt");
+                    ChangeThemeOrder.ChangeOrder();
                     selecting = false;
                 }
                 else if (pos == 3)
+                {
+                    WriteItems.WriteToJson();
+                    selecting = false;
+                }
+                else if (pos == 4)
+                {
+                    ShowAllUsers.Show();
+                    selecting = false;
+                }
+                else if (pos == 5)
+                {
+                    Console.WriteLine("Nog niet gemaakt");
+                    selecting = false;
+                }
+                else if (pos == 6)
                 {
                     Menu.Start();
                     selecting = false;

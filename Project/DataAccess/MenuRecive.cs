@@ -1,16 +1,20 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-
 
 public static class MenuRecive
 {
-    public static JArray getdata()
-    {
-        string JsonName =  GiveThemeLogic.Givename();
-        var jsonString = File.ReadAllText($"DataSources/{JsonName}");
+    public static List<MenuItems> getdata(){
+        var jsonString = File.ReadAllText(GiveThemeLogic.Givename(GiveThemeLogic.NumbersLogic()));
         JArray jsonArray = JArray.Parse(jsonString);
-        return jsonArray;
+        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(jsonArray.ToString());
+        return menuItems;
+    }
+      public static List<MenuItems> getdata(string Namejson){
+        var jsonString = File.ReadAllText("DataSources/" +Namejson);
+        JArray jsonArray = JArray.Parse(jsonString);
+        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(jsonArray.ToString());
+        return menuItems;
     }
 }

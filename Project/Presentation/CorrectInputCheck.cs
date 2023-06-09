@@ -12,7 +12,7 @@ static class CorrectInputCheck
 
     public static void ShowMenu(ReservationModel reservation)
     {
-        JArray jsonArray = MenuRecive.getdata();
+        List<MenuItems> jsonArray = MenuRecive.getdata();
         bool done = true;
         List<string> orderItems = new List<string>();
         List<int> orderItemIDs = new List<int>();
@@ -21,7 +21,7 @@ static class CorrectInputCheck
         while (done)
         {
             // Call the menu display method at the beginning of the loop
-            menucardpresentasion.menucard(true);
+            menucardpresentasion.menucard(true, jsonArray);
 
             Console.WriteLine(
                 "schrijf het nummer van de bestelling die je wilt! Of type 'x' als je klaar bent."
@@ -30,15 +30,15 @@ static class CorrectInputCheck
             string option = Console.ReadLine();
 
             bool notFound = true;
-            foreach (JObject item in jsonArray)
+            foreach (var item in jsonArray)
             {
-                if (option == item["id"].ToString())
+                if (option == item.id.ToString())
                 {
-                    orderItemIDs.Add(Convert.ToInt32(item["id"]));
-                    totalPrice += Convert.ToDouble(item["price"]);
-                    Console.WriteLine(
-                        $"{item["name"].ToString()} succesvol toegevoegd aan bestelling"
-                    );
+
+                    orderItemIDs.Add(Convert.ToInt32(item.id));
+                    totalPrice += Convert.ToDouble(item.price);
+                    Console.WriteLine($"{item.name.ToString()} succesvol toegevoegd aan bestelling");
+
                     Thread.Sleep(1000);
                     notFound = false;
 
@@ -80,4 +80,5 @@ static class CorrectInputCheck
 
         Console.WriteLine("bestelling succesvol opgeslagen");
     }
+
 }
