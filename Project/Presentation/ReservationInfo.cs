@@ -98,7 +98,7 @@ public class ReservationInfo
                                         reservation.ReservationDateTime,
                                         reservation.ReservationId
                                     );
-                                    getdata = ReservationsAccess.LoadAll();
+                                    getdata = reservationLogic.GetAll();
                                     reservationLogic.ReloadData();
                                     break;
                                 }
