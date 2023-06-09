@@ -144,8 +144,6 @@ public class ReservationInfo
 
                 }
             } while (true);
-
-            Menu.Start();
         }
     }
 }

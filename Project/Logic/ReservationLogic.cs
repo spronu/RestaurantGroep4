@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
-public class ReservationLogic
+public class ReservationLogic : ILogic<ReservationModel>
 {
     private List<ReservationModel> _reservations;
 
@@ -111,6 +111,20 @@ public class ReservationLogic
     }
 
 
+    public void RemoveReservation(Guid reservationID)
+    {
+        ReloadData();
+        var ReservationsID_Find = _reservations.Where(x => x.ReservationId == reservationID).ToList();
+
+        foreach (var item in ReservationsID_Find)
+        {
+            _reservations.Remove(item);
+        }
+
+        ReservationsAccess.WriteAll(_reservations);
+    }
+
+
     public void ChangeReservationDateTime(Guid id, DateTime newDateTime)
     {
         // Find the reservation with the given ID
@@ -139,7 +153,4 @@ public class ReservationLogic
 
         ReloadData();
     }
-
-
-
 }
