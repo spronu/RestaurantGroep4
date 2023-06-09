@@ -70,12 +70,10 @@ public class ReservationLogic : ILogic<ReservationModel>
         CorrectInputCheck.ShowMenu(reservation);
     }
 
-    public void UpdateReservationJson(
-        List<int> orderItemIDs,
-        double totalPrice,
-        ReservationModel reservation
-    )
+    public void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
     {
+        GetAll();
+        ReloadData();
         reservation.OrderItemIDs = orderItemIDs;
         reservation.TotalPrice = totalPrice;
 
