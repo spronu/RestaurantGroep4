@@ -105,15 +105,17 @@ public class ReservationInfo
                                 else if (choosing.pos == 1)
                                 {
                                     SchedulingChart schedulingChart = new SchedulingChart();
+
                                     SeatingandTableLayout layoutS = new SeatingandTableLayout(3, 5);
                                     DateTime newDate = schedulingChart.SelectDate();
+
 
                                     DateTime newTime = layoutS.GetReservationTime();
 
                                     DateTime newReservationDateTime = new DateTime(
-                                        newDate.Year,
-                                        newDate.Month,
-                                        newDate.Day,
+                                        reservation.ReservationDateTime.Year,
+                                        reservation.ReservationDateTime.Month,
+                                        reservation.ReservationDateTime.Day,
                                         newTime.Hour,
                                         newTime.Minute,
                                         0
@@ -134,6 +136,7 @@ public class ReservationInfo
                                 }
                                 else if (choosing.pos == 2)
                                 {
+
                                     reservationLogic.RemoveReservation(reservation.ReservationId);
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine(
@@ -143,6 +146,7 @@ public class ReservationInfo
                                     Thread.Sleep(2000);
                                     reservationLogic.ReloadData();
                                     Menu.Start();
+
                                 }
                             }
                         }
