@@ -69,8 +69,16 @@ public class AccountsLogic : ILogic<AccountModel>
         AccountModel SignUp_acc = new AccountModel();
 
         // Setting the properties of the account model
-        int maxId = _accounts.Max(acc => acc.Id);
-        SignUp_acc.Id = maxId + 1;
+        if(_accounts.Count == 0){
+            SignUp_acc.Id = 1;
+            SignUp_acc.Admin = true;
+        }
+        else{
+            int maxId = _accounts.Max(acc => acc.Id);
+            SignUp_acc.Id = maxId + 1;
+            SignUp_acc.Admin = false;
+        }
+
         SignUp_acc.EmailAddress = email;
         SignUp_acc.Password = EncryptPassword(password);
         SignUp_acc.FullName = fullName;
@@ -101,6 +109,7 @@ public class AccountsLogic : ILogic<AccountModel>
 
         AccountModel acc = _accounts.Find(i => i.Id == id);
 
+        //Changing name
         acc.FullName = fullName;
 
         UpdateList(acc);
@@ -114,7 +123,6 @@ public class AccountsLogic : ILogic<AccountModel>
         acc.Password = EncryptPassword(password);
 
         UpdateList(acc);
-
     }
 
     public void ChangeEmail(int id, string email){

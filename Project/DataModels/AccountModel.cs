@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-
-public class AccountModel // Public of iets anders, zoals interface?
+public class AccountModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -27,7 +26,6 @@ public class AccountModel // Public of iets anders, zoals interface?
         Admin = admin;
     }
 
-    public AccountModel()
-    {
-    }
+    public AccountModel(){ }
+
 }

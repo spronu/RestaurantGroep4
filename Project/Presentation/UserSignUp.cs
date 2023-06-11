@@ -7,24 +7,42 @@ public class UserSignUp
     public static void Start()
     {
         Console.Clear();
+        _accountsLogic.ReloadData();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("====================================");
         Console.WriteLine("|            Registreer            |");
         Console.WriteLine("====================================");
         Console.ResetColor();
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("Terugkeren? Typ 'T' in de terminal.");
+        Console.ResetColor();
+        Console.WriteLine();
 
         Console.WriteLine("Voer uw email adres in");
         string email = Console.ReadLine();
         email = email.Trim();
+        if(email.ToUpper() == "T")
+        {
+            Menu.Start();
+        }
+
         while (!IsValidEmailAdress(email) || _accountsLogic.CheckEmail(email)){
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Dit email adres bestaat al of is niet geldig");
             Console.ResetColor();
             email = Console.ReadLine();
             email = email.Trim();
+            if(email.ToUpper() == "T")
+            {
+                Menu.Start();
+            }
         }
 
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("Druk op 'esc' om terug te keren");
+        Console.ResetColor();
         Console.WriteLine("Voer uw wachtwoord in");
         string password = "";
         ConsoleKeyInfo key;
