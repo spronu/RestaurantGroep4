@@ -1,24 +1,3 @@
 [
-  {
-    "reservationId": "957443ba-bf42-4b0b-a8f7-9dc2f4837fa7",
-    "orderItemIDs": [
-      1
-    ],
-    "totalPrice": 8.95,
-    "accountId": 5,
-    "fullName": "hallo",
-    "tableId": 1,
-    "reservationDateTime": "2023-06-08T20:30:00",
-    "numberOfPeople": 2
-  },
-  {
-    "reservationId": "46685a2f-3e22-40f4-a67c-dcded67fdfe2",
-    "orderItemIDs": null,
-    "totalPrice": 0,
-    "accountId": 5,
-    "fullName": "hallo",
-    "tableId": 1,
-    "reservationDateTime": "2023-06-11T20:30:00",
-    "numberOfPeople": 2
-  }
+
 ]
