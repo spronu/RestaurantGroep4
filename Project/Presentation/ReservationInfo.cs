@@ -74,10 +74,13 @@ public class ReservationInfo
                             $"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}"
                         );
                         elements.Add("Verwijder reservering");
-                        // foreach (var id in reservation.OrderItemIDs)
-                        // {
-                        //     elements.Add($"Bestelling: {reservationLogic.GetDishNameById(id)}");
-                        // }
+                        int gCount = 1;
+                        foreach (var id in reservation.OrderItemIDs)
+                        {
+
+                            elements.Add($"Gerecht {gCount}: {reservationLogic.GetDishNameById(id)}");
+                            gCount += 1;
+                        }
 
 
 
@@ -148,6 +151,13 @@ public class ReservationInfo
                                     Menu.Start();
 
                                 }
+                                else
+                                {
+                                    Console.WriteLine("nee");
+                                    Thread.Sleep(2000);
+                                    break;
+                                }
+
                             }
                         }
                         break;

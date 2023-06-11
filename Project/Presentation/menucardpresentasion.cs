@@ -2,13 +2,14 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-class menucardpresentasion
+public class menucardpresentasion
 {
     public static bool menucard(bool showcourse, List<MenuItems> ListmenuItems)
     {
 
 
         Tuple<string, string> all = MenuDataLogic.MakeOptionsLists(showcourse);
+        // Console.WriteLine(all);
         string option = all.Item1;
         string course = all.Item2;
         // string course = MenuDataLogic.hallo().Item2;
@@ -18,6 +19,7 @@ class menucardpresentasion
         if (option != "quit")
         {
             Console.WriteLine(option);
+            Console.Clear();
 
             foreach (MenuItems item in ListmenuItems)
             {

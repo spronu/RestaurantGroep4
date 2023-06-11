@@ -50,7 +50,7 @@ static class MenuDataLogic
         {
             while (courseoption)
             {
-                int save =  MenuDataPresentasion.ShowCourses(courselink);
+                int save =  MenuDataPresentasion.ShowCourses(courselink, "welke type maaltijd wilt u? \n");
                 course = courselink[save];
                 if (course == "return")
                     {
@@ -80,7 +80,7 @@ static class MenuDataLogic
 
             while (choise)
             {
-                int save2 = MenuDataPresentasion.Showcatogeries(catogorieslink);
+                int save2 = MenuDataPresentasion.ShowCourses(catogorieslink, "welke categorie wilt u? \n");
                 option = catogorieslink[save2];
                 if (allcatogories.Contains(option))
                 {
