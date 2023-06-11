@@ -7,10 +7,9 @@ static class MenuDataLogic
     public static string course = "";
     public static bool courseoption = true;
 
-    public static Tuple<string, string> hallo(bool ShowCourse)
+    public static Tuple<string, string> MakeOptionsLists(bool ShowCourse)
     {
 
-        Console.Clear();
         bool choise = true;
         courseoption = ShowCourse;
         string option = "";
@@ -18,19 +17,9 @@ static class MenuDataLogic
 
         List<string> Allallcatogories = new List<string>();
         List<string> Allallcourses = new List<string>();
-        // Dictionary<string, int> x = fish;
         List<MenuItems> ListmenuItems = MenuRecive.getdata();
-
         foreach (MenuItems item in ListmenuItems)
         {
-
-            // Console.WriteLine(item["id"]);
-            // Console.WriteLine(item["name"]);
-            // Console.WriteLine(item["course"]);
-            // Console.WriteLine(item["category"]);
-            // Console.WriteLine(item["price"]);
-            // ---
-            // Console.WriteLine($"{item["name"]}    :    {item["price"]}");
             Allallcatogories.Add($"{item.category}");
             Allallcourses.Add($"{item.course}");
 
@@ -40,7 +29,6 @@ static class MenuDataLogic
         List<string> allcourses = Allallcourses.Distinct().ToList();
         Dictionary<int, string> catogorieslink = new Dictionary<int, string>();
         Dictionary<int, string> courselink = new Dictionary<int, string>();
-	    // Animalsound.Add( “cat”, “meow”)
 
         allcatogories.Add("return");
         allcourses.Add("return");
@@ -62,17 +50,7 @@ static class MenuDataLogic
         {
             while (courseoption)
             {
-                Console.Clear();
-                foreach (KeyValuePair<int, string> entry in courselink)
-                {
-                    int key = entry.Key;
-                    string value = entry.Value;
-                    Console.WriteLine($"{key}. {value}");
-                }
-                Console.WriteLine("welke type maaltijd wilt u?");
-                Console.WriteLine("");
-                string coursesave = Console.ReadLine() ?? string.Empty;
-                int save = Int32.Parse(coursesave);
+                int save =  MenuDataPresentasion.ShowCourses(courselink);
                 course = courselink[save];
                 if (course == "return")
                     {
@@ -96,30 +74,13 @@ static class MenuDataLogic
                         Tuple<string, string> v = Tuple.Create("quit", "quit");
                         return v;
                     }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine(course);
-                        Console.WriteLine("fout");
-                        Console.WriteLine("kies opnieuw");
-                    }
                 }
             }
             
 
             while (choise)
             {
-                Console.Clear();
-                foreach (KeyValuePair<int, string> entry in catogorieslink)
-                {
-                    int key = entry.Key;
-                    string value = entry.Value;
-                    Console.WriteLine($"{key}. {value}");
-                }
-                Console.WriteLine("welke categorie wilt u?");
-                Console.WriteLine("");
-                string catogoriesave = Console.ReadLine() ?? string.Empty;
-                int save2 = Int32.Parse(catogoriesave);
+                int save2 = MenuDataPresentasion.Showcatogeries(catogorieslink);
                 option = catogorieslink[save2];
                 if (allcatogories.Contains(option))
                 {
@@ -130,35 +91,9 @@ static class MenuDataLogic
                         courseoption = true;
                     }
                 }
-                else
-                {
-                    // Console.Clear();
-                    Console.WriteLine("dit is niet een van de opties");
-                    Console.WriteLine("kies opnieuw");
-                }
-
             }
         }
-        Console.Clear();
         Tuple<string, string> x = Tuple.Create(option, course);
         return x;
-
-        // Console.Clear();
-        // Console.WriteLine("gerecht       :         prijs");
-        // foreach (JObject item in jsonArray)
-        // {
-        //     if( item["category"].ToString() == option)
-        //     {
-        //         Console.WriteLine($"{item["name"].ToString()}   :   {item["price"].ToString()}");
-        //     }
-        // }
-        // Console.WriteLine("");
-        // Console.WriteLine(food["name"]); manier om de prijs te printen
-
     }
-
-
 }
-
-
-

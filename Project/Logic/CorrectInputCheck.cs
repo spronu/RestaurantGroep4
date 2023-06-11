@@ -8,8 +8,8 @@ using System.Threading;
 
 static class CorrectInputCheck
 {
-    static ReservationLogic reservationlogics = new ReservationLogic();
 
+    static ReservationLogic reservationlogics = new ReservationLogic();
     public static void ShowMenu(ReservationModel reservation)
     {
         List<MenuItems> jsonArray = MenuRecive.getdata();
@@ -23,11 +23,8 @@ static class CorrectInputCheck
             // Call the menu display method at the beginning of the loop
             menucardpresentasion.menucard(true, jsonArray);
 
-            Console.WriteLine(
-                "schrijf het nummer van de bestelling die je wilt! Of type 'x' als je klaar bent."
-            );
-            Console.WriteLine("");
-            string option = Console.ReadLine();
+
+            string option = OrderFoodPresentasion.AskOrder();
 
             bool notFound = true;
             foreach (var item in jsonArray)
@@ -37,18 +34,18 @@ static class CorrectInputCheck
 
                     orderItemIDs.Add(Convert.ToInt32(item.id));
                     totalPrice += Convert.ToDouble(item.price);
-                    Console.WriteLine($"{item.name.ToString()} succesvol toegevoegd aan bestelling");
+                    OrderFoodPresentasion.ShowItem(item.name.ToString());
 
                     Thread.Sleep(1000);
                     notFound = false;
 
                     // Update the JSON immediately after an order is made.
-                    reservationlogics.UpdateReservationJson(orderItemIDs, totalPrice, reservation);
+                    // reservationlogics.UpdateReservationJson(orderItemIDs, totalPrice, reservation);
                 }
             }
             if (notFound && option != "x")
             {
-                Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
+                OrderFoodPresentasion.DishNotFound();
                 Thread.Sleep(1000);
             }
 
@@ -57,15 +54,8 @@ static class CorrectInputCheck
                 // Move the warning check here
                 if (orderItemIDs.Count < reservation.NumberOfPeople)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(
-                        "Waarschuwing: Er zijn minder gerechten besteld dan het aantal personen in de reservering."
-                    );
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Willen de overige mensen ook iets bestellen? (j/n)");
-                    Console.ResetColor();
-                    string response = Console.ReadLine();
+
+                    string response = OrderFoodPresentasion.DoneOrder();
                     if (response.ToLower() == "j")
                     {
                         done = true; // Only continue with the loop if there are more orders to be made and the user confirms they want to order more
@@ -78,7 +68,7 @@ static class CorrectInputCheck
             }
         }
 
-        Console.WriteLine("bestelling succesvol opgeslagen");
+        OrderFoodPresentasion.Orderfinished();
     }
 
 }
