@@ -17,7 +17,6 @@ public class AdminMenu : MenuLogic
             {
                 if (pos == 0)
                 {
-
                     // deze is voor nieuw ding toeoegen pas volgende sprint goed aan
                     // AddNewFoodItem.givenames();
                     ChangeTheme.ChangeIt();

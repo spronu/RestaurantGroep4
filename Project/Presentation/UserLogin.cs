@@ -12,12 +12,19 @@ static class UserLogin
         Console.WriteLine("====================================");
         Console.ResetColor();
         Console.WriteLine();
-        Console.WriteLine("Voer uw email adres in");
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         Console.WriteLine("Email of Wachtwoord vergeten? Typ 'F' in de terminal.");
+        Console.WriteLine("Terugkeren? Typ 'T' in de terminal.");
         Console.ResetColor();
+        Console.WriteLine();
+        Console.WriteLine("Voer uw email adres in");
         string email = Console.ReadLine();
         email = email.Trim();
+        if(email.ToUpper() == "T")
+        {
+            Menu.Start();
+        }
+
         if(email == "F" || email == "f"){
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("====================================");
@@ -29,6 +36,10 @@ static class UserLogin
             Console.ReadKey();
             Menu.Start();
         }
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("Druk op 'esc' om terug te keren");
+        Console.ResetColor();
         Console.WriteLine("Voer uw wachtwoord in");
         string password = "";
         ConsoleKeyInfo key;
@@ -53,15 +64,15 @@ static class UserLogin
             }
         } while (key.Key != ConsoleKey.Enter);
         Console.WriteLine();
-        AccountModel acc = _accountsLogic.CheckLogin(email, password);
-        if (acc != null)
+        if (_accountsLogic.CheckLogin(email, password) != null)
         {
             Console.Clear();
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("====================================");
-            Console.WriteLine(" Welkom terug " + acc.FullName);
-            Console.WriteLine(" Uw e-mailadres is " + acc.EmailAddress);
+            Console.WriteLine();
+            Console.WriteLine($"Welkom terug {AccountsLogic.CurrentAccount.FullName}");
+            Console.WriteLine();
             Console.WriteLine("====================================");
             Console.ResetColor();
             Thread.Sleep(1500);

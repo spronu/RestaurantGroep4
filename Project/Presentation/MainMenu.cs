@@ -1,7 +1,6 @@
 public class MainMenu : MenuLogic
 {
-    public MainMenu(List<String> Elements, int pos)
-        : base(Elements, pos) { }
+    public MainMenu(List<String> Elements, int pos) : base(Elements, pos) { }
 
     public override void Logics(string title)
     {
@@ -14,10 +13,7 @@ public class MainMenu : MenuLogic
 
             if (input.Key == ConsoleKey.Enter)
             {
-                if (
-                    AccountsLogic.CurrentAccount != null
-                    && AccountsLogic.CurrentAccount.Admin == false
-                )
+                if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == false)
                 {
                     if (pos == 1)
                     {
@@ -68,24 +64,8 @@ public class MainMenu : MenuLogic
                     {
                         Environment.Exit(0);
                     }
-                    // else if (pos == 5)
-                    // {
-                    //     List<String> items = new List<String>();
-                    //     if (AccountsLogic.CurrentAccount != null)
-                    //     {
-                    //         items.Add("veranderen thema's menu");
-                    //         items.Add("gebruikers overzicht");
-                    //         items.Add("reservering overzicht");
-                    //         items.Add("terug");
-                    //     }
-                    //     AdminMenu menu = new AdminMenu(items, 0);
-                    //     menu.Logics(title);
-                    // }
                 }
-                else if (
-                    AccountsLogic.CurrentAccount != null
-                    && AccountsLogic.CurrentAccount.Admin == true
-                )
+                else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
                 {
                     if (pos == 1)
                     {
@@ -184,17 +164,6 @@ public class MainMenu : MenuLogic
                     {
                         Environment.Exit(0);
                     }
-                    // else if (pos == 6)
-                    // {
-                    //     List<String> items = new List<String>();
-                    //     items.Add("veranderen thema's menu");
-                    //     items.Add("gebruikers overzicht");
-                    //     items.Add("reservering overzicht");
-                    //     items.Add("terug");
-                    //     AdminMenu menu = new AdminMenu(items, 0);
-                    //     menu.Logics(title);                        // veranderen thema menus, admin overzicht gebruikers, overzicht reserveringen
-
-                    // }
                 }
             }
         }
