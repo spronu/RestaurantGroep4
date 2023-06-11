@@ -57,25 +57,23 @@ public class ReservationLogic : ILogic<ReservationModel>
         );
     }
 
-    public void AddReservation(int tableId, int numberOfPeople, DateTime reservationDateTime)
+    public ReservationModel AddReservation(int id, string fullName, int tableId, int numberOfPeople, DateTime reservationDateTime)
     {
         ReservationModel reservation = new ReservationModel(
-            AccountsLogic.CurrentAccount.Id,
-            AccountsLogic.CurrentAccount.FullName,
+            id,
+            fullName,
             tableId,
             numberOfPeople,
             reservationDateTime
         );
         UpdateList(reservation);
-        CorrectInputCheck.ShowMenu(reservation);
+        return reservation;
     }
 
-    public void UpdateReservationJson(
-        List<int> orderItemIDs,
-        double totalPrice,
-        ReservationModel reservation
-    )
+    public void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
     {
+        GetAll();
+        ReloadData();
         reservation.OrderItemIDs = orderItemIDs;
         reservation.TotalPrice = totalPrice;
 
@@ -84,12 +82,12 @@ public class ReservationLogic : ILogic<ReservationModel>
 
     public string GetDishNameById(int id)
     {
-        JArray jsonArray = MenuRecive.getdata();
-        foreach (JObject item in jsonArray)
+        List<MenuItems> ListmenuItems = MenuRecive.getdata();
+        foreach (var item in ListmenuItems)
         {
-            if (id == Convert.ToInt32(item["id"]))
+            if (id == Convert.ToInt32(item.id))
             {
-                return item["name"].ToString();
+                return item.name.ToString();
             }
         }
         return "Unknown dish"; // return this if the id is not found

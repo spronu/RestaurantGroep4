@@ -233,11 +233,14 @@ public class SeatingandTableLayout
 
                         if (pathCheck == "ordering")
                         {
-                            reservationlogics.AddReservation(
+                            var reservations = reservationlogics.AddReservation(
+                                AccountsLogic.CurrentAccount.Id,
+                                AccountsLogic.CurrentAccount.FullName,
                                 selectedTable.TableId,
                                 desiredCapacity,
                                 reservationDateTime
                             );
+                            CorrectInputCheck.ShowMenu(reservations);
 
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -316,6 +319,8 @@ public class SeatingandTableLayout
 
     public static void Main()
     {
+        reservationlogics.ReloadData();
+        reservationlogics.GetAll();
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
         seatingChart.PrintSeatingChart("ordering", partySize);
@@ -323,6 +328,8 @@ public class SeatingandTableLayout
 
     public static void Main2(DateTime orderDate, Guid resID)
     {
+        reservationlogics.ReloadData();
+        reservationlogics.GetAll();
         SeatingandTableLayout seatingChart = new SeatingandTableLayout(3, 5);
         int partySize = seatingChart.GetUserPartySize();
         seatingChart.PrintSeatingChart("updating", partySize, orderDate, resID);

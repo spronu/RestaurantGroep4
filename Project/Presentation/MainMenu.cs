@@ -26,13 +26,13 @@ public class MainMenu : MenuLogic
                         bool done = true;
                         string option = "";
                         // done = menucardpresentasion.menucard();
-                        while (done)
-                        {
-                            done = menucardpresentasion.menucard(coursecheck);
-                            if (done)
-                            {
-                                Console.WriteLine(" druk enter om iets anders te zien.");
-                                option = Console.ReadLine() ?? string.Empty;
+
+                        while(done){
+                            done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
+                            if(done){
+                            Console.WriteLine(" druk enter om iets anders te zien.");
+                            option = Console.ReadLine() ?? string.Empty;
+
                             }
                             coursecheck = false;
                             // if (option == "return")
@@ -73,13 +73,13 @@ public class MainMenu : MenuLogic
                         bool done = true;
                         string option = "";
                         // done = menucardpresentasion.menucard();
-                        while (done)
-                        {
-                            done = menucardpresentasion.menucard(coursecheck);
-                            if (done)
-                            {
-                                Console.WriteLine(" druk enter om iets anders te zien.");
-                                option = Console.ReadLine() ?? string.Empty;
+
+                        while(done){
+                            done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
+                            if(done){
+                            Console.WriteLine(" druk enter om iets anders te zien.");
+                            option = Console.ReadLine() ?? string.Empty;
+
                             }
                             coursecheck = false;
                             // if (option == "return")
@@ -92,7 +92,10 @@ public class MainMenu : MenuLogic
                     else if (pos == 2)
                     {
                         List<String> items = new List<String>();
-                        items.Add("veranderen thema's menu");
+                        items.Add("bekijk thema volgorde");
+                        items.Add("voeg nieuw gerecht toe");
+                        items.Add("Verander thema volgorde");
+                        items.Add("Verwijder gerecht");
                         items.Add("gebruikers overzicht");
                         items.Add("reservering overzicht");
                         items.Add("terug");
@@ -140,13 +143,13 @@ public class MainMenu : MenuLogic
                         bool done = true;
                         string option = "";
                         // done = menucardpresentasion.menucard();
-                        while (done)
-                        {
-                            done = menucardpresentasion.menucard(coursecheck);
-                            if (done)
-                            {
-                                Console.WriteLine(" druk enter om iets anders te zien.");
-                                option = Console.ReadLine() ?? string.Empty;
+
+                        while(done){
+                            done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
+                            if(done){
+                            Console.WriteLine(" druk enter om iets anders te zien.");
+                            option = Console.ReadLine() ?? string.Empty;
+
                             }
                             coursecheck = false;
                             // if (option == "return")

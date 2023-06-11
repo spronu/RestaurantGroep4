@@ -13,6 +13,5 @@ public class MenuItem
     public int Id { get; set; }
     public string Name { get; set; }
     public string Json { get; set; }
-    public int Aantal { get; set; }
     public bool Active { get; set; }
 }

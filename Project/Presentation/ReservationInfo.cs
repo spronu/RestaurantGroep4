@@ -32,7 +32,7 @@ public class ReservationInfo
                 var reservation = getdata[index];
 
                 Console.WriteLine("====================================");
-                Console.WriteLine("Reservation ID: " + reservation.ReservationId);
+                Console.WriteLine("Reserverings ID: " + reservation.ReservationId);
                 Console.WriteLine("AccountID: " + reservation.AccountId);
                 Console.WriteLine("Volledige naam: " + reservation.FullName);
                 Console.WriteLine("Tafel Id: " + reservation.TableId);
@@ -98,22 +98,24 @@ public class ReservationInfo
                                         reservation.ReservationDateTime,
                                         reservation.ReservationId
                                     );
-                                    getdata = ReservationsAccess.LoadAll();
+                                    getdata = reservationLogic.GetAll();
                                     reservationLogic.ReloadData();
                                     break;
                                 }
                                 else if (choosing.pos == 1)
                                 {
                                     SchedulingChart schedulingChart = new SchedulingChart();
+
                                     SeatingandTableLayout layoutS = new SeatingandTableLayout(3, 5);
-                                    DateTime newDate = schedulingChart.SelectDate();
+                                    // DateTime newDate = schedulingChart.SelectDate();
+
 
                                     DateTime newTime = layoutS.GetReservationTime();
 
                                     DateTime newReservationDateTime = new DateTime(
-                                        newDate.Year,
-                                        newDate.Month,
-                                        newDate.Day,
+                                        reservation.ReservationDateTime.Year,
+                                        reservation.ReservationDateTime.Month,
+                                        reservation.ReservationDateTime.Day,
                                         newTime.Hour,
                                         newTime.Minute,
                                         0
@@ -134,6 +136,7 @@ public class ReservationInfo
                                 }
                                 else if (choosing.pos == 2)
                                 {
+
                                     reservationLogic.RemoveReservation(reservation.ReservationId);
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine(
@@ -143,6 +146,7 @@ public class ReservationInfo
                                     Thread.Sleep(2000);
                                     reservationLogic.ReloadData();
                                     Menu.Start();
+
                                 }
                             }
                         }
