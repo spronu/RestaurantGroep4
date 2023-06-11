@@ -1,7 +1,7 @@
 public class AccountInfo : MenuLogic
 {
     public AccountInfo(List<String> Elements, int pos) : base(Elements, pos) { }
-    private static AccountsLogic accountsLogic_info = new AccountsLogic();
+    private static AccountsLogic _accountsLogic_info = new AccountsLogic();
 
     public string returnedOption = "";
     public override void Logics(string title)
@@ -91,22 +91,22 @@ public class AccountInfo : MenuLogic
         string dynamic_adjusting1 = "====================================";
         string dynamic_adjusting2 = "|        Account informatie        |";
         string dynamic_adjusting3 = "====================================";
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_adjusting1.Length / 2)) + "}", dynamic_adjusting1));
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_adjusting2.Length / 2)) + "}", dynamic_adjusting2));
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_adjusting3.Length / 2)) + "}", dynamic_adjusting3));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_adjusting1.Length / 2)) + "}", dynamic_adjusting1));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_adjusting2.Length / 2)) + "}", dynamic_adjusting2));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_adjusting3.Length / 2)) + "}", dynamic_adjusting3));
         
         string dynamic_account = $" AccountID: {AccountsLogic.CurrentAccount.Id}";
         string dynamic_naam = $" Volledige naam: {AccountsLogic.CurrentAccount.FullName}";
         string dynamic_email = $" Email: {AccountsLogic.CurrentAccount.EmailAddress}";
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_account.Length / 2)) + "}", dynamic_account));
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_naam.Length / 2)) + "}", dynamic_naam));
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_email.Length / 2)) + "}", dynamic_email));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_account.Length / 2)) + "}", dynamic_account));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_naam.Length / 2)) + "}", dynamic_naam));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_email.Length / 2)) + "}", dynamic_email));
 
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_adjusting3.Length / 2)) + "}", dynamic_adjusting3));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_adjusting3.Length / 2)) + "}", dynamic_adjusting3));
         Console.ResetColor();
         Console.WriteLine();
         string dynamic_return = "Klik op een knop om terug te keren";
-        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2)+ (dynamic_return.Length / 2)) + "}", dynamic_return));
+        Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_return.Length / 2)) + "}", dynamic_return));
 
         Console.ReadKey();
         Main();
@@ -115,8 +115,16 @@ public class AccountInfo : MenuLogic
     public static void Change_AccName()
     {
         Console.WriteLine("Voer uw nieuwe naam in");
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("Terugkeren? Typ 'T' in de terminal.");
+        Console.ResetColor();
         string newName = Console.ReadLine();
-        accountsLogic_info.ChangeFullName(AccountsLogic.CurrentAccount.Id, newName);
+        if (newName.ToUpper() == "T")
+        {
+            Main();
+        }
+    
+        _accountsLogic_info.ChangeFullName(AccountsLogic.CurrentAccount.Id, newName);
         AccountsLogic.CurrentAccount.FullName = newName;
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine($"Uw naam is succesvol veranderd naar {newName}");
@@ -129,15 +137,18 @@ public class AccountInfo : MenuLogic
     public static void Change_AccPW()
     {
         Console.WriteLine("Voer uw oude wachtwoord in");
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("Terugkeren? Druk op de 'esc' knop.");
+        Console.ResetColor();
+
         string oldPassword = "";
         ConsoleKeyInfo old_key;
         do
         {
             old_key = Console.ReadKey(true);
-            // if(ConsoleKey.Escape == old_key.Key){
-            //     // key_pw = Console.ReadKey(false);
-            //     break;
-            // }
+            if(ConsoleKey.Escape == old_key.Key){
+                Main();
+            }
             if (old_key.Key != ConsoleKey.Backspace && old_key.Key != ConsoleKey.Enter)
             {
                 oldPassword += old_key.KeyChar;
@@ -162,6 +173,9 @@ public class AccountInfo : MenuLogic
             do
             {
                 key = Console.ReadKey(true);
+                if(ConsoleKey.Escape == key.Key){
+                    Main();
+                }
                 if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
                 {
                     newPassword += key.KeyChar;
@@ -183,7 +197,11 @@ public class AccountInfo : MenuLogic
             ConsoleKeyInfo key2;
             do
             {
+                
                 key2 = Console.ReadKey(true);
+                if(ConsoleKey.Escape == key2.Key){
+                    Main();
+                }
                 if (key2.Key != ConsoleKey.Backspace && key2.Key != ConsoleKey.Enter)
                 {
                     newPassword2 += key2.KeyChar;
@@ -202,7 +220,7 @@ public class AccountInfo : MenuLogic
             if (newPassword == newPassword2)
             {
                 string hashespw = AccountsLogic.EncryptPassword(newPassword);
-                accountsLogic_info.ChangePassword(AccountsLogic.CurrentAccount.Id, hashespw);
+                _accountsLogic_info.ChangePassword(AccountsLogic.CurrentAccount.Id, hashespw);
                 AccountsLogic.CurrentAccount.Password = hashespw;
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine($"Uw wachtwoord is veranderd");
@@ -224,12 +242,9 @@ public class AccountInfo : MenuLogic
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Uw oude wachtwoord is niet correct.");
-            // Console.WriteLine("Klik op een knop om terug te keren");
+            Console.WriteLine("Uw oude wachtwoord is niet correct. U wordt teruggestuurd naar het menu.");
             Console.ResetColor();
-            Thread.Sleep(1000);
-            // return;
-            // Console.ReadKey();
+            Thread.Sleep(2000);
             Main();
         }  
     }
@@ -238,23 +253,33 @@ public class AccountInfo : MenuLogic
     {
         AccountsLogic accountslogic2 = new AccountsLogic();
         Console.WriteLine("Voer uw nieuwe email-adres in");
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("Terugkeren? Typ 'T' in de terminal.");
+        Console.ResetColor();
         string newEmail = Console.ReadLine();
         newEmail = newEmail.Trim();
+        if (newEmail.ToUpper() == "T")
+        {
+            Main();
+        }
         while (!UserSignUp.IsValidEmailAdress(newEmail) || accountslogic2.CheckEmail(newEmail)){
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Dit email adres bestaat al of is niet geldig");
-            Thread.Sleep(1000);
+            Console.WriteLine("Dit email adres bestaat al of is niet geldig. U wordt teruggestuurd naar het menu.");
+            Thread.Sleep(2000);
             Console.ResetColor();
-            // newEmail = Console.ReadLine();
-            // newEmail = newEmail.Trim();
             Main();
         }
         Console.WriteLine("Voer uw nieuwe email-adres nogmaals in");
         string newEmail2 = Console.ReadLine();
         newEmail2 = newEmail2.Trim();
+        if (newEmail2.ToUpper() == "T")
+        {
+            Main();
+        }
+
         if (newEmail.ToLower() == newEmail2.ToLower())
         {
-            accountsLogic_info.ChangeEmail(AccountsLogic.CurrentAccount.Id, newEmail);
+            _accountsLogic_info.ChangeEmail(AccountsLogic.CurrentAccount.Id, newEmail);
             AccountsLogic.CurrentAccount.EmailAddress = newEmail;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine($"Uw email-adres is veranderd naar {newEmail}");
@@ -266,11 +291,13 @@ public class AccountInfo : MenuLogic
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("De email-adressen komen niet overeen");
-            Console.WriteLine("Klik op een knop om terug te keren");
+            Console.WriteLine("De email-adressen komen niet overeen. U wordt teruggestuurd naar het menu.");
+            Thread.Sleep(2000);
             Console.ResetColor();
-            Console.ReadKey();
             Main();
+            // Console.WriteLine("Klik op een knop om terug te keren");
+            // Console.ResetColor();
+            // Console.ReadKey();
         }
     }
 }

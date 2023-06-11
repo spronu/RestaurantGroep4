@@ -10,7 +10,7 @@ public class MenuLogic
         this.Elements = Elements;
         pos = pos;
     }
-        public MenuLogic(List<String> Elements)
+    public MenuLogic(List<String> Elements)
     {
         this.Elements = Elements;
         pos = 0;
@@ -59,4 +59,38 @@ public class MenuLogic
         return str;
     }
 
+    public static List<string> ShowingMenuOptions()
+    {
+        List<String> items = new List<String>();
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == false)
+        {
+            items.Add("Welkom " + AccountsLogic.CurrentAccount.FullName);
+            items.Add("Start reservering");
+            items.Add("Bekijk menukaart");
+            items.Add("Bekijk reservering info");
+            items.Add("Bekijk account info");
+            items.Add("Informatie over Restaurant");
+            items.Add("Uitloggen");
+            items.Add("Afsluiten");
+        }
+        else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
+        {
+            items.Add("Welkom " + AccountsLogic.CurrentAccount.FullName);
+            items.Add("Bekijk menukaart");
+            items.Add("Beheercentrum");
+            items.Add("Uitloggen");
+            items.Add("Afsluiten");
+        }
+        else
+        {
+            items.Add("Niet ingelogd");
+            items.Add("Start reservering");
+            items.Add("Log in");
+            items.Add("Registreer");
+            items.Add("Bekijk menukaart");
+            items.Add("Informatie over Restaurant");
+            items.Add("Afsluiten");
+        }
+        return items;
+    }
 }
