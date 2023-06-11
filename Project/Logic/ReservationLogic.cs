@@ -57,17 +57,17 @@ public class ReservationLogic : ILogic<ReservationModel>
         );
     }
 
-    public void AddReservation(int tableId, int numberOfPeople, DateTime reservationDateTime)
+    public ReservationModel AddReservation(int id, string fullName, int tableId, int numberOfPeople, DateTime reservationDateTime)
     {
         ReservationModel reservation = new ReservationModel(
-            AccountsLogic.CurrentAccount.Id,
-            AccountsLogic.CurrentAccount.FullName,
+            id,
+            fullName,
             tableId,
             numberOfPeople,
             reservationDateTime
         );
         UpdateList(reservation);
-        CorrectInputCheck.ShowMenu(reservation);
+        return reservation;
     }
 
     public void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)

@@ -723,11 +723,31 @@ namespace ProjectTest
             Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
         }
 
-        // [TestMethod]
-        // public void AddReservation_Test()
-        // {
+        [TestMethod]
+        public void AddReservation_Test()
+        {
+            int tableId = 2;
+            int numberOfPeople = 4;
+            DateTime reservationDateTime = new DateTime(9999, 6, 11, 18, 0, 0);
 
-        // }
+
+            ReservationLogic reservationLogic = new ReservationLogic();
+
+            reservationLogic.AddReservation(999, "yahya-test", tableId, numberOfPeople, reservationDateTime);
+
+            var reservations = reservationLogic.GetAll();
+            Assert.IsTrue(reservations.Count > 0, "Reservation was added");
+
+            var addedReservation = reservations[0];
+            Assert.AreEqual(tableId, addedReservation.TableId, "Table ID matches");
+            Assert.AreEqual(numberOfPeople, addedReservation.NumberOfPeople, "Number of people matches");
+            Assert.AreEqual(reservationDateTime, addedReservation.ReservationDateTime, "Reservation date and time match");
+
+            reservationLogic.RemoveReservation(addedReservation.AccountId);
+
+            reservations = reservationLogic.GetAll();
+            Assert.IsTrue(reservations.Count == 0, "Reservation was removed");
+        }
 
         [TestMethod]
         public void UpdateReservationJson_Test()
