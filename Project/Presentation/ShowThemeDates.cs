@@ -1,7 +1,7 @@
 public static class ShowThemeDates{
     public static void Showthemes(){
         Console.Clear();
-        Dictionary<string, string>couple = MakeDateList.reciveInfo();
+        Dictionary<string, string>couple = MakeDateListLogic.reciveInfo();
         foreach (KeyValuePair<string, string> numbers in couple)
                 {
                     string key = numbers.Key;
