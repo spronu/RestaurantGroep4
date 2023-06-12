@@ -233,11 +233,14 @@ public class SeatingandTableLayout
 
                         if (pathCheck == "ordering")
                         {
-                            reservationlogics.AddReservation(
+                            var reservations = reservationlogics.AddReservation(
+                                AccountsLogic.CurrentAccount.Id,
+                                AccountsLogic.CurrentAccount.FullName,
                                 selectedTable.TableId,
                                 desiredCapacity,
                                 reservationDateTime
                             );
+                            CorrectInputCheck.ShowMenu(reservations);
 
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Yellow;

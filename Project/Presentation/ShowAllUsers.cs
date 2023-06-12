@@ -58,7 +58,6 @@ public class ShowAllUsers{
                 var lastdigit = all_accounts.Count - 1;
                 if(select_index == lastdigit){
                     Menu.Start();
-                    // break;
                 }
                 else{
                     select = true;
@@ -66,7 +65,6 @@ public class ShowAllUsers{
             }
             else if (key.Key == ConsoleKey.Escape){
                 Menu.Start();
-                // break;
             }
             if (select){
                 int num = 3;
@@ -76,10 +74,8 @@ public class ShowAllUsers{
                     Console.WriteLine("Kies een optie");
                     Console.WriteLine("====================================");
 
-                    // option_index = 0;
                     Console.ForegroundColor = option_index == 0 ? ConsoleColor.Black : ConsoleColor.DarkGreen;
                     Console.BackgroundColor = option_index == 0 ? ConsoleColor.DarkGreen : ConsoleColor.Black;
-                    // Console.OutputEncoding = System.Text.Encoding.UTF8;
                     Console.WriteLine("- Verander wachtwoord");
                     Console.ResetColor();
 
@@ -115,18 +111,12 @@ public class ShowAllUsers{
                             {
                                 key_pw = Console.ReadKey(true);
                                 if(ConsoleKey.Escape == key_pw.Key){
-                                    // key_pw = Console.ReadKey(false);
                                     select = false;
                                     select_bool = false;
-                                    Menu.Start();
-                                    // break;
+                                    Show();
                                 }
                                 if (key_pw.Key != ConsoleKey.Backspace && key_pw.Key != ConsoleKey.Enter)
                                 {
-                                    // if(key_pw.Key == ConsoleKey.Escape){
-                                    //     select = false;
-                                    //     select_bool = false;
-                                    // }
                                     newPassword += key_pw.KeyChar;
                                     Console.Write("*");
                                 }
@@ -147,6 +137,7 @@ public class ShowAllUsers{
                             Console.WriteLine("|     Wachtwoord is veranderd!     |");
                             Console.WriteLine("====================================");
                             Console.ResetColor();
+                            _accountsLogic_Users.ReloadData();
                             Thread.Sleep(1000);
                             select = false;
                             select_bool = false;
@@ -164,10 +155,9 @@ public class ShowAllUsers{
                                 Console.WriteLine("|      Account is verwijderd!      |");
                                 Console.WriteLine("====================================");
                                 Console.ResetColor();
+                                _accountsLogic_Users.ReloadData();
                                 Thread.Sleep(1000);
                                 Menu.Start();
-                                // select = false;
-                                // select_bool = false;
                             }
                             else if(deleting == "N"){
                                 select = false;
@@ -178,10 +168,6 @@ public class ShowAllUsers{
                             select = false;
                             select_bool = false;
                         }
-                        // else if (enter_key.Key == ConsoleKey.Escape){
-                        //     select = false;
-                        //     select_bool = false;
-                        // }
                         option_index = 0;
                     }
                     else if(enter_key.Key == ConsoleKey.Escape){

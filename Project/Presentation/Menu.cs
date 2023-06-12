@@ -17,37 +17,7 @@ static class Menu
                                                                                                                                                                                                                   
 ";
         Console.WriteLine(title);
-        List<String> items = new List<String>();
-        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == false)
-        {
-            items.Add("Welkom " + AccountsLogic.CurrentAccount.FullName);
-            items.Add("Start reservering");
-            items.Add("Bekijk menukaart");
-            items.Add("Bekijk reservering info");
-            items.Add("Bekijk account info");
-            items.Add("Informatie over Restaurant");
-            items.Add("Uitloggen");
-            items.Add("Afsluiten");
-        }
-        else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
-        {
-            items.Add("Welkom " + AccountsLogic.CurrentAccount.FullName);
-            items.Add("Bekijk menukaart");
-            items.Add("Beheercentrum");
-            items.Add("Uitloggen");
-            items.Add("Afsluiten");
-        }
-        else
-        {
-            items.Add("Niet ingelogd");
-            items.Add("Start reservering");
-            items.Add("Log in");
-            items.Add("Registreer");
-            items.Add("Bekijk menukaart");
-            items.Add("Informatie over Restaurant");
-            items.Add("Afsluiten");
-        }
-        MainMenu menu = new MainMenu(items, 0);
+        MainMenu menu = new MainMenu(MenuLogic.ShowingMenuOptions(), 0);
         menu.Logics(title);
     }
 }
