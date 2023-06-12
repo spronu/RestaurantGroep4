@@ -1,5 +1,6 @@
 public class AdminMenu : MenuLogic
 {
+    private static ReservationLogic reservationLogic = new ReservationLogic();
     public string returnedOption = "";
 
     public AdminMenu(List<String> Elements, int pos) : base(Elements, pos) { }
@@ -10,6 +11,7 @@ public class AdminMenu : MenuLogic
         PrintOptions(pos, title);
         while (selecting)
         {
+            PrintOptions(pos, title);
             ConsoleKeyInfo input = Console.ReadKey(true);
             Selection(input, title);
 
@@ -44,8 +46,14 @@ public class AdminMenu : MenuLogic
                 }
                 else if (pos == 5)
                 {
-                    Console.WriteLine("Nog niet gemaakt");
-                    selecting = false;
+                    AdminsInfo adminsInfo = new AdminsInfo();
+
+                    while (!adminsInfo.currentStatus)
+                    {
+                    adminsInfo.ShowReservationInfo();
+                    }
+                    break;
+                    // selecting = false;
                 }
                 else if (pos == 6)
                 {
