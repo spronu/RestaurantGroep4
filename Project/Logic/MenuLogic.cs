@@ -40,24 +40,18 @@ public class MenuLogic
 
     public void PrintOptions(int pos, string title)
     {
-        Console.Clear();
-        Console.WriteLine(title);
-        foreach (string str in Elements)
-        {
-            Console.WriteLine(Mark(str, pos));
-            Console.ResetColor();
-        }
+        OptionPrint.FullyPrint(title, Elements, pos);
     }
 
-    public string Mark(string str, int pos)
-    {
-        if (Elements[pos] == str)
-        {
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-        }
-        return str;
-    }
+    // public string Mark(string str, int pos)
+    // {
+    //     if (Elements[pos] == str)
+    //     {
+    //         Console.BackgroundColor = ConsoleColor.White;
+    //         Console.ForegroundColor = ConsoleColor.Black;
+    //     }
+    //     return str;
+    // }
 
     public static List<string> ShowingMenuOptions()
     {
