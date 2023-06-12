@@ -2,16 +2,16 @@
   {
     "reservationId": "8c28b880-cc7d-430c-89dd-9a4791d1e28e",
     "orderItemIDs": [
-      1,
-      2,
-      2,
-      21
+      7,
+      14,
+      9,
+      24
     ],
-    "totalPrice": 25.9,
+    "totalPrice": 5.95,
     "accountId": 4,
     "fullName": "Test",
-    "tableId": 10,
-    "reservationDateTime": "2023-06-11T19:00:00",
-    "numberOfPeople": 3
+    "tableId": 9,
+    "reservationDateTime": "2023-06-11T19:30:00",
+    "numberOfPeople": 4
   }
 ]

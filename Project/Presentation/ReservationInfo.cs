@@ -74,6 +74,7 @@ public class ReservationInfo
                             $"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}"
                         );
                         elements.Add("Verwijder reservering");
+                        elements.Add("Voeg gerecht toe");
                         int gCount = 1;
                         foreach (var id in reservation.OrderItemIDs)
                         {
@@ -81,6 +82,8 @@ public class ReservationInfo
                             elements.Add($"Gerecht {gCount}: {reservationLogic.GetDishNameById(id)}");
                             gCount += 1;
                         }
+                        elements.Add("Terug");
+
 
 
 
@@ -151,10 +154,19 @@ public class ReservationInfo
                                     Menu.Start();
 
                                 }
+                                else if (choosing.pos == 3)
+                                {
+                                    ChangeResCheck.ShowMenu(reservation);
+                                    break;
+                                }
+                                else if (choosing.pos == elements.Count() - 1)
+                                {
+                                    currently = false;
+                                }
                                 else
                                 {
-                                    Console.WriteLine("nee");
-                                    Thread.Sleep(2000);
+                                    // reservation.OrderItemIDs = new List<int>{3, 4, 5};
+                                    reservationLogic.changeDish(reservation, choosing.pos);
                                     break;
                                 }
 

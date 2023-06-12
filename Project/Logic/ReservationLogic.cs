@@ -151,4 +151,45 @@ public class ReservationLogic : ILogic<ReservationModel>
 
         ReloadData();
     }
+    public void changeDish(ReservationModel reservation, int pos)
+    {
+
+        List<string> elements = new List<string>();
+        elements.Add("Verander gerecht");
+        elements.Add("Verwijder gerecht");
+
+        MenuLogic choosing = new MenuLogic(elements);
+
+        choosing.PrintOptions(0, "kies een optie: \n");
+        bool currently = true;
+        while (currently)
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
+            choosing.Selection(input, "kies een optie: \n");
+
+            if (input.Key == ConsoleKey.Enter)
+            {
+                if (choosing.pos == 0)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    UpdateReservationJson(reservation.OrderItemIDs, reservation.TotalPrice, reservation);
+                    ReloadData();
+                    bool removeCheck = ChangeResCheck.ShowMenu(reservation);
+                    currently = false;
+                }
+                else if (choosing.pos == 1)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    UpdateReservationJson(reservation.OrderItemIDs, reservation.TotalPrice, reservation);
+                    ReloadData();
+                    Console.WriteLine("Gerecht verwijderd.");
+                    Thread.Sleep(2000);
+                    currently = false;
+                }
+            }
+        }
+
+
+
+    }
 }
