@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
-static class MakeDateList
+static class MakeDateListLogic
 {
     public static Dictionary<string, string> reciveInfo()
     {
