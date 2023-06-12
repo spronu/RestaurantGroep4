@@ -1,8 +1,5 @@
 public class AdminMenu : MenuLogic
 {
-    private static ReservationLogic reservationLogic = new ReservationLogic();
-    public string returnedOption = "";
-
     public AdminMenu(List<String> Elements, int pos) : base(Elements, pos) { }
 
     public override void Logics(string title)
