@@ -2,16 +2,6 @@ public class ReservationLogic : ILogic<ReservationModel>
 {
     private List<ReservationModel> _reservations;
 
-    public static ReservationModel? CurrentReservation { get; private set; }
-
-    // public static int[,] tableSizes2 = new int[3, 5];
-    // private SeatingandTableLogic StLogic = new SeatingandTableLogic(tableSizes2);
-
-    public ReservationLogic(List<ReservationModel> reservations = null)
-    {
-        _reservations = reservations ?? ReservationsAccess.LoadAll();
-    }
-
     public ReservationLogic()
     {
         _reservations = ReservationsAccess.LoadAll();
