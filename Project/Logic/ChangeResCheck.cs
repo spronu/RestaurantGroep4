@@ -37,7 +37,7 @@ static class ChangeResCheck
                     notFound = false;
 
                     // Update the JSON immediately after an order is made.
-                    reservationlogics.UpdateReservationJson(orderItemIDs, totalPrice, reservation);
+                    reservationlogics.UpdateReservationJson(orderItemIDs, reservation);
                 }
             }
             if (notFound && option != "x")

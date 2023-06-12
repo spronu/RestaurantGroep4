@@ -54,12 +54,27 @@ public class ReservationLogic : ILogic<ReservationModel>
         return reservation;
     }
 
-    public void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
+    public void UpdateReservationJson(List<int> orderItemIDs, ReservationModel reservation)
     {
         GetAll();
         ReloadData();
         reservation.OrderItemIDs = orderItemIDs;
-        reservation.TotalPrice = totalPrice;
+
+        double newtotalPrice = 0.0;
+
+        foreach (var item in reservation.OrderItemIDs)
+        {
+            List<MenuItems> ListmenuItems = MenuRecive.getdata();
+            foreach (var item2 in ListmenuItems)
+            {
+                if (item == Convert.ToInt32(item2.id))
+                {
+                    newtotalPrice += Convert.ToDouble(item2.price);
+                }
+            }
+        }
+
+        reservation.TotalPrice = newtotalPrice;
 
         UpdateList(reservation);
     }
@@ -156,7 +171,7 @@ public class ReservationLogic : ILogic<ReservationModel>
                 if (choosing.pos == 0)
                 {
                     reservation.OrderItemIDs.RemoveAt(pos - 4);
-                    UpdateReservationJson(reservation.OrderItemIDs, reservation.TotalPrice, reservation);
+                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
                     ReloadData();
                     bool removeCheck = ChangeResCheck.ShowMenu(reservation);
                     currently = false;
@@ -164,7 +179,7 @@ public class ReservationLogic : ILogic<ReservationModel>
                 else if (choosing.pos == 1)
                 {
                     reservation.OrderItemIDs.RemoveAt(pos - 4);
-                    UpdateReservationJson(reservation.OrderItemIDs, reservation.TotalPrice, reservation);
+                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
                     ReloadData();
                     Console.WriteLine("Gerecht verwijderd.");
                     Thread.Sleep(2000);

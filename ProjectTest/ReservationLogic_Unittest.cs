@@ -179,10 +179,10 @@ namespace ProjectTest
             _reservationLogic.UpdateList(_reservationModel);
 
             List<int> orderItemIDs = new List<int> { 1, 2, 3 };
-            double totalPrice = 100.00;
+            double totalPrice = 21.45;
 
 
-            _reservationLogic.UpdateReservationJson(orderItemIDs, totalPrice, _reservationModel);
+            _reservationLogic.UpdateReservationJson(orderItemIDs, _reservationModel);
 
 
             List<ReservationModel> result = _reservationLogic.GetAll();
