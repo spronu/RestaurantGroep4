@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-static class CorrectInputCheck
+static class AddFoodItemToOrderLogic
 {
 
     static ReservationLogic reservationlogics = new ReservationLogic();
