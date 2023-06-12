@@ -256,7 +256,6 @@ public class SeatingandTableLayout
                             Console.ResetColor();
                             Console.WriteLine();
                             Thread.Sleep(1500);
-                            ReservationModel reservation = new ReservationModel();
                             Menu.Start();
                         }
                         else
