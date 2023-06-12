@@ -37,7 +37,5 @@ public class ReservationModel
         ReservationDateTime = reservationDateTime;
     }
 
-    public ReservationModel()
-    {
-    }
+    public ReservationModel(){ }
 }
