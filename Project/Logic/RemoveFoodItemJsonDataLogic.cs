@@ -1,4 +1,4 @@
-public class RemoveFoodItemJsonData{
+public class RemoveFoodItemJsonDataLogic{
     public static (List<MenuItems>, string ) RemoveChosenItems(){
         List<MenuItems> ListmenuItems = MenuRecive.getdata();
         (List<int> Removenumbers, string jsonName) = removeItem.removeItemList();

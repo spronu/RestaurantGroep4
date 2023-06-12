@@ -240,7 +240,7 @@ public class SeatingandTableLayout
                                 desiredCapacity,
                                 reservationDateTime
                             );
-                            CorrectInputCheck.ShowMenu(reservations);
+                            AddFoodItemToOrderLogic.ShowMenu(reservations);
 
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Yellow;
