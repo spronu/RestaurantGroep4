@@ -35,6 +35,7 @@ public class ReservationModel
         TableId = tableId;
         NumberOfPeople = numberOfPeople;
         ReservationDateTime = reservationDateTime;
+        OrderItemIDs = new List<int>();
     }
 
     public ReservationModel(){ }
