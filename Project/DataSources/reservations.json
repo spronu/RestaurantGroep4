@@ -1,17 +1,1 @@
-[
-  {
-    "reservationId": "8c28b880-cc7d-430c-89dd-9a4791d1e28e",
-    "orderItemIDs": [
-      1,
-      2,
-      2,
-      21
-    ],
-    "totalPrice": 25.9,
-    "accountId": 4,
-    "fullName": "Test",
-    "tableId": 10,
-    "reservationDateTime": "2023-06-11T19:00:00",
-    "numberOfPeople": 3
-  }
-]
+[]
