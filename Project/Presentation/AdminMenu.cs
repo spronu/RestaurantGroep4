@@ -52,7 +52,6 @@ public class AdminMenu : MenuLogic
                     {
                     adminsInfo.ShowReservationInfo();
                     }
-                    break;
                     // selecting = false;
                 }
                 else if (pos == 6)
