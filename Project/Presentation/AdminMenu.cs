@@ -1,7 +1,5 @@
 public class AdminMenu : MenuLogic
 {
-    public string returnedOption = "";
-
     public AdminMenu(List<String> Elements, int pos) : base(Elements, pos) { }
 
     public override void Logics(string title)
@@ -10,6 +8,7 @@ public class AdminMenu : MenuLogic
         PrintOptions(pos, title);
         while (selecting)
         {
+            PrintOptions(pos, title);
             ConsoleKeyInfo input = Console.ReadKey(true);
             Selection(input, title);
 
@@ -44,8 +43,13 @@ public class AdminMenu : MenuLogic
                 }
                 else if (pos == 5)
                 {
-                    Console.WriteLine("Nog niet gemaakt");
-                    selecting = false;
+                    AdminsInfo adminsInfo = new AdminsInfo();
+
+                    while (!adminsInfo.currentStatus)
+                    {
+                    adminsInfo.ShowReservationInfo();
+                    }
+                    // selecting = false;
                 }
                 else if (pos == 6)
                 {
