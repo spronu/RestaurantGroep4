@@ -90,39 +90,16 @@ namespace ProjectTest
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
 
-            var admin_expectedPassword = AccountsLogic.EncryptPassword("PW123");
-
             //Aanmaken
             AccountsLogic _accountsLogic = new AccountsLogic();
-            AccountModel acc_model_admin = new AccountModel(-100, "Ali_admin@gmail.com", admin_expectedPassword, "Ali_admin", true);
-            _accountsLogic.UpdateList(acc_model_admin);
-
             AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, expectedFullName, false);
             _accountsLogic.UpdateList(acc_model);
 
             //Testen
-            AccountModel result_admin = _accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123");
-
-            Assert.IsNotNull(result_admin);
-            Assert.IsNotNull(_accountsLogic.GetById(-100));
-            Assert.AreEqual(-100, result_admin.Id);
-            Assert.AreEqual("Ali_admin@gmail.com", result_admin.EmailAddress);
-            Assert.AreEqual(admin_expectedPassword, result_admin.Password);
-            Assert.AreEqual("Ali_admin", result_admin.FullName);
-            Assert.AreEqual(true, result_admin.Admin);
-
-            Assert.AreNotEqual(-99, result_admin.Id);
-            Assert.AreNotEqual(-101, result_admin.Id);
-            Assert.AreNotEqual("Ali-admin123@gmail.com", result_admin.EmailAddress);
-            Assert.AreNotEqual("password!", result_admin.Password);
-            Assert.AreNotEqual("Ali2_admin", result_admin.FullName);
-            Assert.AreNotEqual(false, result_admin.Admin);
-
-
             AccountModel result = _accountsLogic.CheckLogin(expectedEmail, "Password");
             var result_users = _accountsLogic.GetAll();
 
-            Assert.AreEqual(2, result_users.Count);
+            Assert.AreEqual(1, result_users.Count);
             Assert.IsNotNull(result);
             Assert.IsNotNull(_accountsLogic.GetById(expectedId));
             Assert.AreEqual(expectedId, result.Id);
@@ -139,22 +116,66 @@ namespace ProjectTest
             Assert.AreNotEqual(true, result.Admin);
 
             //Login mislukt
-            AccountModel result_failed_admin = _accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW12345!");
             AccountModel result_failed = _accountsLogic.CheckLogin(expectedEmail, "Password123");
 
-            Assert.IsNull(result_failed_admin);
             Assert.IsNull(result_failed);
 
             //Verwijderen & Testen
-            _accountsLogic.DeleteAccount(-100);
             _accountsLogic.DeleteAccount(expectedId);
             _accountsLogic.ReloadData();
 
-            Assert.AreNotEqual(2, result_users.Count);
+            Assert.AreNotEqual(1, result_users.Count);
             Assert.AreEqual(0, result_users.Count);
-            Assert.IsNull(_accountsLogic.GetById(-100));
             Assert.IsNull(_accountsLogic.GetById(expectedId));
-            Assert.IsNull(_accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123"));
+            Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
+        }
+
+        [TestMethod]
+        public void CheckLogin_Test_Admin()
+        {
+            var expectedId = -100;
+            var expectedEmail = "Ali-Admin@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedFullName = "Ali-Admin";
+
+            //Aanmaken
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, expectedFullName, true);
+            _accountsLogic.UpdateList(acc_model);
+
+            //Testen
+            AccountModel result = _accountsLogic.CheckLogin(expectedEmail, "Password");
+            var result_users = _accountsLogic.GetAll();
+
+            Assert.AreEqual(1, result_users.Count);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(_accountsLogic.GetById(expectedId));
+            Assert.AreEqual(expectedId, result.Id);
+            Assert.AreEqual(expectedEmail, result.EmailAddress);
+            Assert.AreEqual(expectedPassword, result.Password);
+            Assert.AreEqual(expectedFullName, result.FullName);
+            Assert.AreEqual(true, result.Admin);
+
+            Assert.AreNotEqual(0, result_users.Count);
+            Assert.AreNotEqual(-99, result.Id);
+            Assert.AreNotEqual(-101, result.Id);
+            Assert.AreNotEqual("Ali-admin123@gmail.com", result.EmailAddress);
+            Assert.AreNotEqual("password!", result.Password);
+            Assert.AreNotEqual("Ali2_admin", result.FullName);
+            Assert.AreNotEqual(false, result.Admin);
+
+            //Login mislukt
+            AccountModel result_failed = _accountsLogic.CheckLogin(expectedEmail, "Password123!");
+
+            Assert.IsNull(result_failed);
+
+            //Verwijderen & Testen
+            _accountsLogic.DeleteAccount(expectedId);
+            _accountsLogic.ReloadData();
+
+            Assert.AreNotEqual(1, result_users.Count);
+            Assert.AreEqual(0, result_users.Count);
+            Assert.IsNull(_accountsLogic.GetById(expectedId));
             Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
         }
 
@@ -207,34 +228,14 @@ namespace ProjectTest
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
 
-            var admin_expectedPassword = AccountsLogic.EncryptPassword("PW123");
-
             //Aanmaken
             AccountsLogic _accountsLogic = new AccountsLogic();
-            AccountModel acc_model = new AccountModel(-100, "Ali_admin@gmail.com", admin_expectedPassword, "Ali_admin", true);
-            _accountsLogic.UpdateList(acc_model);
+            _accountsLogic.SignUp("Setup@gmail.com", "Setup", "Setup-user", true);
             _accountsLogic.SignUp(expectedEmail, "Password", expectedFullName);
 
             //Testen
-            var result_admin = _accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123");
-            var result_users = _accountsLogic.GetAll();
-
-            Assert.IsNotNull(result_admin);
-            Assert.AreEqual(-100, result_admin.Id);
-            Assert.AreEqual("Ali_admin@gmail.com", result_admin.EmailAddress);
-            Assert.AreEqual(admin_expectedPassword, result_admin.Password);
-            Assert.AreEqual("Ali_admin", result_admin.FullName);
-            Assert.AreEqual(true, result_admin.Admin);
-
-            Assert.AreNotEqual(-99, result_admin.Id);
-            Assert.AreNotEqual(-101, result_admin.Id);
-            Assert.AreNotEqual("Ali-admin123@gmail.com", result_admin.EmailAddress);
-            Assert.AreNotEqual("password!", result_admin.Password);
-            Assert.AreNotEqual("Ali2_admin", result_admin.FullName);
-            Assert.AreNotEqual(false, result_admin.Admin);
-
-
             var result = _accountsLogic.CheckLogin(expectedEmail, "Password");
+            var result_users = _accountsLogic.GetAll();
 
             Assert.AreEqual(2, result_users.Count);
             Assert.IsNotNull(result);
@@ -261,7 +262,49 @@ namespace ProjectTest
             Assert.AreEqual(0, result_users.Count);
             Assert.IsNull(_accountsLogic.GetById(-100));
             Assert.IsNull(_accountsLogic.GetById(expectedId));
-            Assert.IsNull(_accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123"));
+            Assert.IsNull(_accountsLogic.CheckLogin("Setup@gmail.com", "Setup"));
+            Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
+        }
+
+        [TestMethod]
+        public void SignUp_Test_Admin()
+        {
+            var expectedId = -100;
+            var expectedEmail = "Ali-Admin@gmail.com";
+            var expectedPassword = AccountsLogic.EncryptPassword("Password");
+            var expectedFullName = "Ali-Admin";
+
+            //Aanmaken
+            AccountsLogic _accountsLogic = new AccountsLogic();
+            _accountsLogic.SignUp(expectedEmail, "Password", expectedFullName, true);
+
+            //Testen
+            var result = _accountsLogic.CheckLogin(expectedEmail, "Password");
+            var result_users = _accountsLogic.GetAll();
+
+            Assert.AreEqual(1, result_users.Count);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedId, result.Id);
+            Assert.AreEqual(expectedEmail, result.EmailAddress);
+            Assert.AreEqual(expectedPassword, result.Password);
+            Assert.AreEqual(expectedFullName, result.FullName);
+            Assert.AreEqual(true, result.Admin);
+
+            Assert.AreNotEqual(0, result_users.Count);
+            Assert.AreNotEqual(-99, result.Id);
+            Assert.AreNotEqual(-101, result.Id);
+            Assert.AreNotEqual("Ali-admin123@gmail.com", result.EmailAddress);
+            Assert.AreNotEqual("password!", result.Password);
+            Assert.AreNotEqual("Ali2_admin", result.FullName);
+            Assert.AreNotEqual(false, result.Admin);
+
+            //Verwijderen & Testen
+            _accountsLogic.DeleteAccount(expectedId);
+            _accountsLogic.ReloadData();
+
+            Assert.AreNotEqual(1, result_users.Count);
+            Assert.AreEqual(0, result_users.Count);
+            Assert.IsNull(_accountsLogic.GetById(expectedId));
             Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
         }
 
@@ -279,10 +322,8 @@ namespace ProjectTest
             //Testen
             var result_users = _accountsLogic.GetAll();
 
-            // Assert.AreEqual(1, result_users.Count);
             Assert.AreEqual(expectedPassword, acc_model.Password);
             
-            // Assert.AreNotEqual(0, result_users.Count);
             Assert.AreNotEqual("<588+9PF8OZmpTyxvYS6KiI5bECaHjk4ZOYsjvTjsIho=", acc_model.Password);
 
             //Verwijderen & Testen
