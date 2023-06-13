@@ -23,7 +23,7 @@ public class AdminMenu : MenuLogic
                 }
                 else if (pos == 1)
                 {
-                    AddNewFoodItem.givenames();
+                    AddNewFoodItemLogic.givenames();
                     selecting = false;
                 }
                 else if (pos == 2)
