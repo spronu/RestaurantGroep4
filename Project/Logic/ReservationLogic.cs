@@ -125,7 +125,7 @@ public class ReservationLogic : ILogic<ReservationModel>
     public void ChangeReservationDateTime(Guid id, DateTime newDateTime)
     {
         // Find the reservation with the given ID
-        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
+        ReservationModel? reservation = _reservations.Find(r => r.ReservationId == id);
 
         if (reservation != null)
         {
@@ -150,7 +150,7 @@ public class ReservationLogic : ILogic<ReservationModel>
 
         ReloadData();
     }
-    public void changeDish(ReservationModel reservation, int pos)
+    public void ChangeDish(ReservationModel reservation, int pos)
     {
 
         List<string> elements = new List<string>();
@@ -181,8 +181,7 @@ public class ReservationLogic : ILogic<ReservationModel>
                     reservation.OrderItemIDs.RemoveAt(pos - 4);
                     UpdateReservationJson(reservation.OrderItemIDs, reservation);
                     ReloadData();
-                    Console.WriteLine("Gerecht verwijderd.");
-                    Thread.Sleep(2000);
+                    removeItem.RemovalMessage();
                     currently = false;
                 }
             }
