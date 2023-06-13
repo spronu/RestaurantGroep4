@@ -95,7 +95,7 @@ static class AddNewFoodItem
         }
         else
         {
-            Console.WriteLine("Invalid input or unable to parse.");
+            Console.WriteLine("Ongeldige invoer of niet in staat te parsen.");
         }
     }
 }
