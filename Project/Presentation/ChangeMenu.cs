@@ -105,7 +105,7 @@ public class ChangeMenu
                 else
                 {
                     // reservation.OrderItemIDs = new List<int>{3, 4, 5};
-                    reservationLogic.changeDish(reservation, choosing.pos);
+                    reservationLogic.ChangeDish(reservation, choosing.pos);
                     break;
                 }
             }
