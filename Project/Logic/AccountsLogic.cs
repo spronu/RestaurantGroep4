@@ -63,13 +63,17 @@ public class AccountsLogic : ILogic<AccountModel>
         return _accounts.Exists(i => i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
     }
 
-    public void SignUp(string email, string password, string fullName)
+    public void SignUp(string email, string password, string fullName, bool forUnittest = false)
     {
         // Creating a new account model
         AccountModel SignUp_acc = new AccountModel();
 
         // Setting the properties of the account model
-        if(_accounts.Count == 0){
+        if(forUnittest){
+            SignUp_acc.Id = -100;
+            SignUp_acc.Admin = true;
+        }
+        else if(_accounts.Count == 0){
             SignUp_acc.Id = 1;
             SignUp_acc.Admin = true;
         }
@@ -82,13 +86,6 @@ public class AccountsLogic : ILogic<AccountModel>
         SignUp_acc.EmailAddress = email;
         SignUp_acc.Password = EncryptPassword(password);
         SignUp_acc.FullName = fullName;
-
-        if(_accounts.Count == 0){
-            SignUp_acc.Admin = true;
-        }
-        else{
-            SignUp_acc.Admin = false;
-        }
 
         UpdateList(SignUp_acc);
     }

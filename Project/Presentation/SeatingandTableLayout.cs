@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System.Globalization;
 
 public class SeatingandTableLayout
@@ -240,7 +239,7 @@ public class SeatingandTableLayout
                                 desiredCapacity,
                                 reservationDateTime
                             );
-                            CorrectInputCheck.ShowMenu(reservations);
+                            AddFoodItemToOrderLogic.ShowMenu(reservations);
 
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -256,7 +255,6 @@ public class SeatingandTableLayout
                             Console.ResetColor();
                             Console.WriteLine();
                             Thread.Sleep(1500);
-                            ReservationModel reservation = new ReservationModel();
                             Menu.Start();
                         }
                         else

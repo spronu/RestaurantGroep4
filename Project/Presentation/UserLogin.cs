@@ -14,16 +14,11 @@ static class UserLogin
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         Console.WriteLine("Email of Wachtwoord vergeten? Typ 'F' in de terminal.");
-        Console.WriteLine("Terugkeren? Typ 'T' in de terminal.");
         Console.ResetColor();
         Console.WriteLine();
         Console.WriteLine("Voer uw email adres in");
         string email = Console.ReadLine();
         email = email.Trim();
-        if(email.ToUpper() == "T")
-        {
-            Menu.Start();
-        }
 
         if(email == "F" || email == "f"){
             Console.ForegroundColor = ConsoleColor.DarkYellow;
