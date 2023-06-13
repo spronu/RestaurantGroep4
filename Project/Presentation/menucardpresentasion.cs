@@ -3,8 +3,9 @@ public class menucardpresentasion
     public static bool menucard(bool showcourse, List<MenuItems> ListmenuItems)
     {
 
-
+        ThemeItem activetheme = GiveThemeLogic.GetActiveTheme();
         Tuple<string, string> all = MenuDataLogic.MakeOptionsLists(showcourse);
+        
         // Console.WriteLine(all);
         string option = all.Item1;
         string course = all.Item2;
@@ -20,7 +21,7 @@ public class menucardpresentasion
             foreach (MenuItems item in ListmenuItems)
             {
                 // Console.WriteLine(item["course"].ToString());
-                if (item.category.ToString() == option && item.course.ToString() == course)
+                if (item.category.ToString() == option && item.course.ToString() == course && item.thema == activetheme.Theme.ToString())
                 {
                     Console.WriteLine($"{item.id.ToString()}. {item.name.ToString().PadRight(30)}   :  ${item.price.ToString().PadRight(10)}  [ {item.course.ToString()} ]");
                 }

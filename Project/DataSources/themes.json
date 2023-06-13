@@ -8,68 +8,68 @@
     {
       "Id": 2,
       "Name": "Chinees",
-      "Json": "Chinees.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 3,
       "Name": "Mexicaans",
-      "Json": "Mexicaans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 4,
       "Name": "Amerikaans",
-      "Json": "Amerikaans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 5,
       "Name": "Indiase",
-      "Json": "Indiase.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 6,
       "Name": "Italiaans",
-      "Json": "Italiaans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 7,
       "Name": "Turks",
-      "Json": "Turks.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 8,
       "Name": "Frans",
-      "Json": "Frans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 9,
       "Name": "Somalisch",
-      "Json": "Somalisch.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 10,
       "Name": "Zuid-Afrikaans",
-      "Json": "Zuid-Afrikaans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     {
       "Id": 11,
       "Name": "Spaans",
-      "Json": "Spaans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     },
     
     {
       "Id": 12,
       "Name": "Japans",
-      "Json": "Japans.json",
+      "Json": "MenuItems.json",
       "aantal": 24
     }
 
