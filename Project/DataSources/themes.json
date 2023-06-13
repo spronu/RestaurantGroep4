@@ -2,75 +2,63 @@
     {
       "Id": 1,
       "Name": "Geen",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 2,
       "Name": "Chinees",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 3,
       "Name": "Mexicaans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 4,
       "Name": "Amerikaans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 5,
       "Name": "Indiase",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 6,
       "Name": "Italiaans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 7,
       "Name": "Turks",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 8,
       "Name": "Frans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 9,
       "Name": "Somalisch",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 10,
       "Name": "Zuid-Afrikaans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     {
       "Id": 11,
       "Name": "Spaans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     },
     
     {
       "Id": 12,
       "Name": "Japans",
-      "Json": "MenuItems.json",
-      "aantal": 24
+      "Json": "MenuItems.json"
     }
 
   ]
