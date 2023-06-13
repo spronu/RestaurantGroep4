@@ -1,8 +1,7 @@
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-
-public static class GiveThemeLogic{
-    public static ThemeItem GetActiveTheme(){
+public static class GiveThemeLogic
+{
+    public static ThemeItem GetActiveTheme()
+    {
         // Deserialize the JSON array into a list of objects
         List<ThemeItem> themes = GetThemes.gethemeNumber();
 
@@ -13,6 +12,7 @@ public static class GiveThemeLogic{
         ThemeItem selectedTheme = themes.Find(t => t.Month == currentMonth);
         return selectedTheme;
     }
+
     public static string NumbersLogic()
     {
         ThemeItem selectedTheme = GetActiveTheme();
@@ -24,21 +24,22 @@ public static class GiveThemeLogic{
         else
         {
             return "DataSources/Geen";
-
         }
     }
-    public static string Givename(string Active){
+
+    public static string Givename(string Active)
+    {
         // Console.WriteLine(Active);
         List<MenuTheme> themelist = GetThemes.getheme();
         foreach (MenuTheme item in themelist)
         {
             // Console.WriteLine(item["Name"].ToString());
 
-            if(Active == item.Name.ToString() ){
+            if (Active == item.Name.ToString())
+            {
                 return ($"DataSources/{item.Json.ToString()}");
             }
         }
         return $"DataSources/MenuItems.json";
-
     }
 }
