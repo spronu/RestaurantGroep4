@@ -9,9 +9,8 @@ static class MakeDateList
 {
     public static Dictionary<string, string> reciveInfo()
     {
-        string json = GetThemes.gethemeNumber();
         // Deserialize the JSON array into a list of objects
-        List<ThemeItem> themes = JsonConvert.DeserializeObject<List<ThemeItem>>(json);
+        List<ThemeItem> themes = GetThemes.gethemeNumber();
         
         string[] months = { "januari ", "februari ", "maart ", "april ", "mei ", "juni ", "juli", "augustus ", "september ", "oktober ", "november ", "december" };
         int monthCounter = 0;
