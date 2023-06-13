@@ -13,11 +13,14 @@ static class AddFoodItemToOrderLogic
         while (done)
         {
             // Call the menu display method at the beginning of the loop
-            menucardpresentasion.menucard(true, jsonArray);
+            bool checking = menucardpresentasion.menucard(true, jsonArray);
 
-
-            string option = OrderFoodPresentasion.AskOrder();
-
+            string option = "x";
+            if (checking)
+            {
+                option = OrderFoodPresentasion.AskOrder();
+            }
+            
             bool notFound = true;
             foreach (var item in jsonArray)
             {
