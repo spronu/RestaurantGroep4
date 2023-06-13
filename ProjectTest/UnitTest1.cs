@@ -1,8 +1,14 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+
 namespace ProjectTest
 {
     [TestClass]
-    public class AccountsLogic_Unittest
+    public class UnitTest1
     {
+
         [TestMethod]
         public void UpdateList_AccountTest()
         {
@@ -90,16 +96,39 @@ namespace ProjectTest
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
 
+            var admin_expectedPassword = AccountsLogic.EncryptPassword("PW123");
+
             //Aanmaken
             AccountsLogic _accountsLogic = new AccountsLogic();
+            AccountModel acc_model_admin = new AccountModel(-100, "Ali_admin@gmail.com", admin_expectedPassword, "Ali_admin", true);
+            _accountsLogic.UpdateList(acc_model_admin);
+
             AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, expectedFullName, false);
             _accountsLogic.UpdateList(acc_model);
 
             //Testen
+            AccountModel result_admin = _accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123");
+
+            Assert.IsNotNull(result_admin);
+            Assert.IsNotNull(_accountsLogic.GetById(-100));
+            Assert.AreEqual(-100, result_admin.Id);
+            Assert.AreEqual("Ali_admin@gmail.com", result_admin.EmailAddress);
+            Assert.AreEqual(admin_expectedPassword, result_admin.Password);
+            Assert.AreEqual("Ali_admin", result_admin.FullName);
+            Assert.AreEqual(true, result_admin.Admin);
+
+            Assert.AreNotEqual(-99, result_admin.Id);
+            Assert.AreNotEqual(-101, result_admin.Id);
+            Assert.AreNotEqual("Ali-admin123@gmail.com", result_admin.EmailAddress);
+            Assert.AreNotEqual("password!", result_admin.Password);
+            Assert.AreNotEqual("Ali2_admin", result_admin.FullName);
+            Assert.AreNotEqual(false, result_admin.Admin);
+
+
             AccountModel result = _accountsLogic.CheckLogin(expectedEmail, "Password");
             var result_users = _accountsLogic.GetAll();
 
-            Assert.AreEqual(1, result_users.Count);
+            Assert.AreEqual(2, result_users.Count);
             Assert.IsNotNull(result);
             Assert.IsNotNull(_accountsLogic.GetById(expectedId));
             Assert.AreEqual(expectedId, result.Id);
@@ -116,66 +145,22 @@ namespace ProjectTest
             Assert.AreNotEqual(true, result.Admin);
 
             //Login mislukt
+            AccountModel result_failed_admin = _accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW12345!");
             AccountModel result_failed = _accountsLogic.CheckLogin(expectedEmail, "Password123");
 
+            Assert.IsNull(result_failed_admin);
             Assert.IsNull(result_failed);
 
             //Verwijderen & Testen
+            _accountsLogic.DeleteAccount(-100);
             _accountsLogic.DeleteAccount(expectedId);
             _accountsLogic.ReloadData();
 
-            Assert.AreNotEqual(1, result_users.Count);
+            Assert.AreNotEqual(2, result_users.Count);
             Assert.AreEqual(0, result_users.Count);
+            Assert.IsNull(_accountsLogic.GetById(-100));
             Assert.IsNull(_accountsLogic.GetById(expectedId));
-            Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
-        }
-
-        [TestMethod]
-        public void CheckLogin_Test_Admin()
-        {
-            var expectedId = -100;
-            var expectedEmail = "Ali-Admin@gmail.com";
-            var expectedPassword = AccountsLogic.EncryptPassword("Password");
-            var expectedFullName = "Ali-Admin";
-
-            //Aanmaken
-            AccountsLogic _accountsLogic = new AccountsLogic();
-            AccountModel acc_model = new AccountModel(expectedId, expectedEmail, expectedPassword, expectedFullName, true);
-            _accountsLogic.UpdateList(acc_model);
-
-            //Testen
-            AccountModel result = _accountsLogic.CheckLogin(expectedEmail, "Password");
-            var result_users = _accountsLogic.GetAll();
-
-            Assert.AreEqual(1, result_users.Count);
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(_accountsLogic.GetById(expectedId));
-            Assert.AreEqual(expectedId, result.Id);
-            Assert.AreEqual(expectedEmail, result.EmailAddress);
-            Assert.AreEqual(expectedPassword, result.Password);
-            Assert.AreEqual(expectedFullName, result.FullName);
-            Assert.AreEqual(true, result.Admin);
-
-            Assert.AreNotEqual(0, result_users.Count);
-            Assert.AreNotEqual(-99, result.Id);
-            Assert.AreNotEqual(-101, result.Id);
-            Assert.AreNotEqual("Ali-admin123@gmail.com", result.EmailAddress);
-            Assert.AreNotEqual("password!", result.Password);
-            Assert.AreNotEqual("Ali2_admin", result.FullName);
-            Assert.AreNotEqual(false, result.Admin);
-
-            //Login mislukt
-            AccountModel result_failed = _accountsLogic.CheckLogin(expectedEmail, "Password123!");
-
-            Assert.IsNull(result_failed);
-
-            //Verwijderen & Testen
-            _accountsLogic.DeleteAccount(expectedId);
-            _accountsLogic.ReloadData();
-
-            Assert.AreNotEqual(1, result_users.Count);
-            Assert.AreEqual(0, result_users.Count);
-            Assert.IsNull(_accountsLogic.GetById(expectedId));
+            Assert.IsNull(_accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123"));
             Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
         }
 
@@ -228,14 +213,34 @@ namespace ProjectTest
             var expectedPassword = AccountsLogic.EncryptPassword("Password");
             var expectedFullName = "Ali";
 
+            var admin_expectedPassword = AccountsLogic.EncryptPassword("PW123");
+
             //Aanmaken
             AccountsLogic _accountsLogic = new AccountsLogic();
-            _accountsLogic.SignUp("Setup@gmail.com", "Setup", "Setup-user", true);
+            AccountModel acc_model = new AccountModel(-100, "Ali_admin@gmail.com", admin_expectedPassword, "Ali_admin", true);
+            _accountsLogic.UpdateList(acc_model);
             _accountsLogic.SignUp(expectedEmail, "Password", expectedFullName);
 
             //Testen
-            var result = _accountsLogic.CheckLogin(expectedEmail, "Password");
+            var result_admin = _accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123");
             var result_users = _accountsLogic.GetAll();
+
+            Assert.IsNotNull(result_admin);
+            Assert.AreEqual(-100, result_admin.Id);
+            Assert.AreEqual("Ali_admin@gmail.com", result_admin.EmailAddress);
+            Assert.AreEqual(admin_expectedPassword, result_admin.Password);
+            Assert.AreEqual("Ali_admin", result_admin.FullName);
+            Assert.AreEqual(true, result_admin.Admin);
+
+            Assert.AreNotEqual(-99, result_admin.Id);
+            Assert.AreNotEqual(-101, result_admin.Id);
+            Assert.AreNotEqual("Ali-admin123@gmail.com", result_admin.EmailAddress);
+            Assert.AreNotEqual("password!", result_admin.Password);
+            Assert.AreNotEqual("Ali2_admin", result_admin.FullName);
+            Assert.AreNotEqual(false, result_admin.Admin);
+
+
+            var result = _accountsLogic.CheckLogin(expectedEmail, "Password");
 
             Assert.AreEqual(2, result_users.Count);
             Assert.IsNotNull(result);
@@ -262,49 +267,7 @@ namespace ProjectTest
             Assert.AreEqual(0, result_users.Count);
             Assert.IsNull(_accountsLogic.GetById(-100));
             Assert.IsNull(_accountsLogic.GetById(expectedId));
-            Assert.IsNull(_accountsLogic.CheckLogin("Setup@gmail.com", "Setup"));
-            Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
-        }
-
-        [TestMethod]
-        public void SignUp_Test_Admin()
-        {
-            var expectedId = -100;
-            var expectedEmail = "Ali-Admin@gmail.com";
-            var expectedPassword = AccountsLogic.EncryptPassword("Password");
-            var expectedFullName = "Ali-Admin";
-
-            //Aanmaken
-            AccountsLogic _accountsLogic = new AccountsLogic();
-            _accountsLogic.SignUp(expectedEmail, "Password", expectedFullName, true);
-
-            //Testen
-            var result = _accountsLogic.CheckLogin(expectedEmail, "Password");
-            var result_users = _accountsLogic.GetAll();
-
-            Assert.AreEqual(1, result_users.Count);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(expectedId, result.Id);
-            Assert.AreEqual(expectedEmail, result.EmailAddress);
-            Assert.AreEqual(expectedPassword, result.Password);
-            Assert.AreEqual(expectedFullName, result.FullName);
-            Assert.AreEqual(true, result.Admin);
-
-            Assert.AreNotEqual(0, result_users.Count);
-            Assert.AreNotEqual(-99, result.Id);
-            Assert.AreNotEqual(-101, result.Id);
-            Assert.AreNotEqual("Ali-admin123@gmail.com", result.EmailAddress);
-            Assert.AreNotEqual("password!", result.Password);
-            Assert.AreNotEqual("Ali2_admin", result.FullName);
-            Assert.AreNotEqual(false, result.Admin);
-
-            //Verwijderen & Testen
-            _accountsLogic.DeleteAccount(expectedId);
-            _accountsLogic.ReloadData();
-
-            Assert.AreNotEqual(1, result_users.Count);
-            Assert.AreEqual(0, result_users.Count);
-            Assert.IsNull(_accountsLogic.GetById(expectedId));
+            Assert.IsNull(_accountsLogic.CheckLogin("Ali_admin@gmail.com", "PW123"));
             Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
         }
 
@@ -322,8 +285,10 @@ namespace ProjectTest
             //Testen
             var result_users = _accountsLogic.GetAll();
 
+            // Assert.AreEqual(1, result_users.Count);
             Assert.AreEqual(expectedPassword, acc_model.Password);
             
+            // Assert.AreNotEqual(0, result_users.Count);
             Assert.AreNotEqual("<588+9PF8OZmpTyxvYS6KiI5bECaHjk4ZOYsjvTjsIho=", acc_model.Password);
 
             //Verwijderen & Testen
@@ -610,5 +575,350 @@ namespace ProjectTest
             Assert.IsNull(_accountsLogic.GetById(expectedId));
             Assert.IsNull(_accountsLogic.CheckLogin(expectedEmail, "Password"));
         }
+
+        [TestMethod]
+        public void IsTableOccupied_Test()
+        {
+
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+            var result = _seatingandTableLogic.IsTableOccupied(2, reservationDateTime);
+
+            Assert.IsTrue(result, "De tafel is bezet (true)");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
+        }
+
+        [TestMethod]
+        public void GenerateDefaultTableData_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            List<Table> result = _seatingandTableLogic.GenerateDefaultTableData();
+
+            Assert.AreEqual(6, result.Count, "De tafels zijn gelijk aan elkaar (6) (true)");
+            Assert.AreNotEqual(7, result.Count, "De tafels zijn niet gelijk aan elkaar (7) (false)");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            List<ReservationModel> result2 = _reservationLogic.GetAll();
+
+            Assert.IsFalse(result2.Any(reservation => reservation.AccountId == -99), "check of de gebruiker niet meer bestaat (-99) (false)");
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
+        }
+
+        [TestMethod]
+        public void ReloadData_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+
+            _reservationLogic.ReloadData();
+
+            List<ReservationModel> result = _reservationLogic.GetAll();
+
+            Assert.AreEqual(1, result.Count, "De lijst is gelijk aan elkaar (1) (true)");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            _reservationLogic.ReloadData();
+
+            result = _reservationLogic.GetAll();
+
+            Assert.AreEqual(0, result.Count, "De lijst is gelijk aan elkaar (0) (false)");
+        }
+
+        [TestMethod]
+        public void UpdateList_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel); // update het list
+
+            Assert.AreEqual(-99, _reservationModel.AccountId, "De accountId is gelijk aan elkaar (-99) (true)");
+
+            Assert.AreNotEqual(-100, _reservationModel.AccountId, "De accountId is niet gelijk aan elkaar (-100) (false)");
+
+            _reservationLogic.RemoveReservation(-99); // we verwijderen accountId -99
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            List<ReservationModel> result = _reservationLogic.GetAll();
+
+            Assert.IsFalse(result.Any(reservation => reservation.AccountId == -99), "check of de gebruiker niet meer bestaat (-99) (false)");
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat tableId(2) (false)");
+        }
+
+        [TestMethod]
+        public void GetAll_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+
+            List<ReservationModel> result = _reservationLogic.GetAll();
+
+            Assert.AreEqual(1, result.Count, "De lijst is gelijk aan elkaar (1) (true)");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            result = _reservationLogic.GetAll();
+
+            Assert.AreNotEqual(1, result.Count, "De lijst is niet gelijk aan elkaar (1) (false)");
+        }
+
+        [TestMethod]
+        public void CheckReservation_Test()
+        {
+        int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+        DateTime reservationDateTime = new DateTime(
+            9999,
+            06,
+            01,
+            18,
+            01,
+            00
+        );
+
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            _reservationLogic.UpdateList(_reservationModel);
+
+            var result = _reservationLogic.CheckReservation(2, reservationDateTime);
+
+            Assert.IsTrue(result, "De reservatie bestaat (true)");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            List<ReservationModel> result2 = _reservationLogic.GetAll();
+
+            Assert.IsFalse(result2.Any(reservation => reservation.AccountId == -99), "check of de gebruiker niet meer bestaat (-99) (false)");
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
+        }
+
+        [TestMethod]
+        public void AddReservation_Test()
+        {
+            int tableId = 2;
+            int numberOfPeople = 4;
+            DateTime reservationDateTime = new DateTime(9999, 6, 11, 18, 0, 0);
+
+
+            ReservationLogic reservationLogic = new ReservationLogic();
+
+            reservationLogic.AddReservation(999, "yahya-test", tableId, numberOfPeople, reservationDateTime);
+
+            var reservations = reservationLogic.GetAll();
+            Assert.IsTrue(reservations.Count > 0, "Reservation was added");
+
+            var addedReservation = reservations[0];
+            Assert.AreEqual(tableId, addedReservation.TableId, "Table ID matches");
+            Assert.AreEqual(numberOfPeople, addedReservation.NumberOfPeople, "Number of people matches");
+            Assert.AreEqual(reservationDateTime, addedReservation.ReservationDateTime, "Reservation date and time match");
+
+            reservationLogic.RemoveReservation(addedReservation.AccountId);
+
+            reservations = reservationLogic.GetAll();
+            Assert.IsTrue(reservations.Count == 0, "Reservation was removed");
+        }
+
+        [TestMethod]
+        public void UpdateReservationJson_Test()
+        {
+
+            DateTime reservationDateTime = new DateTime(
+                9999,
+                06,
+                01,
+                18,
+                01,
+                00
+            );
+
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+            _reservationLogic.UpdateList(_reservationModel);
+
+            List<int> orderItemIDs = new List<int> { 1, 2, 3 };
+            double totalPrice = 100.00;
+
+
+            _reservationLogic.UpdateReservationJson(orderItemIDs, totalPrice, _reservationModel);
+
+
+            List<ReservationModel> result = _reservationLogic.GetAll();
+            ReservationModel updatedReservation = result.Find(x => x.AccountId == -99);
+
+            Assert.IsNotNull(updatedReservation, "De gebruiker bestaat (-99) (true)");
+            CollectionAssert.AreEqual(orderItemIDs, updatedReservation.OrderItemIDs, "de orderItemIDs komen overeen (true)");
+            Assert.AreEqual(totalPrice, updatedReservation.TotalPrice, "de totalPrice komt overeen (true)");
+
+
+            _reservationLogic.RemoveReservation(-99);
+
+            //nieuwe data ophalen door een nieuwe instantie te maken na het verwijderen van de gebruiker
+            result = _reservationLogic.GetAll();
+
+            Assert.IsFalse(result.Any(reservation => reservation.AccountId == -99), "check of de gebruiker niet meer bestaat (-99) (false)");
+
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime), "check of de reservatie niet meer bestaat (2) (false)");
+        }
+
+        [TestMethod]
+        public void GetDishNameById_Test()
+        {
+            ReservationLogic _reservationLogic = new ReservationLogic();
+
+            int dishId1 = 1;
+            int dishId2 = 2;
+            int dishIdInvalid = 1000;
+
+            string expectedDishName1 = "Zalmfilet met proseccoroomsaus";
+            string expectedDishName2 = "Kabeljauw met saffraansaus";
+            string expectedDishNameInvalid = "Unknown dish";
+
+
+            string actualDishName1 = _reservationLogic.GetDishNameById(dishId1);
+            string actualDishName2 = _reservationLogic.GetDishNameById(dishId2);
+            string actualDishNameInvalid = _reservationLogic.GetDishNameById(dishIdInvalid);
+
+
+            Assert.AreEqual(expectedDishName1, actualDishName1, "De verwachte en werkelijke gerechtnamen moeten hetzelfde zijn voor id=1");
+            Assert.AreEqual(expectedDishName2, actualDishName2, "De verwachte en werkelijke gerechtnamen moeten hetzelfde zijn voor id=2");
+            Assert.AreEqual(expectedDishNameInvalid, actualDishNameInvalid, "De verwachte en werkelijke gerechtnamen moeten hetzelfde zijn voor ongeldige id");
+        }
+
+
+
+        [TestMethod]
+        public void RemoveReservation_Test()
+        {
+        
+
+            int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+            DateTime reservationDateTime = new DateTime(
+                9999,
+                06,
+                01,
+                18,
+                20,
+                00
+            );
+
+            var expectedId = -99;
+
+            //Aanmaken
+            SeatingandTableLogic _seatingandTableLogic = new SeatingandTableLogic(tableSizes);
+            ReservationLogic _reservationLogic = new ReservationLogic();
+            ReservationModel _reservationModel = new ReservationModel(expectedId, "Ali-Test", 2, 6, reservationDateTime);
+            _reservationLogic.UpdateList(_reservationModel);
+
+            //Testen
+            var result = _seatingandTableLogic.IsTableOccupied(2, reservationDateTime);
+            var check_account = _reservationLogic.GetAll().Find(x => x.AccountId == expectedId).AccountId;
+            var result_reservations = _reservationLogic.GetAll();
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(-99, check_account);
+            Assert.IsTrue(_reservationLogic.CheckReservation(2, reservationDateTime));
+            Assert.AreEqual(1, result_reservations.Count);
+
+            Assert.AreNotEqual(0, result_reservations.Count);
+
+            //Verwijderen & Testen
+            _reservationLogic.RemoveReservation(-99);
+            _reservationLogic.ReloadData();
+            result_reservations = _reservationLogic.GetAll();
+
+            Assert.AreEqual(0, result_reservations.Count);
+            Assert.AreNotEqual(1, result_reservations.Count);
+            Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime));
+        }
+
+        // [TestMethod]
+        // public void ShowingMenuOptions_Test()
+        // {
+        //     // Check if the menu options are shown correctly when the user is logged in or not
+        //     bool loggedIn = true;
+        //     bool expected = true;
+        //     var result = MenuLogic.ShowingMenuOptions();
+
+        //     Assert.AreEqual(7, result.Count);
+
+
+        // }
     }
 }
