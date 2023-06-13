@@ -1,22 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json.Linq;
-using System.Text.Json;
-
 public class ReservationLogic : ILogic<ReservationModel>
 {
     private List<ReservationModel> _reservations;
-
-    public static ReservationModel? CurrentReservation { get; private set; }
-
-    // public static int[,] tableSizes2 = new int[3, 5];
-    // private SeatingandTableLogic StLogic = new SeatingandTableLogic(tableSizes2);
-
-    public ReservationLogic(List<ReservationModel> reservations = null)
-    {
-        _reservations = reservations ?? ReservationsAccess.LoadAll();
-    }
 
     public ReservationLogic()
     {
@@ -70,12 +54,27 @@ public class ReservationLogic : ILogic<ReservationModel>
         return reservation;
     }
 
-    public void UpdateReservationJson(List<int> orderItemIDs, double totalPrice, ReservationModel reservation)
+    public void UpdateReservationJson(List<int> orderItemIDs, ReservationModel reservation)
     {
         GetAll();
         ReloadData();
         reservation.OrderItemIDs = orderItemIDs;
-        reservation.TotalPrice = totalPrice;
+
+        double newtotalPrice = 0.0;
+
+        foreach (var item in reservation.OrderItemIDs)
+        {
+            List<MenuItems> ListmenuItems = MenuRecive.getdata();
+            foreach (var item2 in ListmenuItems)
+            {
+                if (item == Convert.ToInt32(item2.id))
+                {
+                    newtotalPrice += Convert.ToDouble(item2.price);
+                }
+            }
+        }
+
+        reservation.TotalPrice = newtotalPrice;
 
         UpdateList(reservation);
     }
@@ -150,5 +149,46 @@ public class ReservationLogic : ILogic<ReservationModel>
         ReservationsAccess.WriteAll(_reservations);
 
         ReloadData();
+    }
+    public void changeDish(ReservationModel reservation, int pos)
+    {
+
+        List<string> elements = new List<string>();
+        elements.Add("Verander gerecht");
+        elements.Add("Verwijder gerecht");
+
+        MenuLogic choosing = new MenuLogic(elements);
+
+        choosing.PrintOptions(0, "kies een optie: \n");
+        bool currently = true;
+        while (currently)
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
+            choosing.Selection(input, "kies een optie: \n");
+
+            if (input.Key == ConsoleKey.Enter)
+            {
+                if (choosing.pos == 0)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
+                    ReloadData();
+                    bool removeCheck = ChangeResCheck.ShowMenu(reservation);
+                    currently = false;
+                }
+                else if (choosing.pos == 1)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
+                    ReloadData();
+                    Console.WriteLine("Gerecht verwijderd.");
+                    Thread.Sleep(2000);
+                    currently = false;
+                }
+            }
+        }
+
+
+
     }
 }

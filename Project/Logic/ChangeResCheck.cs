@@ -1,30 +1,27 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-
-static class CorrectInputCheck
+static class ChangeResCheck
 {
 
     static ReservationLogic reservationlogics = new ReservationLogic();
-    public static void ShowMenu(ReservationModel reservation)
+    public static bool ShowMenu(ReservationModel reservation)
     {
         List<MenuItems> jsonArray = MenuRecive.getdata();
         bool done = true;
         List<string> orderItems = new List<string>();
-        List<int> orderItemIDs = new List<int>();
+        List<int> orderItemIDs = reservation.OrderItemIDs;
         double totalPrice = 0.0;
 
         while (done)
         {
             // Call the menu display method at the beginning of the loop
-            menucardpresentasion.menucard(true, jsonArray);
+            bool checking = menucardpresentasion.menucard(true, jsonArray);
+
+            string option = "x";
+            if (checking)
+            {
+                option = OrderFoodPresentasion.AskOrder();
+            }
 
 
-            string option = OrderFoodPresentasion.AskOrder();
 
             bool notFound = true;
             foreach (var item in jsonArray)
@@ -40,7 +37,7 @@ static class CorrectInputCheck
                     notFound = false;
 
                     // Update the JSON immediately after an order is made.
-                    reservationlogics.UpdateReservationJson(orderItemIDs, totalPrice, reservation);
+                    reservationlogics.UpdateReservationJson(orderItemIDs, reservation);
                 }
             }
             if (notFound && option != "x")
@@ -65,10 +62,12 @@ static class CorrectInputCheck
 
                 // Finish the order if no more orders are to be made or the user doesn't want to continue ordering
                 done = false;
+                return false;
             }
         }
 
         OrderFoodPresentasion.Orderfinished();
+        return true;
     }
 
 }
