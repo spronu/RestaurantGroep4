@@ -156,7 +156,7 @@ public class SeatingandTableLayout
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("====================================");
-            Console.WriteLine("|          Seating Chart:          |");
+            Console.WriteLine("|      Zitplaatsenoverzicht:       |");
             Console.WriteLine("====================================");
             Console.ResetColor();
             Console.WriteLine();
