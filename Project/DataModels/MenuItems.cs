@@ -5,4 +5,6 @@ public class MenuItems
     public string course { get; set; }
     public string category { get; set; }
     public double price { get; set; }
+    public string thema { get; set; }
 }
+

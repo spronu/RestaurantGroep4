@@ -1,1 +1,764 @@
-[{"id":1,"name":"Zalmfilet met proseccoroomsaus","allergies":null,"course":"hoofdgerecht","category":"vis","price":5.95},{"id":2,"name":"Kabeljauw met saffraansaus","allergies":null,"course":"bijgerecht","category":"vis","price":7.5},{"id":3,"name":"Zalm uit de oven","allergies":null,"course":"hoofdgerecht","category":"vis","price":8.0},{"id":4,"name":"Kabeljauwfilet met mosselen","allergies":null,"course":"hoofdgerecht","category":"vis","price":9.95},{"id":5,"name":"Biefstuk met pepersaus","allergies":null,"course":"hoofdgerecht","category":"vlees","price":15.5},{"id":6,"name":"Kipfilet met champignonsaus","allergies":null,"course":"bijgerecht","category":"vlees","price":17.5},{"id":7,"name":"Varkenshaas met roomsaus","allergies":null,"course":"hoofdgerecht","category":"vlees","price":20.0},{"id":8,"name":"Rundscarpaccio","allergies":null,"course":"side","category":"vlees","price":22.5},{"id":9,"name":"Veganistische lasagne","allergies":null,"course":"side","category":"veganistisch","price":15.5},{"id":10,"name":"Veganistische burger","allergies":null,"course":"hoofdgerecht","category":"veganistisch","price":17.5},{"id":11,"name":"Veganistische curry","allergies":null,"course":"hoofdgerecht","category":"veganistisch","price":20.0},{"id":12,"name":"Veganistische salade","allergies":null,"course":"hoofdgerecht","category":"veganistisch","price":22.5},{"id":13,"name":"Vegetarische wraps","allergies":null,"course":"hoofdgerecht","category":"vegetarisch","price":15.5},{"id":14,"name":"Vegetarische quiche","allergies":null,"course":"hoofdgerecht","category":"vegetarisch","price":17.5},{"id":15,"name":"Pasta met tomaat-auberginesaus","allergies":null,"course":"hoofdgerecht","category":"vegetarisch","price":20.0},{"id":16,"name":"Kikkererwten met kerrie en rijst van Bonduelle","allergies":null,"course":"hoofdgerecht","category":"vegetarisch","price":22.5},{"id":17,"name":"pizza","allergies":null,"course":"main","category":"vis","price":8.9},{"id":18,"name":"Tester","allergies":null,"course":"hoofdgerecht","category":"vis","price":18.0},{"id":19,"name":"Testnieuw","allergies":null,"course":"hoofdgerecht","category":"vis","price":100.0}]
+[
+    {
+        "id": 1,
+        "name": "Zalmfilet met proseccoroomsaus",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 5.95,
+        "Thema": "Geen"
+    },
+    {
+        "id": 2,
+        "name": "Kabeljauw met saffraansaus",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 7.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 3,
+        "name": "Zalm uit de oven",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 8,
+        "Thema": "Geen"
+    },
+    {
+        "id": 4,
+        "name": "Kabeljauwfilet met mosselen",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 9.95,
+        "Thema": "Geen"
+    },
+    {
+        "id": 5,
+        "name": "Biefstuk met pepersaus",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 15.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 6,
+        "name": "Kipfilet met champignonsaus",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 17.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 7,
+        "name": "Varkenshaas met roomsaus",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 20.0,
+        "Thema": "Geen"
+    },
+    {
+        "id": 8,
+        "name": "Rundscarpaccio",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 22.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 9,
+        "name": "Veganistische lasagne",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 15.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 10,
+        "name": "Veganistische burger",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 17.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 11,
+        "name": "Veganistische curry",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 20.0,
+        "Thema": "Geen"
+    },
+    {
+        "id": 12,
+        "name": "Veganistische salade",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 22.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 13,
+        "name": "Vegetarische wraps",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 15.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 14,
+        "name": "Vegetarische quiche",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 17.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 15,
+        "name": "Pasta met tomaat-auberginesaus",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 20.0,
+        "Thema": "Geen"
+    },
+    {
+        "id": 16,
+        "name": "Kikkererwten met kerrie en rijst van Bonduelle",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 22.5,
+        "Thema": "Geen"
+    },
+    {
+        "id": 18,
+        "name": "Tester",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 18.0,
+        "Thema": "Geen"
+    },
+    {
+        "id": 19,
+        "name": "Testnieuw",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 100.0,
+        "Thema": "Geen"
+    },
+    {
+        "id": 1,
+        "name": "New England Clam Chowder",
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 8.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 2,
+        "name": "Grilled Salmon",
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 5.50,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 3,
+        "name": "Fish Tacos",
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 12.00,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 4,
+        "name": "Coleslaw",
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 7.50,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 5,
+        "name": "Cornbread",
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 9.80,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 6,
+        "name": "Sweet Potato Fries",
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 8.70,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 7,
+        "name": "BBQ Ribs",
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 5.80,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 8,
+        "name": "Cheeseburger",
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 6.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 9,
+        "name": "Fried Chicken",
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 8.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 10,
+        "name": "Coleslaw",
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 11,
+        "name": "Cornbread",
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 12,
+        "name": "Macaroni and Cheese",
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 13,
+        "name": "Vegan BBQ Pulled Jackfruit",
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 14,
+        "name": "Vegan Chili",
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 15,
+        "name": "Vegan Mushroom Burger",
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 16,
+        "name": "Sweet Potato Fries",
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 17,
+        "name": "Vegan Coleslaw",
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 18,
+        "name": "Vegan Cornbread",
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 19,
+        "name": "Vegetarische BBQ Pulled Jackfruit Sandwich",
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 20,
+        "name": "Vegetarische Black Bean Burger",
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 21,
+        "name": "Vegetarische Mac and Cheese",
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 22,
+        "name": "Sweet Potato Fries",
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 23,
+        "name": "Cornbread",
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 24,
+        "name": "Vegetarische Baked Beans",
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Amerikaans"
+    },
+    {
+        "id": 1,
+        "name": "Maraq Digir",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 8.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 2,
+        "name": "Canjeero",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 5.5,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 3,
+        "name": "Xawaash Kalluun",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 12.0,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 4,
+        "name": "Bisbaas",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 7.5,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 5,
+        "name": "Sabaayad",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 9.8,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 6,
+        "name": "Maraq Digaag",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 8.7,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 7,
+        "name": "Suqaar",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 5.8,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 8,
+        "name": "Canjeero Digaag",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 6.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 9,
+        "name": "Bariis Iskukaris",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 8.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 10,
+        "name": "Bur Somali",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 11,
+        "name": "Hilib Ari",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 12,
+        "name": "Bur Siddis",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 13,
+        "name": "Misir Wot",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 14,
+        "name": "Bamia",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 15,
+        "name": "Isku-dhex karis",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 16,
+        "name": "Kac Kac",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 17,
+        "name": "Dudube",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 18,
+        "name": "Sabaayad",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 19,
+        "name": "Isti'aanato",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 20,
+        "name": "Salad Maraq",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 21,
+        "name": "Cambuulo",
+        "allergies": null,
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 22,
+        "name": "Sabaayad",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 23,
+        "name": "Fah-fah",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 24,
+        "name": "Suugo Suqaar",
+        "allergies": null,
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Chinees"
+    },
+    {
+        "id": 1,
+        "name": "Bouillabaisse",
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 8.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 2,
+        "name": "Coquilles Saint-Jacques",
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 5.50,
+        "Thema": "Frans"
+    },
+    {
+        "id": 3,
+        "name": "Moules Frites",
+        "course": "hoofdgerecht",
+        "category": "vis",
+        "price": 12.00,
+        "Thema": "Frans"
+    },
+    {
+        "id": 4,
+        "name": "Ratatouille",
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 7.50,
+        "Thema": "Frans"
+    },
+    {
+        "id": 5,
+        "name": "Gratin Dauphinois",
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 9.80,
+        "Thema": "Frans"
+    },
+    {
+        "id": 6,
+        "name": "Salade Niçoise",
+        "course": "bijgerecht",
+        "category": "vis",
+        "price": 8.70,
+        "Thema": "Frans"
+    },
+    {
+        "id": 7,
+        "name": "Boeuf Bourguignon",
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 5.80,
+        "Thema": "Frans"
+    },
+    {
+        "id": 8,
+        "name": "Coq au Vin",
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 6.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 9,
+        "name": "Cassoulet",
+        "course": "hoofdgerecht",
+        "category": "vlees",
+        "price": 8.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 10,
+        "name": "Pommes Anna",
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 11,
+        "name": "Gratin de Macaroni",
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 12,
+        "name": "Ratatouille",
+        "course": "bijgerecht",
+        "category": "vlees",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 13,
+        "name": "Ratatouille",
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 14,
+        "name": "Vegan Quiche Lorraine",
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 15,
+        "name": "Curry met groenten en linzen",
+        "course": "hoofdgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 16,
+        "name": "Gratin Dauphinois",
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 17,
+        "name": "Ratatouille",
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 18,
+        "name": "Gegrilde groenten",
+        "course": "bijgerecht",
+        "category": "veganistisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 19,
+        "name": "Gegrilde groenten",
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 20,
+        "name": "Gevulde portobello's",
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 21,
+        "name": "Quiche met spinazie en feta",
+        "course": "hoofdgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 22,
+        "name": "Aardappelgratin",
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 23,
+        "name": "Ratatouille",
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    },
+    {
+        "id": 24,
+        "name": "Gegrilde asperges",
+        "course": "bijgerecht",
+        "category": "vegetarisch",
+        "price": 5.95,
+        "Thema": "Frans"
+    }
+]

@@ -6,12 +6,12 @@ static class removeItem
     {
 
         List<int> removeItems = new List<int>();
-        JArray jsonArray = GetThemes.getheme();
+        List<MenuTheme> jsonArray = GetThemes.getheme();
         // Display the options to the user
         Console.WriteLine("Kies een optie:");
         for (int i = 0; i < jsonArray.Count; i++)
         {
-            var menuItem = jsonArray[i].ToObject<MenuItem>();
+            var menuItem = jsonArray[i];
             Console.WriteLine($"{menuItem.Id}. {menuItem.Name}");
         }
 
@@ -20,8 +20,8 @@ static class removeItem
         int optionNumber = Convert.ToInt32(Console.ReadLine());
         
 
-        JToken jsonObject = jsonArray.FirstOrDefault(j => (int)j["Id"] == optionNumber);
-        string JsonName = jsonObject?["Json"]?.ToString();
+        var jsonObject = jsonArray.FirstOrDefault(j => (int)j.Id == optionNumber);
+        string JsonName = jsonObject?.Json?.ToString();
         bool done = true;
         List<MenuItems> ListmenuItems = MenuRecive.getdata(JsonName);
 
