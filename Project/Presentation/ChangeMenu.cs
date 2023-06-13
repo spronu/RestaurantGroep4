@@ -1,5 +1,6 @@
 public class ChangeMenu
 {
+    
     private static ReservationLogic reservationLogic = new ReservationLogic();
 
     public void ChangeReservation(ReservationModel reservation, int index)
@@ -105,11 +106,49 @@ public class ChangeMenu
                 else
                 {
                     // reservation.OrderItemIDs = new List<int>{3, 4, 5};
-                    reservationLogic.ChangeDish(reservation, choosing.pos);
+                    ChangeDish(reservation, choosing.pos);
                     break;
                 }
             }
         }
 
+    }
+    public void ChangeDish(ReservationModel reservation, int pos)
+    {
+
+        List<string> elements = new List<string>();
+        elements.Add("Verander gerecht");
+        elements.Add("Verwijder gerecht");
+
+        MenuLogic choosing = new MenuLogic(elements);
+
+        choosing.PrintOptions(0, "kies een optie: \n");
+        bool currently = true;
+        while (currently)
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
+            choosing.Selection(input, "kies een optie: \n");
+
+            if (input.Key == ConsoleKey.Enter)
+            {
+                if (choosing.pos == 0)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    reservationLogic.UpdateReservationJson(reservation.OrderItemIDs, reservation);
+                    reservationLogic.ReloadData();
+                    bool removeCheck = ChangeResCheck.ShowMenu(reservation);
+                    currently = false;
+                }
+                else if (choosing.pos == 1)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    reservationLogic.UpdateReservationJson(reservation.OrderItemIDs, reservation);
+                    reservationLogic.ReloadData();
+                    Console.WriteLine("Gerecht verwijderd.");
+                    Thread.Sleep(2000);
+                    currently = false;
+                }
+            }
+        }
     }
 }

@@ -68,9 +68,5 @@ static class removeItem
         return (removeItems, JsonName);
 
     }
-    public static void RemovalMessage()
-    {
-        Console.WriteLine("Gerecht verwijderd.");
-        Thread.Sleep(2000);
-    }
+
 }
