@@ -36,6 +36,12 @@ public class menucardpresentasion
         // Console.WriteLine(food["name"]); manier om de prijs te printen
         return false;
     }
+    
+    public static string GetNewoption(){
+        Console.WriteLine(" druk enter om iets anders te zien.");
+        string option = Console.ReadLine() ?? string.Empty;
+        return option;
+    }
 }
 
 

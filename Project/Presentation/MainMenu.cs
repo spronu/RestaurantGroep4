@@ -21,25 +21,7 @@ public class MainMenu : MenuLogic
                     }
                     else if (pos == 2)
                     {
-                        // menukaart met login
-                        bool coursecheck = true;
-                        bool done = true;
-                        string option = "";
-                        // done = menucardpresentasion.menucard();
-
-                        while(done){
-                            done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
-                            if(done){
-                            Console.WriteLine(" druk enter om iets anders te zien.");
-                            option = Console.ReadLine() ?? string.Empty;
-
-                            }
-                            coursecheck = false;
-                            // if (option == "return")
-                            // {
-                            //     done = false;
-                            // }
-                        }
+                        CallMenuShower.ShowMenuCard();
                         Menu.Start();
                     }
                     else if (pos == 3)
@@ -69,24 +51,7 @@ public class MainMenu : MenuLogic
                 {
                     if (pos == 1)
                     {
-                        bool coursecheck = true;
-                        bool done = true;
-                        string option = "";
-                        // done = menucardpresentasion.menucard();
-
-                        while(done){
-                            done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
-                            if(done){
-                            Console.WriteLine(" druk enter om iets anders te zien.");
-                            option = Console.ReadLine() ?? string.Empty;
-
-                            }
-                            coursecheck = false;
-                            // if (option == "return")
-                            // {
-                            //     done = false;
-                            // }
-                        }
+                        CallMenuShower.ShowMenuCard();
                         Menu.Start();
                     }
                     else if (pos == 2)
@@ -138,25 +103,7 @@ public class MainMenu : MenuLogic
                     }
                     else if (pos == 4)
                     {
-                        // show menu zonder login
-                        bool coursecheck = true;
-                        bool done = true;
-                        string option = "";
-                        // done = menucardpresentasion.menucard();
-
-                        while(done){
-                            done = menucardpresentasion.menucard(coursecheck, MenuRecive.getdata());
-                            if(done){
-                            Console.WriteLine(" druk enter om iets anders te zien.");
-                            option = Console.ReadLine() ?? string.Empty;
-
-                            }
-                            coursecheck = false;
-                            // if (option == "return")
-                            // {
-                            //     done = false;
-                            // }
-                        }
+                        CallMenuShower.ShowMenuCard();
                         Menu.Start();
                     }
                     else if (pos == 5)
