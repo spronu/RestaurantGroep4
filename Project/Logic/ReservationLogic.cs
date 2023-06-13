@@ -178,11 +178,6 @@ public class ReservationLogic : ILogic<ReservationModel>
                 }
                 else if (choosing.pos == 1)
                 {
-                    reservation.OrderItemIDs.RemoveAt(pos - 4);
-                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
-                    ReloadData();
-                    removeItem.RemovalMessage();
-                    currently = false;
                 }
             }
         }

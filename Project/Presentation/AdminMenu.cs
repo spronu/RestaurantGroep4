@@ -33,7 +33,7 @@ public class AdminMenu : MenuLogic
                 }
                 else if (pos == 3)
                 {
-                    WriteItems.WriteToJson();
+                    RemoveFoodItemJsonDataLogic.RemoveChosenItems();
                     selecting = false;
                 }
                 else if (pos == 4)
