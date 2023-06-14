@@ -48,7 +48,7 @@ static class MenuDataLogic
                     "welke type maaltijd wilt u? \n"
                 );
                 course = courselink[save];
-                if (course == "return")
+                if (course == "terug")
                 {
                     course = string.Empty;
                     courseoption = false;
@@ -63,7 +63,7 @@ static class MenuDataLogic
                 }
                 else
                 {
-                    if (course == "return")
+                    if (course == "terug")
                     {
                         course = string.Empty;
                         courseoption = false;
@@ -83,7 +83,7 @@ static class MenuDataLogic
                 if (allcatogories.Contains(option))
                 {
                     choise = false;
-                    if (option == "return")
+                    if (option == "terug")
                     {
                         courseoption = true;
                     }
