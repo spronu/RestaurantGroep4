@@ -364,36 +364,5 @@ namespace ProjectTest
             Assert.AreEqual(newNumberOfPeople, updatedReservation.NumberOfPeople, "Het aantal personen is gewijzigd");
             Assert.AreEqual(newReservationDateTime, updatedReservation.ReservationDateTime, "De reserveringsdatum en -tijd zijn gewijzigd");
         }
-
-        // [TestMethod]
-        // public void ChangeDish_Test()
-        // {
-        //     // Arrange
-        //     ReservationModel reservation = new ReservationModel();
-        //     int pos = 0;
-
-        //     // Mock the console output
-        //     var consoleOutput = new StringWriter();
-        //     Console.SetOut(consoleOutput);
-
-        //     // Simulate user input by setting the desired option
-        //     string simulatedInput = "1";
-        //     Console.SetIn(new StringReader(simulatedInput));
-
-        //     // Define the expected order item IDs after invoking changeDish
-        //     List<int> expectedOrderItemIDs = new List<int> { /* Add your expected order item IDs here */ };
-
-        //     // Act
-        //     _reservationLogic.ChangeDish(reservation, pos);
-
-        //     // Assert
-        //     // Add your assertions based on the expected changes in the reservation object
-        //     Assert.AreEqual(expectedOrderItemIDs, reservation.OrderItemIDs);
-        //     // ...
-        // }
-
-
     }
-
-
 }
