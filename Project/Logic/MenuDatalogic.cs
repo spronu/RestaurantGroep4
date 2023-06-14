@@ -23,8 +23,8 @@ static class MenuDataLogic
         Dictionary<int, string> catogorieslink = new Dictionary<int, string>();
         Dictionary<int, string> courselink = new Dictionary<int, string>();
 
-        allcatogories.Add("return");
-        allcourses.Add("return");
+        allcatogories.Add("terug");
+        allcourses.Add("terug");
         // maken van opties 1 tot eind linken aan keuze
         int i = 1;
         foreach (string item in allcourses)
