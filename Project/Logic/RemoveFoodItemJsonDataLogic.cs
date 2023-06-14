@@ -39,9 +39,9 @@ public class RemoveFoodItemJsonDataLogic
             if (option == "x")
             {
                 done = false;
+                Menu.Start();
             }
         }
-        RemoveFoodItemJsonDataPresentasion.succesvolRemoved();
         return (removeItems, JsonName);
     }
 
