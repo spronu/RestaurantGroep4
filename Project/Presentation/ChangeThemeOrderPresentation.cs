@@ -30,6 +30,6 @@ public static class ChangeThemeOrderPresentation
 
     public static void UpdateSucsesvol()
     {
-        Console.WriteLine("Thema sucsessvol aangepast.");
+        Console.WriteLine("Thema succesvol aangepast.");
     }
 }
