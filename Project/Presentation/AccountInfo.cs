@@ -27,7 +27,7 @@ public class AccountInfo : MenuLogic
 
                 else if (pos == 2)
                 {
-                    returnedOption = "Verander wachtwoord";
+                    returnedOption = "Verander Wachtwoord";
                     selecting = false;
                 }
                 else if (pos == 3)
@@ -48,7 +48,7 @@ public class AccountInfo : MenuLogic
     {   
         "Account Informatie",
         "Verander Naam",
-        "Verander wachtwoord",
+        "Verander Wachtwoord",
         "Verander Email-adres",
         "Terug"
     };
@@ -67,7 +67,7 @@ public class AccountInfo : MenuLogic
             Change_AccName();
         }
 
-        else if (accountInfo.returnedOption == "Verander wachtwoord")
+        else if (accountInfo.returnedOption == "Verander Wachtwoord")
         {
             Change_AccPW();
         }
@@ -89,7 +89,7 @@ public class AccountInfo : MenuLogic
         Console.ForegroundColor = ConsoleColor.DarkGreen;
 
         string dynamic_adjusting1 = "====================================";
-        string dynamic_adjusting2 = "|        Account informatie        |";
+        string dynamic_adjusting2 = "|        Account Informatie        |";
         string dynamic_adjusting3 = "====================================";
         Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_adjusting1.Length / 2)) + "}", dynamic_adjusting1));
         Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (dynamic_adjusting2.Length / 2)) + "}", dynamic_adjusting2));

@@ -1,41 +1,45 @@
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-
-public static class GiveThemeLogic{
-    public static string NumbersLogic()
+public static class GiveThemeLogic
+{
+    public static ThemeItem GetActiveTheme()
     {
-        string json = GetThemes.gethemeNumber();
         // Deserialize the JSON array into a list of objects
-        List<ThemeItem> themes = JsonConvert.DeserializeObject<List<ThemeItem>>(json);
+        List<ThemeItem> themes = GetThemes.gethemeNumber();
 
         // Get the current month number
         int currentMonth = DateTime.Now.Month;
 
         // Find the corresponding theme for the current month
         ThemeItem selectedTheme = themes.Find(t => t.Month == currentMonth);
+        return selectedTheme;
+    }
+
+    public static string NumbersLogic()
+    {
+        ThemeItem selectedTheme = GetActiveTheme();
 
         if (selectedTheme != null)
         {
-            return selectedTheme.Theme;
+            return "DataSources/Geen";
         }
         else
         {
-            return "Geen";
-
+            return "DataSources/Geen";
         }
     }
-    public static string Givename(string Active){
+
+    public static string Givename(string Active)
+    {
         // Console.WriteLine(Active);
-        JArray themelist = GetThemes.getheme();
-        foreach (JObject item in themelist)
+        List<MenuTheme> themelist = GetThemes.getheme();
+        foreach (MenuTheme item in themelist)
         {
             // Console.WriteLine(item["Name"].ToString());
 
-            if(Active == item["Name"].ToString() ){
-                return ($"DataSources/{item["Json"].ToString()}");
+            if (Active == item.Name.ToString())
+            {
+                return ($"DataSources/{item.Json.ToString()}");
             }
         }
         return $"DataSources/MenuItems.json";
-
     }
 }

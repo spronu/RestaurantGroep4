@@ -1,7 +1,7 @@
 static class ChangeResCheck
 {
-
     static ReservationLogic reservationlogics = new ReservationLogic();
+
     public static bool ShowMenu(ReservationModel reservation)
     {
         List<MenuItems> jsonArray = MenuRecive.getdata();
@@ -21,14 +21,11 @@ static class ChangeResCheck
                 option = OrderFoodPresentasion.AskOrder();
             }
 
-
-
             bool notFound = true;
             foreach (var item in jsonArray)
             {
                 if (option == item.id.ToString())
                 {
-
                     orderItemIDs.Add(Convert.ToInt32(item.id));
                     totalPrice += Convert.ToDouble(item.price);
                     OrderFoodPresentasion.ShowItem(item.name.ToString());
@@ -51,7 +48,6 @@ static class ChangeResCheck
                 // Move the warning check here
                 if (orderItemIDs.Count < reservation.NumberOfPeople)
                 {
-
                     string response = OrderFoodPresentasion.DoneOrder();
                     if (response.ToLower() == "j")
                     {
@@ -69,5 +65,4 @@ static class ChangeResCheck
         OrderFoodPresentasion.Orderfinished();
         return true;
     }
-
 }
