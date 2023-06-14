@@ -7,4 +7,3 @@ public class MenuItems
     public double price { get; set; }
     public string thema { get; set; }
 }
-

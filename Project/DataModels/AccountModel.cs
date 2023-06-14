@@ -15,7 +15,7 @@ public class AccountModel
     public string FullName { get; set; }
 
     [JsonPropertyName("admin")]
-    public bool Admin {get; set;}
+    public bool Admin { get; set; }
 
     public AccountModel(int id, string emailAddress, string password, string fullName, bool admin)
     {
@@ -26,6 +26,5 @@ public class AccountModel
         Admin = admin;
     }
 
-    public AccountModel(){ }
-
+    public AccountModel() { }
 }
