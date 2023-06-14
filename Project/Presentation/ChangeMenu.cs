@@ -5,26 +5,18 @@ public class ChangeMenu
     public void ChangeReservation(ReservationModel reservation, int index)
     {
         var getdata = reservationLogic.GetAll();
-        // Console.WriteLine("selectie elementen menu + verwijder optie");
-        // Thread.Sleep(2000);
         List<string> elements = new List<string>();
         elements.Add($"Aantal mensen: {reservation.NumberOfPeople}");
-        elements.Add(
-            $"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}"
-        );
+        elements.Add($"Reserveringsdatum en tijd: {reservation.ReservationDateTime.ToString()}");
         elements.Add("Verwijder reservering");
         elements.Add("Voeg gerecht toe");
         int gCount = 1;
         foreach (var id in reservation.OrderItemIDs)
         {
-
             elements.Add($"Gerecht {gCount}: {reservationLogic.GetDishNameById(id)}");
             gCount += 1;
         }
         elements.Add("Terug");
-
-
-
 
         MenuLogic choosing = new MenuLogic(elements);
 
@@ -71,9 +63,7 @@ public class ChangeMenu
                         reservationId,
                         newReservationDateTime
                     );
-                    Console.WriteLine(
-                        "Reserveringsdatum en tijd succesvol bijgewerkt."
-                    );
+                    Console.WriteLine("Reserveringsdatum en tijd succesvol bijgewerkt.");
                     Thread.Sleep(2000);
                     getdata = reservationLogic.GetAll();
                     reservationLogic.ReloadData();
@@ -81,7 +71,6 @@ public class ChangeMenu
                 }
                 else if (choosing.pos == 2)
                 {
-
                     reservationLogic.RemoveReservation(reservation.ReservationId);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(
@@ -91,7 +80,6 @@ public class ChangeMenu
                     Thread.Sleep(2000);
                     reservationLogic.ReloadData();
                     Menu.Start();
-
                 }
                 else if (choosing.pos == 3)
                 {
@@ -105,11 +93,48 @@ public class ChangeMenu
                 else
                 {
                     // reservation.OrderItemIDs = new List<int>{3, 4, 5};
-                    reservationLogic.changeDish(reservation, choosing.pos);
+                    ChangeDish(reservation, choosing.pos);
                     break;
                 }
             }
         }
+    }
 
+    public void ChangeDish(ReservationModel reservation, int pos)
+    {
+        List<string> elements = new List<string>();
+        elements.Add("Verander gerecht");
+        elements.Add("Verwijder gerecht");
+
+        MenuLogic choosing = new MenuLogic(elements);
+
+        choosing.PrintOptions(0, "kies een optie: \n");
+        bool currently = true;
+        while (currently)
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
+            choosing.Selection(input, "kies een optie: \n");
+
+            if (input.Key == ConsoleKey.Enter)
+            {
+                if (choosing.pos == 0)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    reservationLogic.UpdateReservationJson(reservation.OrderItemIDs, reservation);
+                    reservationLogic.ReloadData();
+                    bool removeCheck = ChangeResCheck.ShowMenu(reservation);
+                    currently = false;
+                }
+                else if (choosing.pos == 1)
+                {
+                    reservation.OrderItemIDs.RemoveAt(pos - 4);
+                    reservationLogic.UpdateReservationJson(reservation.OrderItemIDs, reservation);
+                    reservationLogic.ReloadData();
+                    Console.WriteLine("Gerecht verwijderd.");
+                    Thread.Sleep(2000);
+                    currently = false;
+                }
+            }
+        }
     }
 }

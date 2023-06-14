@@ -1,8 +1,34 @@
+
+
 namespace ProjectTest
 {
     [TestClass]
     public class ReservationLogic_Unittest
     {
+        // public ReservationLogic_Unittest()
+        // {
+        //     string basedir = System.IO.Directory.GetCurrentDirectory();
+        //     int startIndex = basedir.IndexOf(@"ProjectTest/bin/Debug/net6.0");
+        //     if (startIndex == -1) startIndex = basedir.IndexOf(@"ProjectTest\bin\Debug\net6.0");
+        //     string sourcedir = basedir.Remove(startIndex, 28) + @"Project/DataSources/";
+
+        //     // Set the paths for your data sources
+        //     ReservationsAccess.path = sourcedir + "reservations.json";
+            
+        //     // Set the paths for other data sources used by your OrderLogic class
+        //     // FlightsAccess.path = sourcedir + "flights.json";
+        //     // SeatsAccess.path = sourcedir;
+        //     // PlanesAccess.path = sourcedir + "planes.json";
+        //     // PassengerAccess.path = sourcedir + "passengers.json";
+        // }
+        private ReservationLogic _reservationLogic; // Declareer een instantie van ReservationLogic
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _reservationLogic = new ReservationLogic(); // Initialiseer de instantie van ReservationLogic
+        }
+
         [TestMethod]
         public void ReloadData_Test() 
         {
@@ -272,6 +298,71 @@ namespace ProjectTest
             Assert.AreEqual(0, result_reservations.Count);
             Assert.AreNotEqual(1, result_reservations.Count);
             Assert.IsFalse(_reservationLogic.CheckReservation(2, reservationDateTime));
+        }
+
+        [TestMethod]
+        public void ChangeReservationDateTime_Test()
+        {
+            // Definieer de tafelgroottes
+            int[,] tableSizes = new int[,] { { 2, 2 }, { 4, 4 }, { 6, 6 } };
+
+            // Definieer de oorspronkelijke reserveringsdatum en -tijd
+            DateTime reservationDateTime = new DateTime(9999, 6, 1, 18, 1, 0);
+
+            // Maak een instantie van ReservationLogic
+            ReservationLogic _reservationLogic = new ReservationLogic();
+
+            // Maak een nieuwe ReservationModel voor de testreservering
+            ReservationModel _reservationModel = new ReservationModel(-99, "Yahya-Test", 2, 6, reservationDateTime);
+
+            // Voeg de testreservering toe aan de lijst
+            _reservationLogic.UpdateList(_reservationModel);
+
+            // Definieer de nieuwe datum en tijd voor de reservering
+            DateTime newDateTime = new DateTime(9999, 6, 2, 12, 0, 0);
+
+            // Wijzig de datum en tijd van de reservering
+            _reservationLogic.ChangeReservationDateTime(_reservationModel.ReservationId, newDateTime);
+
+            // Haal de bijgewerkte reserveringslijst op
+            List<ReservationModel> result = _reservationLogic.GetAll();
+
+            // Zoek de bijgewerkte reservering in de lijst
+            ReservationModel? updatedReservation = result.Find(x => x.ReservationId == _reservationModel.ReservationId);
+
+            // Assert dat de reservering bestaat
+            Assert.IsNotNull(updatedReservation, "De reservering bestaat (waar)");
+
+            // Assert dat de datum en tijd van de reservering overeenkomen met de nieuwe datum en tijd
+            Assert.AreEqual(newDateTime, updatedReservation.ReservationDateTime, "De reserveringsdatum en -tijd komen overeen");
+        }
+        [TestMethod]
+        public void ChangeReservationSeatings_Test()
+        {
+            // Maak een testreservering voor de methode changeReservationSeatings
+            ReservationModel testReservation = new ReservationModel(123, "Test Naam", 1, 4, DateTime.Now);
+
+            // Voeg de testreservering toe aan de lijst
+            _reservationLogic.UpdateList(testReservation);
+
+            // Definieer nieuwe gegevens voor de reservering
+            int newTableId = 2;
+            int newNumberOfPeople = 6;
+            DateTime newReservationDateTime = DateTime.Now.AddDays(1);
+
+            // Roep de methode changeReservationSeatings aan om de reserveringsgegevens te wijzigen
+            _reservationLogic.changeReservationSeatings(newTableId, newNumberOfPeople, newReservationDateTime, testReservation.ReservationId);
+
+            // Haal de bijgewerkte reservering op uit de lijst
+            ReservationModel? updatedReservation = _reservationLogic.GetAll().Find(r => r.ReservationId == testReservation.ReservationId);
+
+            // Assert dat de reservering bestaat
+            Assert.IsNotNull(updatedReservation, "De reservering bestaat (waar)");
+
+            // Assert dat de reserveringsgegevens correct zijn gewijzigd
+            Assert.AreEqual(newTableId, updatedReservation.TableId, "De tafel-ID is gewijzigd");
+            Assert.AreEqual(newNumberOfPeople, updatedReservation.NumberOfPeople, "Het aantal personen is gewijzigd");
+            Assert.AreEqual(newReservationDateTime, updatedReservation.ReservationDateTime, "De reserveringsdatum en -tijd zijn gewijzigd");
         }
     }
 }

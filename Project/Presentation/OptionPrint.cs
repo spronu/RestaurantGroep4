@@ -10,6 +10,7 @@ public static class OptionPrint
             Console.ResetColor();
         }
     }
+
     public static string Mark(string str, int pos, List<string> Elements)
     {
         if (Elements[pos] == str)

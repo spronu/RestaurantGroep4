@@ -107,7 +107,6 @@ public class ReservationLogic : ILogic<ReservationModel>
         ReservationsAccess.WriteAll(_reservations);
     }
 
-
     public void RemoveReservation(Guid reservationID)
     {
         ReloadData();
@@ -121,11 +120,10 @@ public class ReservationLogic : ILogic<ReservationModel>
         ReservationsAccess.WriteAll(_reservations);
     }
 
-
     public void ChangeReservationDateTime(Guid id, DateTime newDateTime)
     {
         // Find the reservation with the given ID
-        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
+        ReservationModel? reservation = _reservations.Find(r => r.ReservationId == id);
 
         if (reservation != null)
         {
@@ -138,10 +136,10 @@ public class ReservationLogic : ILogic<ReservationModel>
             ReloadData();
         }
     }
-    
+
     public void changeReservationSeatings(int tableId, int numberOfPeople, DateTime reservationDateTime, Guid id)
     {
-        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);    
+        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
 
         reservation.ReservationDateTime = reservationDateTime;
         reservation.TableId = tableId;
@@ -149,46 +147,5 @@ public class ReservationLogic : ILogic<ReservationModel>
         ReservationsAccess.WriteAll(_reservations);
 
         ReloadData();
-    }
-    public void changeDish(ReservationModel reservation, int pos)
-    {
-
-        List<string> elements = new List<string>();
-        elements.Add("Verander gerecht");
-        elements.Add("Verwijder gerecht");
-
-        MenuLogic choosing = new MenuLogic(elements);
-
-        choosing.PrintOptions(0, "kies een optie: \n");
-        bool currently = true;
-        while (currently)
-        {
-            ConsoleKeyInfo input = Console.ReadKey(true);
-            choosing.Selection(input, "kies een optie: \n");
-
-            if (input.Key == ConsoleKey.Enter)
-            {
-                if (choosing.pos == 0)
-                {
-                    reservation.OrderItemIDs.RemoveAt(pos - 4);
-                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
-                    ReloadData();
-                    bool removeCheck = ChangeResCheck.ShowMenu(reservation);
-                    currently = false;
-                }
-                else if (choosing.pos == 1)
-                {
-                    reservation.OrderItemIDs.RemoveAt(pos - 4);
-                    UpdateReservationJson(reservation.OrderItemIDs, reservation);
-                    ReloadData();
-                    Console.WriteLine("Gerecht verwijderd.");
-                    Thread.Sleep(2000);
-                    currently = false;
-                }
-            }
-        }
-
-
-
     }
 }
