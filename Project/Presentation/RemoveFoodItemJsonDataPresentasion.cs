@@ -37,9 +37,4 @@ public static class RemoveFoodItemJsonDataPresentasion
         Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
         Thread.Sleep(1000);
     }
-
-    public static void succesvolRemoved()
-    {
-        Console.WriteLine("gerecht succesvol verwijdert");
-    }
 }
