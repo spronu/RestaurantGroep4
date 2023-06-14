@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 
 public class ReservationModel
 {
-
     [JsonPropertyName("reservationId")]
     public Guid ReservationId { get; set; }
 
@@ -16,7 +15,7 @@ public class ReservationModel
     public int AccountId { get; set; }
 
     [JsonPropertyName("fullName")]
-    public string FullName {get; set;}
+    public string FullName { get; set; }
 
     [JsonPropertyName("tableId")]
     public int TableId { get; set; }
@@ -27,7 +26,13 @@ public class ReservationModel
     [JsonPropertyName("numberOfPeople")]
     public int NumberOfPeople { get; set; }
 
-    public ReservationModel(int accountId, string fullName, int tableId, int numberOfPeople, DateTime reservationDateTime)
+    public ReservationModel(
+        int accountId,
+        string fullName,
+        int tableId,
+        int numberOfPeople,
+        DateTime reservationDateTime
+    )
     {
         ReservationId = Guid.NewGuid();
         AccountId = accountId;
@@ -37,6 +42,4 @@ public class ReservationModel
         ReservationDateTime = reservationDateTime;
         OrderItemIDs = new List<int>();
     }
-
-    public ReservationModel(){ }
 }

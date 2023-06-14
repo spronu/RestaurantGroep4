@@ -1,6 +1,5 @@
 public class MenuLogic
 {
-
     protected List<String> Elements = new List<string>();
 
     public int pos;
@@ -10,30 +9,29 @@ public class MenuLogic
         this.Elements = Elements;
         pos = pos;
     }
+
     public MenuLogic(List<String> Elements)
     {
         this.Elements = Elements;
         pos = 0;
     }
 
-    public virtual void Logics(string title)
-    {
-
-    }
+    public virtual void Logics(string title) { }
 
     public void Selection(ConsoleKeyInfo input, string title)
     {
         if (input.Key == ConsoleKey.UpArrow)
         {
             pos--;
-            if (pos < 0) pos = Elements.Count - 1;
+            if (pos < 0)
+                pos = Elements.Count - 1;
             PrintOptions(pos, title);
-
         }
         else if (input.Key == ConsoleKey.DownArrow)
         {
             pos++;
-            if (pos > Elements.Count - 1) pos = 0;
+            if (pos > Elements.Count - 1)
+                pos = 0;
             PrintOptions(pos, title);
         }
     }
@@ -42,16 +40,6 @@ public class MenuLogic
     {
         OptionPrint.FullyPrint(title, Elements, pos);
     }
-
-    // public string Mark(string str, int pos)
-    // {
-    //     if (Elements[pos] == str)
-    //     {
-    //         Console.BackgroundColor = ConsoleColor.White;
-    //         Console.ForegroundColor = ConsoleColor.Black;
-    //     }
-    //     return str;
-    // }
 
     public static List<string> ShowingMenuOptions()
     {

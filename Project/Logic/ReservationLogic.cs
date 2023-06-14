@@ -107,7 +107,6 @@ public class ReservationLogic : ILogic<ReservationModel>
         ReservationsAccess.WriteAll(_reservations);
     }
 
-
     public void RemoveReservation(Guid reservationID)
     {
         ReloadData();
@@ -120,7 +119,6 @@ public class ReservationLogic : ILogic<ReservationModel>
 
         ReservationsAccess.WriteAll(_reservations);
     }
-
 
     public void ChangeReservationDateTime(Guid id, DateTime newDateTime)
     {
@@ -138,10 +136,10 @@ public class ReservationLogic : ILogic<ReservationModel>
             ReloadData();
         }
     }
-    
+
     public void changeReservationSeatings(int tableId, int numberOfPeople, DateTime reservationDateTime, Guid id)
     {
-        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);    
+        ReservationModel reservation = _reservations.Find(r => r.ReservationId == id);
 
         reservation.ReservationDateTime = reservationDateTime;
         reservation.TableId = tableId;
