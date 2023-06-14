@@ -21,6 +21,7 @@ public class ReservationInfo
             int index = 0;
             do
             {
+                getdata = getdata.FindAll(i => i.AccountId == AccountsLogic.CurrentAccount.Id);
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("====================================");
