@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-
-
-public static class AddNewFoodItemDataAccess{
-    public static void AddItemJson(string NAME, string COURSE, string CATEGORY, double PRICE, string THEME){
+public static class AddNewFoodItemDataAccess
+{
+    public static void AddItemJson(
+        string NAME,
+        string COURSE,
+        string CATEGORY,
+        double PRICE,
+        string THEME
+    )
+    {
         // Read existing JSON data from the file
         string filePath = $"DataSources/MenuItems.json";
         string existingJson = File.ReadAllText(filePath);

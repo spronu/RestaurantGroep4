@@ -7,9 +7,7 @@ public static class MenuRecive
     {
         var jsonString = File.ReadAllText(GiveThemeLogic.Givename(GiveThemeLogic.NumbersLogic()));
         JArray jsonArray = JArray.Parse(jsonString);
-        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(
-            jsonArray.ToString()
-        );
+        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(jsonArray.ToString());
         return menuItems;
     }
 
@@ -17,9 +15,7 @@ public static class MenuRecive
     {
         var jsonString = File.ReadAllText("DataSources/" + Namejson);
         JArray jsonArray = JArray.Parse(jsonString);
-        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(
-            jsonArray.ToString()
-        );
+        List<MenuItems> menuItems = JsonConvert.DeserializeObject<List<MenuItems>>(jsonArray.ToString());
         return menuItems;
     }
 }

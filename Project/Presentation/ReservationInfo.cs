@@ -66,10 +66,8 @@ public class ReservationInfo
                         if (index < getdata.Count - 1)
                             index++;
                         break;
-                    
+
                     case ConsoleKey.E:
-                        // Console.WriteLine("selectie elementen menu + verwijder optie");
-                        // Thread.Sleep(2000);
 
                         ChangeMenu change = new ChangeMenu();
                         change.ChangeReservation(reservation, index);

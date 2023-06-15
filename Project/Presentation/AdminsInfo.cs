@@ -108,8 +108,6 @@ public class AdminsInfo
                         currentDate = currentDate.AddDays(-1);
                         return;
                     case ConsoleKey.E:
-                        // Console.WriteLine("selectie elementen menu + verwijder optie");
-                        // Thread.Sleep(2000);
                         ChangeMenu change = new ChangeMenu();
                         change.ChangeReservation(reservation, index);
                         reservationLogic.ReloadData();

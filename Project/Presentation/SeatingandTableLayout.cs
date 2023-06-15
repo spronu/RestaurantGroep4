@@ -97,7 +97,14 @@ public class SeatingandTableLayout
         return partySize;
     }
 
-    public void PrintSeatingChart(string pathCheck, int desiredCapacity, DateTime orderDate = default, Guid resID = default,  int selectedRow = -1, int selectedCol = -1)
+    public void PrintSeatingChart(
+        string pathCheck,
+        int desiredCapacity,
+        DateTime orderDate = default,
+        Guid resID = default,
+        int selectedRow = -1,
+        int selectedCol = -1
+    )
     {
         int tableRows = 5;
         int tableCols = (int)Math.Ceiling(tables.Count / (double)tableRows);
@@ -263,8 +270,9 @@ public class SeatingandTableLayout
                                 selectedTable.TableId,
                                 desiredCapacity,
                                 reservationDateTime,
-                                resID);
-                        
+                                resID
+                            );
+
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine(

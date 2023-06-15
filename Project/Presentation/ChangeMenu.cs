@@ -44,8 +44,6 @@ public class ChangeMenu
                     SchedulingChart schedulingChart = new SchedulingChart();
 
                     SeatingandTableLayout layoutS = new SeatingandTableLayout(3, 5);
-                    // DateTime newDate = schedulingChart.SelectDate();
-
 
                     DateTime newTime = layoutS.GetReservationTime();
 
@@ -92,7 +90,6 @@ public class ChangeMenu
                 }
                 else
                 {
-                    // reservation.OrderItemIDs = new List<int>{3, 4, 5};
                     ChangeDish(reservation, choosing.pos);
                     break;
                 }

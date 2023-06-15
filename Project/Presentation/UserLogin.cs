@@ -72,7 +72,6 @@ static class UserLogin
             Console.ResetColor();
             Thread.Sleep(1500);
 
-            //Write some code to go back to the menu
             Menu.Start();
         }
         else

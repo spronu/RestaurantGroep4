@@ -9,7 +9,6 @@ public static class MenuDataPresentasion
             int key = entry.Key;
             string value = entry.Value;
             elements.Add(value);
-            // Console.WriteLine($"{key}. {value}");
         }
 
         MenuLogic choosing = new MenuLogic(elements);

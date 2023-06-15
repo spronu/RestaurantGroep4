@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 public static class AddNewFoodItemLogic
 {
     public static void givenames()
@@ -33,9 +27,7 @@ public static class AddNewFoodItemLogic
 
         string prijs = AddNewFoodItemPresentation.GetPrice();
         // Parse the input to double
-        if (double.TryParse(prijs, out double PRICE))
-        {
-        }
+        if (double.TryParse(prijs, out double PRICE)) { }
 
         AddNewFoodItemDataAccess.AddItemJson(NAME, COURSE, CATEGORY, PRICE, THEME);
         AddNewFoodItemPresentation.FinischedNewItem();

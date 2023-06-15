@@ -7,9 +7,7 @@ public static class GetThemes
     {
         var jsonString = File.ReadAllText($"DataSources/themes.json");
         JArray jsonArray = JArray.Parse(jsonString);
-        List<MenuTheme> menuItems = JsonConvert.DeserializeObject<List<MenuTheme>>(
-            jsonArray.ToString()
-        );
+        List<MenuTheme> menuItems = JsonConvert.DeserializeObject<List<MenuTheme>>(jsonArray.ToString());
         return menuItems;
     }
 

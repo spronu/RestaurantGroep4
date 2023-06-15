@@ -295,9 +295,6 @@ public class AccountInfo : MenuLogic
             Thread.Sleep(2000);
             Console.ResetColor();
             Main();
-            // Console.WriteLine("Klik op een knop om terug te keren");
-            // Console.ResetColor();
-            // Console.ReadKey();
         }
     }
 }
