@@ -1,6 +1,3 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 class ChangeThemeOrder
 {
     public static void ChangeOrder()
@@ -10,7 +7,6 @@ class ChangeThemeOrder
         // GiveThemeLogic.Givename(GiveThemeLogic.NumbersLogic());
         //  CallMenuPresentation.hoofd();
         List<MenuTheme> jsonArray = GetThemes.getheme();
-
 
         // Deserialize the JSON array into a list of objects
         List<ThemeItem> themes = GetThemes.gethemeNumber();
@@ -38,12 +34,13 @@ class ChangeThemeOrder
 
         // Map the theme option number to the actual theme name
         for (int i = 0; i < jsonArray.Count; i++)
+        {
+            var menuItem = jsonArray[i];
+            if (menuItem.Id == themeOption)
             {
-                var menuItem = jsonArray[i];
-                if(menuItem.Id == themeOption){
-                    selectedTheme = menuItem.Name;
-                }
+                selectedTheme = menuItem.Name;
             }
+        }
 
         // Find the corresponding theme item in the list and update the theme
         ThemeItem selectedMonthTheme = themes.FirstOrDefault(t => t.Month == monthNumber);
@@ -51,8 +48,6 @@ class ChangeThemeOrder
         {
             selectedMonthTheme.Theme = selectedTheme;
             Console.Clear();
-
-
         }
 
         // Convert the updated list back to JSON
@@ -61,6 +56,4 @@ class ChangeThemeOrder
         ChangeThemeOrderData.WriteToJson(themes);
         ChangeThemeOrderPresentation.UpdateSucsesvol();
     }
-
 }
-

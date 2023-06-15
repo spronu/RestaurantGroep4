@@ -1,5 +1,7 @@
-public static class RemoveFoodItemJsonDataPresentasion{
-    public static int AskThemeForRemoval(List<MenuTheme> jsonArray){
+public static class RemoveFoodItemJsonDataPresentasion
+{
+    public static int AskThemeForRemoval(List<MenuTheme> jsonArray)
+    {
         Console.Clear();
         Console.WriteLine("Kies een optie:");
         for (int i = 0; i < jsonArray.Count; i++)
@@ -14,24 +16,25 @@ public static class RemoveFoodItemJsonDataPresentasion{
         return optionNumber;
     }
 
-    public static string GetNumbersRemoval(){
-            Console.WriteLine("schrijf het nummer van het gerecht dat verwjdert wilt worden je wilt! Of type 'x' als je klaar bent.");
-            Console.WriteLine("");
-            string option = Console.ReadLine();
-            return option;
+    public static string GetNumbersRemoval()
+    {
+        Console.WriteLine(
+            "schrijf het nummer van het gerecht dat verwjdert wilt worden je wilt! Of type 'x' als je klaar bent."
+        );
+        Console.WriteLine("");
+        string option = Console.ReadLine();
+        return option;
     }
 
-    public static void WriteItemRemoval(string name){
+    public static void WriteItemRemoval(string name)
+    {
         Console.WriteLine($"{name} succesvol verwijderd");
         Thread.Sleep(1000);
     }
 
-    public static void ItemNotFoundMessage(){
-                Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
-                Thread.Sleep(1000);
-    }
-
-    public static void succesvolRemoved(){
-        Console.WriteLine("gerecht succesvol verwijdert");
+    public static void ItemNotFoundMessage()
+    {
+        Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
+        Thread.Sleep(1000);
     }
 }

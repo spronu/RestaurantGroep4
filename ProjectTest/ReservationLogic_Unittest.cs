@@ -1,26 +1,8 @@
-
-
 namespace ProjectTest
 {
     [TestClass]
     public class ReservationLogic_Unittest
     {
-        // public ReservationLogic_Unittest()
-        // {
-        //     string basedir = System.IO.Directory.GetCurrentDirectory();
-        //     int startIndex = basedir.IndexOf(@"ProjectTest/bin/Debug/net6.0");
-        //     if (startIndex == -1) startIndex = basedir.IndexOf(@"ProjectTest\bin\Debug\net6.0");
-        //     string sourcedir = basedir.Remove(startIndex, 28) + @"Project/DataSources/";
-
-        //     // Set the paths for your data sources
-        //     ReservationsAccess.path = sourcedir + "reservations.json";
-            
-        //     // Set the paths for other data sources used by your OrderLogic class
-        //     // FlightsAccess.path = sourcedir + "flights.json";
-        //     // SeatsAccess.path = sourcedir;
-        //     // PlanesAccess.path = sourcedir + "planes.json";
-        //     // PassengerAccess.path = sourcedir + "passengers.json";
-        // }
         private ReservationLogic _reservationLogic; // Declareer een instantie van ReservationLogic
 
         [TestInitialize]
@@ -335,12 +317,20 @@ namespace ProjectTest
 
             // Assert dat de datum en tijd van de reservering overeenkomen met de nieuwe datum en tijd
             Assert.AreEqual(newDateTime, updatedReservation.ReservationDateTime, "De reserveringsdatum en -tijd komen overeen");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            result = _reservationLogic.GetAll();
+
+            Assert.AreEqual(0, result.Count, "De lijst is gelijk aan elkaar (0) (false)");
+
+
         }
         [TestMethod]
         public void ChangeReservationSeatings_Test()
         {
             // Maak een testreservering voor de methode changeReservationSeatings
-            ReservationModel testReservation = new ReservationModel(123, "Test Naam", 1, 4, DateTime.Now);
+            ReservationModel testReservation = new ReservationModel(-99, "Test Naam", 1, 4, DateTime.Now);
 
             // Voeg de testreservering toe aan de lijst
             _reservationLogic.UpdateList(testReservation);
@@ -363,37 +353,13 @@ namespace ProjectTest
             Assert.AreEqual(newTableId, updatedReservation.TableId, "De tafel-ID is gewijzigd");
             Assert.AreEqual(newNumberOfPeople, updatedReservation.NumberOfPeople, "Het aantal personen is gewijzigd");
             Assert.AreEqual(newReservationDateTime, updatedReservation.ReservationDateTime, "De reserveringsdatum en -tijd zijn gewijzigd");
+
+            _reservationLogic.RemoveReservation(-99);
+
+            var result = _reservationLogic.GetAll();
+
+            Assert.AreEqual(0, result.Count, "De lijst is gelijk aan elkaar (0) (false)");
+
         }
-
-        // [TestMethod]
-        // public void ChangeDish_Test()
-        // {
-        //     // Arrange
-        //     ReservationModel reservation = new ReservationModel();
-        //     int pos = 0;
-
-        //     // Mock the console output
-        //     var consoleOutput = new StringWriter();
-        //     Console.SetOut(consoleOutput);
-
-        //     // Simulate user input by setting the desired option
-        //     string simulatedInput = "1";
-        //     Console.SetIn(new StringReader(simulatedInput));
-
-        //     // Define the expected order item IDs after invoking changeDish
-        //     List<int> expectedOrderItemIDs = new List<int> { /* Add your expected order item IDs here */ };
-
-        //     // Act
-        //     _reservationLogic.ChangeDish(reservation, pos);
-
-        //     // Assert
-        //     // Add your assertions based on the expected changes in the reservation object
-        //     Assert.AreEqual(expectedOrderItemIDs, reservation.OrderItemIDs);
-        //     // ...
-        // }
-
-
     }
-
-
 }

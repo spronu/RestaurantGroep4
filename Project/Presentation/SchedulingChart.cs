@@ -28,7 +28,6 @@ public class SchedulingChart
             Console.ResetColor();
             Console.WriteLine();
 
-
             for (int i = 0; i < availableDates.Count; i++)
             {
                 if (i == selectedIndex)

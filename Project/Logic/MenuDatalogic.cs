@@ -5,11 +5,9 @@ static class MenuDataLogic
 
     public static Tuple<string, string> MakeOptionsLists(bool ShowCourse)
     {
-
         bool choise = true;
         courseoption = ShowCourse;
         string option = "";
-
 
         List<string> Allallcatogories = new List<string>();
         List<string> Allallcourses = new List<string>();
@@ -18,7 +16,6 @@ static class MenuDataLogic
         {
             Allallcatogories.Add($"{item.category}");
             Allallcourses.Add($"{item.course}");
-
         }
 
         List<string> allcatogories = Allallcatogories.Distinct().ToList();
@@ -26,36 +23,39 @@ static class MenuDataLogic
         Dictionary<int, string> catogorieslink = new Dictionary<int, string>();
         Dictionary<int, string> courselink = new Dictionary<int, string>();
 
-        allcatogories.Add("return");
-        allcourses.Add("return");
+        allcatogories.Add("terug");
+        allcourses.Add("terug");
         // maken van opties 1 tot eind linken aan keuze
         int i = 1;
         foreach (string item in allcourses)
         {
             courselink.Add(i, item);
-            i ++;
+            i++;
         }
         int y = 1;
         foreach (string item in allcatogories)
         {
             catogorieslink.Add(y, item);
-            y ++;
+            y++;
         }
-        
+
         while (courseoption || choise)
         {
             while (courseoption)
             {
-                int save =  MenuDataPresentasion.ShowCourses(courselink, "welke type maaltijd wilt u? \n");
+                int save = MenuDataPresentasion.ShowCourses(
+                    courselink,
+                    "welke type maaltijd wilt u? \n"
+                );
                 course = courselink[save];
-                if (course == "return")
-                    {
-                        course = string.Empty;
-                        courseoption = false;
-                        choise = false;
-                        Tuple<string, string> v = Tuple.Create("quit", "quit");
-                        return v;
-                    }
+                if (course == "terug")
+                {
+                    course = string.Empty;
+                    courseoption = false;
+                    choise = false;
+                    Tuple<string, string> v = Tuple.Create("quit", "quit");
+                    return v;
+                }
                 if (allcourses.Contains(course))
                 {
                     courseoption = false;
@@ -63,7 +63,7 @@ static class MenuDataLogic
                 }
                 else
                 {
-                    if (course == "return")
+                    if (course == "terug")
                     {
                         course = string.Empty;
                         courseoption = false;
@@ -72,17 +72,18 @@ static class MenuDataLogic
                     }
                 }
             }
-            
 
             while (choise)
             {
-                int save2 = MenuDataPresentasion.ShowCourses(catogorieslink, "welke categorie wilt u? \n");
+                int save2 = MenuDataPresentasion.ShowCourses(
+                    catogorieslink,
+                    "welke categorie wilt u? \n"
+                );
                 option = catogorieslink[save2];
                 if (allcatogories.Contains(option))
                 {
-                
                     choise = false;
-                    if (option == "return")
+                    if (option == "terug")
                     {
                         courseoption = true;
                     }
