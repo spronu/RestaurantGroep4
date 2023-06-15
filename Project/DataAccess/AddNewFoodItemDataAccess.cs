@@ -1,17 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-public static class AddNewFoodItemDataAccess
-{
-    public static void AddItemJson(string NAME, string COURSE, string CATEGORY, double PRICE)
-    {
+
+
+public static class AddNewFoodItemDataAccess{
+    public static void AddItemJson(string NAME, string COURSE, string CATEGORY, double PRICE, string THEME){
         // Read existing JSON data from the file
         string filePath = $"DataSources/MenuItems.json";
         string existingJson = File.ReadAllText(filePath);
 
         // Deserialize existing JSON data into a list of MenuItems objects
-        List<MenuItems> existingMenuItems = JsonConvert.DeserializeObject<List<MenuItems>>(
-            existingJson
-        );
+        List<MenuItems> existingMenuItems = JsonConvert.DeserializeObject<List<MenuItems>>(existingJson);
 
         int ID = existingMenuItems.Count();
         ID++;
@@ -22,7 +24,8 @@ public static class AddNewFoodItemDataAccess
             name = NAME,
             course = COURSE,
             category = CATEGORY,
-            price = PRICE
+            price = PRICE,
+            thema = THEME
         };
 
         // Add the new MenuItem to the existing list
