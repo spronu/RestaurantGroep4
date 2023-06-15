@@ -26,8 +26,10 @@ public static class RemoveFoodItemJsonDataPresentasion{
         Thread.Sleep(1000);
     }
 
-    public static void ItemNotFoundMessage(){
-                Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
-                Thread.Sleep(1000);
+
+    public static void ItemNotFoundMessage()
+    {
+        Console.WriteLine("gerecht niet gevonden, schrijf opnieuw.");
+        Thread.Sleep(1000);
     }
 }

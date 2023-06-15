@@ -13,14 +13,14 @@ static class UserLogin
         Console.ResetColor();
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine("Email of Wachtwoord vergeten? Typ 'F' in de terminal.");
+        Console.WriteLine("Email of Wachtwoord vergeten? Typ 'V' in de terminal.");
         Console.ResetColor();
         Console.WriteLine();
         Console.WriteLine("Voer uw email adres in");
         string email = Console.ReadLine();
         email = email.Trim();
 
-        if(email == "F" || email == "f"){
+        if(email.ToUpper() == "V"){
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("====================================");
             Console.WriteLine(" Telefoonnummer van Admin: +01012345678910");

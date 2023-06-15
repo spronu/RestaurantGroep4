@@ -23,8 +23,8 @@ static class MenuDataLogic
         Dictionary<int, string> catogorieslink = new Dictionary<int, string>();
         Dictionary<int, string> courselink = new Dictionary<int, string>();
 
-        allcatogories.Add("return");
-        allcourses.Add("return");
+        allcatogories.Add("terug");
+        allcourses.Add("terug");
         // maken van opties 1 tot eind linken aan keuze
         int i = 1;
         foreach (string item in allcourses)
@@ -48,7 +48,7 @@ static class MenuDataLogic
                     "welke type maaltijd wilt u? \n"
                 );
                 course = courselink[save];
-                if (course == "return")
+                if (course == "terug")
                 {
                     course = string.Empty;
                     courseoption = false;
@@ -63,7 +63,7 @@ static class MenuDataLogic
                 }
                 else
                 {
-                    if (course == "return")
+                    if (course == "terug")
                     {
                         course = string.Empty;
                         courseoption = false;
@@ -83,7 +83,7 @@ static class MenuDataLogic
                 if (allcatogories.Contains(option))
                 {
                     choise = false;
-                    if (option == "return")
+                    if (option == "terug")
                     {
                         courseoption = true;
                     }
