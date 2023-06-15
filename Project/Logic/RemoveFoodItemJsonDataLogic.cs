@@ -48,8 +48,6 @@ public class RemoveFoodItemJsonDataLogic
             if (option == "x")
             {
                 done = false;
-                Menu.Start();
-
             }
 
         }
