@@ -1,4 +1,4 @@
-static class AddFoodItemToOrderLogic
+public static class AddFoodItemToOrderLogic
 {
     static ReservationLogic reservationlogics = new ReservationLogic();
 
